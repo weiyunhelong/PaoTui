@@ -1,0 +1,31 @@
+<!--pages/message/index.wxml-->
+<view class="c-minheight wx-view_2lkwMN" data-c_e_id="wx_view_89f31c05">
+  <!--顶部的菜单部分-->
+  <view class="c-minheight wx-view_v74MyM" data-c_e_id="wx_view_a7deeb50">
+    <view catchtap="chkmenuopt" data-id='1' class="c-block {{chkmenu==1?'wx-text_MYWDr2':'wx-text_pMYoye'}}">通知</view>
+    <view catchtap="chkmenuopt" data-id='2' class="c-block {{chkmenu==2?'wx-text_MYWDr2':'wx-text_pMYoye'}}" wx:if="{{hasnews}}">
+      <view class='menudot'></view>
+      <view class='menutxt'>聊天</view>
+    </view>
+    <view catchtap="chkmenuopt" wx:if="{{!hasnews}}" data-id='2' class="c-block {{chkmenu==2?'wx-text_MYWDr2':'wx-text_pMYoye'}}">聊天</view>
+  </view>
+
+  <!--内容部分-->
+  <block wx:for="{{newslsit}}" wx:key="item">
+
+    <view class="c-minheight {{item.isnew?'wx-view_FSAqbP':'wx-view_FSAqbP1'}}">
+      <image class="wx-image_4j7TEO" mode="scaleToFill" src="{{item.headerimg}}" />
+      <view class="c-minheight wx-view_tM4PI9">
+        <view class="c-minheight wx-view_sAVRB2">
+          <text class="c-block wx-text_m3PXXb">{{item.username}}</text>
+          <text class="c-block wx-text_XzBqYd">{{item.time}}</text>
+        </view>
+        <view class="c-block wx-text_Z2yVpL">
+          <view class='newstxt'>{{item.info}}</view>
+          <view class='newsnum' wx:if="{{item.msgnum>0}}">{{item.msgnum}}</view>
+        </view>
+      </view>
+    </view>
+
+  </block>
+</view>

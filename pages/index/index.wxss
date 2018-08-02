@@ -1,0 +1,37 @@
+/**index.wxss**/
+
+.userinfov {
+  width: 90%;
+  display: flex;
+}
+
+.biaoqianv {
+  height: 80rpx;
+}
+
+.biaoqianimg {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.biaoqiantxt {
+  margin-top: -55rpx;
+  font-size: 28rpx;
+  text-align: center;
+  color: #fff;
+}
+
+.shopv {
+  display: flex;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.redv {
+  background-color: #ff5b41;
+  color: #fff;
+  padding: 0rpx 20rpx;
+  font-size: 25rpx;
+  border-radius: 15rpx;
+  margin-right: 20rpx;
+}

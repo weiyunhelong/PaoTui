@@ -1,0 +1,45 @@
+<!--pages/tixian/index.wxml-->
+<view class="c-minheight wx-view_oQuCGO">
+  
+  <!--账户余额-->
+  <view class="c-minheight wx-view_ffp5Dq">
+    <view class="c-minheight wx-view_DlKnq3">
+      <image class="wx-image_ZTxjkf" mode="scaleToFill" src="/resources/yue.png"/>
+      <view class="c-minheight wx-view_1N72IJ">
+        <text class="c-block wx-text_GTr4On">账户余额</text>
+      </view>
+    </view>
+    <text class="c-block wx-text_5McyvR">{{money}}</text>
+  </view>
+
+  <!--提现门槛-->
+  <view class="c-minheight wx-view_ffp5Dq">
+    <view class="c-minheight wx-view_DlKnq3">
+      <image class="wx-image_ZTxjkf" mode="scaleToFill" src="/resources/menkan.png"/>
+      <view class="c-minheight wx-view_1N72IJ">
+        <text class="c-block wx-text_GTr4On">提现门槛</text>
+      </view>
+    </view>
+    <text class="c-block wx-text_5McyvR">{{menkan}}</text>
+  </view>
+  
+  <!--提现到微信钱包-->
+  <view class="c-minheight wx-view_ffp5Dq">
+    <view class="c-minheight wx-view_DlKnq3">
+      <image class="wx-image_ZTxjkf" mode="scaleToFill" src="/resources/weixin.png" />
+      <view class="c-minheight wx-view_1N72IJ">
+        <text class="c-block wx-text_GTr4On">提现到微信钱包</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="c-minheight wx-view_ffp5Dq1">
+    <input class="c-block c-fullwidth wx-input_F3M3xk" name="input1" placeholder="请输入提现金额" type="number" value='{{tikuan}}'  bindinput='settotal' bindblur='settotal' bindconfirm='settotal'/>
+  </view>
+  <text class="c-block wx-text_fLfFdj" bindtap='putmoney'>提现</text>
+</view>
+
+<!--提示文字部分-->
+<view class="c-minheight wx-view_5bk2vY {{messagestyle}}">
+  <text class="c-block wx-text_PagCvb">{{messageinfo}}</text>
+</view>

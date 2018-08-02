@@ -1,0 +1,10 @@
+/* pages/message/index.wxss */
+
+.menudot {
+  width: 16rpx;
+  height: 16rpx;
+  background-color: #f00;
+  border-radius: 10rpx;
+  margin-left: 25rpx;
+  margin-top:-18rpx;
+}

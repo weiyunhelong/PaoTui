@@ -1,0 +1,24 @@
+/* pages/help/detail.wxss */
+
+page {
+  background-image: url("http://qty83k.creatby.com/materials/78613/origin/15c4f59232771042d77da61cd55d8eea_origin.jpg");
+  overflow: scroll;
+  background-position: 50% 0%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.title {
+  width: 100%;
+  height: 100rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #fff;
+  line-height: 100rpx;
+}
+
+.bodyinfo {
+  font-size: 25rpx;
+  color: #fff;
+  margin: 0 30rpx;
+}

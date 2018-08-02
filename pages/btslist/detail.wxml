@@ -1,0 +1,73 @@
+<!--pages/btslist/detail.wxml-->
+
+<view class="c-minheight wx-view_W1YqeQ">
+  <view class="c-minheight wx-view_nnJOwx">
+    <view class="c-minheight wx-view_6R3LFQ">
+      <image class="wx-image_UanGTG" mode="scaleToFill" src="/resources/touxiang.png" />
+      <text class="c-block wx-text_7KVuIb">雇主昵称</text>
+    </view>
+    <view class="c-minheight wx-view_CKL7oQ">
+      <view class="c-minheight wx-view_eJY7fz">
+        <text class="c-block wx-text_MiAbaY">投诉内容：</text>
+        <view class="c-minheight wx-view_3v6GL7">
+          <text class="c-block wx-text_YwWbjJ">雇主恶意差评，不配合验收订单。</text>
+          <view class="c-minheight wx-view_JtSjk2">
+            <image class="wx-image_7vnZHV" mode="scaleToFill" src="/resources/tu1.png" />
+             <image class="wx-image_7vnZHV" mode="scaleToFill" src="/resources/tu1.png" />
+             <image class="wx-image_7vnZHV" mode="scaleToFill" src="/resources/tu1.png" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="c-minheight wx-view_LSe4ga">
+      <text class="c-block wx-text_MiAbaY">时间：</text>
+      <text class="c-block wx-text_YwWbjJ">2018-03-01  13:12:36</text>
+    </view>
+    <view class="c-minheight wx-view_LSe4ga">
+      <text class="c-block wx-text_MiAbaY">状态：</text>
+      <text class="c-block wx-text_YwWbjJ">待处理</text>
+    </view>
+  </view>
+  <view class="c-minheight wx-view_9KOweV">
+    <view class="c-minheight wx-view_LSe4ga">
+      <text class="c-block wx-text_MiAbaY">平台回复：</text>
+      <text class="c-block wx-text_YwWbjJ">骑士被封号7天，退款给雇主。骑士被封号7天，退款给雇主。骑士被封号7天，退款给雇主。</text>
+    </view>
+    <view class="c-minheight wx-view_LSe4ga">
+      <text class="c-block wx-text_MiAbaY">时间：</text>
+      <text class="c-block wx-text_YwWbjJ">2018-03-01  13:12:36</text>
+    </view>
+  </view>
+  <view class="c-minheight wx-view_PPXd851">
+    <view class="c-minheight wx-view_dfNyFR1">
+      <text class="c-block wx-text_FFPqzR">始</text>
+      <text class="c-block wx-text_Vj9cHB">广东省中山市东区古镇镇骏贤居</text>
+    </view>
+    <view class="c-minheight wx-view_dfNyFR1">
+      <text class="c-block wx-text_FFPqzR1">终</text>
+      <text class="c-block wx-text_Vj9cHB">广东省中山市东区古镇镇骏贤居</text>
+    </view>
+    <view class="c-minheight wx-view_xp9voB1">
+      <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" />
+      <text class="c-block wx-text_u2uG4j">￥5.5</text>
+    </view>
+    <view class="c-minheight wx-view_XSYzuh1">
+      <image class="wx-image_RYYYOg" mode="scaleToFill" src="/resources/miaoshu.png" />
+      <text class="c-block wx-text_QF0BYA">帮我买一罐可乐，要冰的帮我买一罐可乐，要冰的帮我买一罐可乐...</text>
+    </view>
+    <view class="c-minheight wx-view_Kv5Tev1">
+      <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png"  />
+      <text class="c-block wx-text_1kGNpv">15:32  -  16:25</text>
+    </view>
+    <view class="c-minheight wx-view_JQPoPT11">
+      <view class="c-minheight wx-view_o76ZdP">
+        <text class="c-block wx-text_uhetRv">跑单编号</text>
+        <text class="c-block wx-text_uhetRv">1326545825441244</text>
+      </view>
+      <view class="c-minheight wx-view_o76ZdP">
+        <text class="c-block wx-text_uhetRv">跑单时间</text>
+        <text class="c-block wx-text_uhetRv">2018-03-01  13:12:36</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,79 @@
+<!--pages/my/index.wxml-->
+<view class="c-minheight wx-view_qNqxUa">
+  <view class="c-minheight wx-view_6CGyg8">
+
+    <!--用户信息-->
+    <view class="c-minheight wx-view_f0f9q4">
+      <image class="wx-image_YNBRcq" mode="scaleToFill" src="{{touxiang}}" />
+      <view class="c-minheight wx-view_uYwpEt">
+        <text class="c-block wx-text_gfZnRH">{{wxname}}</text>
+        <view class="c-minheight wx-view_G2Hldj">
+          <block wx:for="{{xinglsit}}" wx:key="xitem" wx:for-item="xitem">
+            <image class="wx-image_oNnlIp" mode="scaleToFill" wx:if="{{xitem<fen}}" src="/resources/xing.png" />
+          </block>
+          <image class="wx-image_jRpsXD" mode="scaleToFill" wx:if="{{fen%1!=0}}"src="/resources/banxing.png" />
+          <text class="c-block wx-text_AE8Cnc">{{fen}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!--现金-->
+    <view class="c-minheight wx-view_wOMz5Q" bindtap='account'>
+      <image class="wx-image_KDqz7p" mode="scaleToFill" src="/resources/daizi.png" />
+      <text class="c-block wx-text_acNa0t">{{qian}}</text>
+    </view>
+  </view>
+
+  <!--提现-->
+  <view class="c-minheight wx-view_cb6Udo" bindtap='gotoput'>
+    <view class="c-minheight wx-view_9nnfvw">
+      <image class="wx-image_ae7rZK" mode="scaleToFill" src="/resources/tixian.png" />
+      <text class="c-block wx-text_srtsY4">提现</text>
+    </view>
+    <image class="wx-image_z3mQTP" mode="scaleToFill" src="/resources/jiantou.png" />
+  </view>
+
+  <!--被投诉记录-->
+  <view class="c-minheight wx-view_cb6Udo" bindtap='complaintlist'>
+    <view class="c-minheight wx-view_9nnfvw">
+      <image class="wx-image_ae7rZK" mode="scaleToFill" src="/resources/su.png" />
+      <text class="c-block wx-text_srtsY4">被投诉记录</text>
+    </view>
+    <image class="wx-image_z3mQTP" mode="scaleToFill" src="/resources/jiantou.png" />
+  </view>
+
+  <!--我的投诉记录-->
+  <view class="c-minheight wx-view_cb6Udo" bindtap='mycomplaintlist'>
+    <view class="c-minheight wx-view_9nnfvw">
+      <image class="wx-image_ae7rZK" mode="scaleToFill" src="/resources/sujilu.png" />
+      <text class="c-block wx-text_srtsY4">我的投诉记录</text>
+    </view>
+    <image class="wx-image_z3mQTP" mode="scaleToFill" src="/resources/jiantou.png" />
+  </view>
+
+  <!--退款申请部分-->
+  <view class="c-minheight wx-view_cb6Udo" bindtap='aftersaleservice'>
+    <view class="c-minheight wx-view_9nnfvw">
+      <image class="wx-image_ae7rZK" mode="scaleToFill" src="/resources/tuikuan.png" />
+      <text class="c-block wx-text_srtsY4">退款申请</text>
+    </view>
+    <image class="wx-image_z3mQTP" mode="scaleToFill" src="/resources/jiantou.png" />
+  </view>
+
+  <!--客服帮助部分-->
+  <view class="c-minheight wx-view_UpN6LQ">
+    <view class="c-minheight wx-view_RFJiE2">
+      <image class="wx-image_LajZmH" mode="scaleToFill" src="/resources/fenzhankf.png" />
+      <text class="c-block wx-text_BYKVBP">分站客服</text>
+    </view>
+    <view class="c-minheight wx-view_RFJiE2">
+      <image class="wx-image_LajZmH" mode="scaleToFill" src="/resources/guankf.png" />
+      <text class="c-block wx-text_BYKVBP">官方客服</text>
+    </view>
+    <view class="c-minheight wx-view_RFJiE2" bindtap='acticle'>
+      <image class="wx-image_LajZmH" mode="scaleToFill" src="/resources/help.png" />
+      <text class="c-block wx-text_BYKVBP">帮助中心</text>
+    </view>
+  </view>
+
+</view>

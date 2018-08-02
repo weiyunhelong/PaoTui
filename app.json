@@ -1,0 +1,72 @@
+{
+  "debug": true,
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "小龙快跑-骑手端",
+    "backgroundColor": "#ffffff",
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark"
+  },
+  "pages": [
+    "pages/index/index",       
+    "pages/paodan/index",
+    "pages/message/index",
+    "pages/business/index",
+    "pages/tixian/index",
+    "pages/btslist/index",
+    "pages/btslist/detail",
+    "pages/mytslist/index",
+    "pages/mytslist/detail",
+    "pages/refundbook/index",
+    "pages/account/index",
+    "pages/help/index",
+    "pages/help/list",
+    "pages/help/detail",
+    "pages/my/index"
+  ],
+  "tabBar": {
+    "color": "#ffffff",
+    "selectedColor": "#00ffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "text": "抢单",
+        "pagePath": "pages/index/index",
+        "iconPath": "resources/home.png",
+        "selectedIconPath": "resources/homeh.png"
+      },
+      {
+        "text": "跑单",
+        "pagePath": "pages/paodan/index",
+        "iconPath": "resources/order.png",
+        "selectedIconPath": "resources/orderh.png"
+      },
+      {
+        "text": "消息",
+        "pagePath": "pages/message/index",
+        "iconPath": "resources/message.png",
+        "selectedIconPath": "resources/messageh.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/my/index",
+        "iconPath": "resources/my.png",
+        "selectedIconPath": "resources/myh.png"
+      }
+    ],
+    "backgroundColor": "#000000"
+  },
+  "networkTimeout": {
+    "connectSocket": "",
+    "request": "",
+    "downloadFile": "",
+    "uploadFile": "",
+    "networkTimeout": {
+      "request": 60000,
+      "connectSocket": 60000,
+      "uploadFile": 60000,
+      "downloadFile": 60000
+    }
+  }
+}

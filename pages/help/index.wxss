@@ -1,0 +1,7 @@
+/* pages/help/index.wxss */
+page { 
+    background-image:  url("http://qty83k.creatby.com/materials/78613/origin/15c4f59232771042d77da61cd55d8eea_origin.jpg");  overflow: scroll;
+  background-position: 50% 0%;
+  background-size: cover;
+  background-repeat: no-repeat; 
+}

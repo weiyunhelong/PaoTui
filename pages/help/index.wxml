@@ -1,0 +1,11 @@
+<!--pages/help/index.wxml-->
+<view class="c-minheight wx-view_DE2u7A">
+
+  <block wx:for="{{menulist}}" wx:key="item">
+    <view class="c-minheight wx-view_xEnsb7" bindtap='gohelp' data-id='{{item.id}}'>
+      <text class="c-block wx-text_mhSKud">{{item.title}}</text>
+      <image class="wx-image_3q0ymX" mode="scaleToFill" src="/resources/jiantou.png" />
+    </view>
+  </block>
+
+</view>
