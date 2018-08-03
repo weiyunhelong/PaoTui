@@ -1,10 +1,10 @@
 <!--pages/paodan/index.wxml-->
 
-<view class="c-minheight wx-view_3oyzpl" data-c_e_id="wx_view_cea3a319">
+<view class="c-minheight wx-view_3oyzpl" >
   <!--顶部的状态-->
-  <view class="c-minheight wx-view_2llUqR" data-c_e_id="wx_view_e43fff38">
-    <scroll-view class="c-minheight wx-scroll-view_M0guNR" data-c_e_id="wx_scroll_view_5e0596a5" lower-threshold="50" scroll-x="True" style="overflow-x:  auto; overflow-y: hidden; " upper-threshold="50">
-      <view class="c-minheight wx-view_2iKOhp" data-c_e_id="wx_view_f28e85d7">
+  <view class="c-minheight wx-view_2llUqR" >
+    <scroll-view class="c-minheight wx-scroll-view_M0guNR"  lower-threshold="50" scroll-x="True" style="overflow-x:  auto; overflow-y: hidden; " upper-threshold="50">
+      <view class="c-minheight wx-view_2iKOhp" >
         <text class="c-block wx-text_YmSCZi {{chkmenu==0?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="0">全部</text>
         <text class="c-block wx-text_YmSCZi {{chkmenu==1?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="1">待支付</text>
         <text class="c-block wx-text_YmSCZi {{chkmenu==2?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="2">待执行</text>
@@ -20,12 +20,12 @@
 
   <!--列表数据-->
   <block wx:for="{{orderlist}}" wx:key="item" wx:for-index="x">
-    <view class="c-minheight wx-view_PPXd851" data-c_e_id="wx_viewbe8d9a40">
+    <view class="c-minheight wx-view_PPXd851" >
 
-      <view class="c-minheight wx-view_7tuQEA" data-c_e_id="wx_viewa89015f9" style='justify-content:space-between;'>
+      <view class="c-minheight wx-view_7tuQEA"  style='justify-content:space-between;'>
         <view class='userinfov'>
-          <image class="wx-image_jDkO78" data-c_e_id="wx_image91c98550" mode="scaleToFill" src="{{item.member.user_headimg}}" />
-          <text class="c-block wx-text_ZaU8MQ" data-c_e_id="wx_texted535d73">{{item.member.user_name}}</text>
+          <image class="wx-image_jDkO78"  mode="scaleToFill" src="{{item.member.user_headimg}}" />
+          <text class="c-block wx-text_ZaU8MQ" >{{item.member.user_name}}</text>
           <view class='shopv'>
             <view class='xiaoxiv' wx:if="{{item.news}}">
               <image src='/resources/xiaoxih.png' class='xiaoxitu'></image>
@@ -40,36 +40,36 @@
         </view>
       </view>
 
-      <view class="c-minheight wx-view_dfNyFR" data-c_e_id="wx_view46eb1756">
-        <text class="c-block wx-text_FFPqzR" data-c_e_id="wx_textee80bf7b">始</text>
-        <text class="c-block wx-text_Vj9cHB" data-c_e_id="wx_text1024ff09">{{item.addr}}</text>
+      <view class="c-minheight wx-view_dfNyFR" >
+        <text class="c-block wx-text_FFPqzR">始</text>
+        <text class="c-block wx-text_Vj9cHB" >{{item.addr}}</text>
       </view>
-      <view class="c-minheight wx-view_dfNyFR" data-c_e_id="wx_viewb60be962">
-        <text class="c-block wx-text_FFPqzR1" data-c_e_id="wx_textf19f2fe3">终</text>
-        <text class="c-block wx-text_Vj9cHB" data-c_e_id="wx_textfd5bce17">{{item.o_addr}}</text>
+      <view class="c-minheight wx-view_dfNyFR" >
+        <text class="c-block wx-text_FFPqzR1">终</text>
+        <text class="c-block wx-text_Vj9cHB">{{item.o_addr}}</text>
       </view>
-      <view class="c-minheight wx-view_xp9voB" data-c_e_id="wx_view53fc1bf6">
-        <image class="wx-image_PYrvOU" data-c_e_id="wx_image0d48fdc6" mode="scaleToFill" src="/resources/daimai.png" />
-        <text class="c-block wx-text_tBG9kh" data-c_e_id="wx_textd9bb3efe">代买</text>
-        <image class="wx-image_uM6VvD" data-c_e_id="wx_image0fb30837" mode="scaleToFill" src="/resources/qian.png" />
-        <text class="c-block wx-text_u2uG4j" data-c_e_id="wx_textf147bda0">￥{{item.cost}}</text>
+      <view class="c-minheight wx-view_xp9voB">
+        <image class="wx-image_PYrvOU"  mode="scaleToFill" src="/resources/daimai.png" />
+        <text class="c-block wx-text_tBG9kh" >代买</text>
+        <image class="wx-image_uM6VvD"  mode="scaleToFill" src="/resources/qian.png" />
+        <text class="c-block wx-text_u2uG4j" >￥{{item.cost}}</text>
       </view>
-      <view class="c-minheight wx-view_XSYzuh" data-c_e_id="wx_view2202500f">
-        <image class="wx-image_RYYYOg" data-c_e_id="wx_imagefda8c360" mode="scaleToFill" src="/resources/miaoshu.png" />
-        <text class="c-block wx-text_QF0BYA" data-c_e_id="wx_texte358fccc">{{item.title}}</text>
+      <view class="c-minheight wx-view_XSYzuh" >
+        <image class="wx-image_RYYYOg"  mode="scaleToFill" src="/resources/miaoshu.png" />
+        <text class="c-block wx-text_QF0BYA" >{{item.title}}</text>
       </view>
-      <view class="c-minheight wx-view_Kv5Tev" data-c_e_id="wx_viewe66f1dc8">
-        <image class="wx-image_MTlz53" data-c_e_id="wx_imagec0bb272d" mode="scaleToFill" src="/resources/time.png" />
-        <text class="c-block wx-text_1kGNpv" data-c_e_id="wx_text5e341e83">{{item.start_time}}  -  {{item.end_time}}</text>
+      <view class="c-minheight wx-view_Kv5Tev" >
+        <image class="wx-image_MTlz53"  mode="scaleToFill" src="/resources/time.png" />
+        <text class="c-block wx-text_1kGNpv" >{{item.start_time}}  -  {{item.end_time}}</text>
       </view>
-      <view class="c-minheight wx-view_co23rd" data-c_e_id="wx_view_20b90a16" />
-      <view class="c-minheight wx-view_V8DLtP" data-c_e_id="wx_view_33bb6d65">
-        <text class="c-block wx-text_UQYh9c" data-c_e_id="wx_text_80832a33">{{item.order_status_val}}</text>
-        <view class="c-minheight wx-view_oVtGKg" data-c_e_id="wx_view_eab8e3c0">
-          <text class="c-block wx-text_9JmF1M" data-c_e_id="wx_text_fab0adc8" wx:if="{{item.order_status<4}}" bindtap="cancelorder" data-order_id="{{item.id}}">取消跑单</text>
-          <text class="c-block wx-text_HoPYvU" data-c_e_id="wx_text_15dd6ed4" wx:if="{{item.order_status==2}}" bindtap='startorder' data-order_id="{{item.id}}">开始执行</text>
-          <text class="c-block wx-text_HoPYvU" data-c_e_id="wx_text_15dd6ed4" wx:if="{{item.order_status==3}}" bindtap='startorder' data-order_id="{{item.id}}">执行中</text>
-          <text class="c-block wx-text_CR9emH" data-c_e_id="wx_text_ff419230" wx:if="{{item.order_status>3}}" bindtap='complaint' data-employer_id="{{}}">投诉雇主</text>
+      <view class="c-minheight wx-view_co23rd"  />
+      <view class="c-minheight wx-view_V8DLtP" >
+        <text class="c-block wx-text_UQYh9c" >{{item.order_status_val}}</text>
+        <view class="c-minheight wx-view_oVtGKg" >
+          <text class="c-block wx-text_9JmF1M"  wx:if="{{item.order_status<4}}" bindtap="cancelorder" data-order_id="{{item.id}}">取消跑单</text>
+          <text class="c-block wx-text_HoPYvU"  wx:if="{{item.order_status==2}}" bindtap='startorder' data-order_id="{{item.id}}">开始执行</text>
+          <text class="c-block wx-text_HoPYvU"  wx:if="{{item.order_status==3}}" bindtap='startorder' data-order_id="{{item.id}}">执行中</text>
+          <text class="c-block wx-text_CR9emH"  wx:if="{{item.order_status>3}}" bindtap='complaint' data-employer_id="{{}}">投诉雇主</text>
         </view>
       </view>
     </view>

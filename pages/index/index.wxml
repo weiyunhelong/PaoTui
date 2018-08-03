@@ -57,7 +57,7 @@
             <text class="c-block wx-text_ZaU8MQ">{{item.member.user_name}}</text>
             <view class='shopv'>
               <view class='redv' wx:if="{{item.member.isshop}}">商家</view>
-              <view class='redv' wx:if="{{item.member.ismember}}">优质客户</view>
+              <view class='redv' wx:if="{{item.level!=''}}">{{item.level}}</view>
             </view>
           </view>
           <view class='biaoqianv' wx:if="{{x==0}}">

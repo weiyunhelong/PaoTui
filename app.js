@@ -12,7 +12,7 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         wx.request({
-          url: that.globalData.requesturl +'/Index/wxLogin',
+          url: that.globalData.requesturl +'/Index/runWxLogin',
           data: {
             code: res.code
           },

@@ -4,16 +4,12 @@
   <view class="c-minheight wx-view_lF3o2l">
     <view class="c-minheight wx-view_sDHbtd">
       <image class="wx-image_o81ARp" mode="scaleToFill" src="/resources/mddaimai.png" />
-      <text class="c-block wx-text_BuCDli">{{ordertypeval}}</text>
+      <text class="c-block wx-text_BuCDli">{{order.type_desc}}</text>
     </view>
-    <text class="c-block wx-text_vuovO2" wx:if="{{orderstatus==0}}">待接单</text>
-    <text class="c-block wx-text_vuovO2" wx:if="{{orderstatus==1}}">待执行</text>
-    <text class="c-block wx-text_vuovO2" wx:if="{{orderstatus==2}}">完成</text>
-    <text class="c-block wx-text_vuovO2" wx:if="{{orderstatus==3}}">已评价</text>
-    <text class="c-block wx-text_vuovO2" wx:if="{{orderstatus==4}}">已取消</text>
+    <text class="c-block wx-text_vuovO2">{{order.status_explain}}</text>
   </view>
   <!--评价内容-->
-  <view class="c-minheight wx-view_5u27ZS" wx:if="{{orderstatus==3}}">
+  <view class="c-minheight wx-view_5u27ZS" wx:if="{{order.order_status==1}}">
     <view class="c-minheight wx-view_fUEelB">
       <text class="c-block wx-text_eAKhuH">评分：</text>
       <block wx:for="{{xinglsit}}" wx:key="xitem" wx:for-item="xitem">
@@ -37,29 +33,30 @@
       <text class="c-block wx-text_eAKhuH">{{pingtime}}</text>
     </view>
   </view>
+
   <!--订单的内容-->
   <view class="c-minheight wx-view_PPXd851">
     <view class="c-minheight wx-view_dfNyFR1">
       <text class="c-block wx-text_FFPqzR">始</text>
-      <text class="c-block wx-text_Vj9cHB">{{addre}}</text>
+      <text class="c-block wx-text_Vj9cHB">{{order.addr}}</text>
       <image class="wx-image_qTVseD" mode="scaleToFill" src="/resources/postion.png" />
     </view>
     <view class="c-minheight wx-view_dfNyFR1">
       <text class="c-block wx-text_FFPqzR1">终</text>
-      <text class="c-block wx-text_Vj9cHB">{{oaddre}}</text>
+      <text class="c-block wx-text_Vj9cHB">{{order.o_addr}}</text>
       <image class="wx-image_qTVseD" mode="scaleToFill" src="/resources/postion.png" />
     </view>
     <view class="c-minheight wx-view_xp9voB1">
       <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/qian.png" />
-      <text class="c-block wx-text_u2uG4j">￥{{money}}</text>
+      <text class="c-block wx-text_u2uG4j">￥{{order.cost}}</text>
     </view>
     <view class="c-minheight wx-view_XSYzuh1">
       <image class="wx-image_RYYYOg" mode="scaleToFill" src="/resources/miaoshu.png" />
-      <text class="c-block wx-text_QF0BYA">{{intro}}</text>
+      <text class="c-block wx-text_QF0BYA">{{order.title}}</text>
     </view>
     <view class="c-minheight wx-view_Kv5Tev1">
       <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png" />
-      <text class="c-block wx-text_1kGNpv">{{starttime}}-{{endtime}}</text>
+      <text class="c-block wx-text_1kGNpv">{{order.start_time}}-{{order.end_time}}</text>
     </view>
     <view class="c-minheight wx-view_XuuAYf">
       <text catchtap="zhinanopt" class="c-block wx-text_dZAta1">操作指南</text>
@@ -68,26 +65,26 @@
   <!--客户信息-->
   <view class="c-minheight wx-view_JQPoPT">
     <view class="c-minheight wx-view_7tuQEA">
-      <image class="wx-image_jDkO78" mode="scaleToFill" src="/resources/touxiang.png" />
-      <text class="c-block wx-text_ZaU8MQ">{{username}}</text>
+      <image class="wx-image_jDkO78" mode="scaleToFill" src="{{order.member.user_name}}" />
+      <text class="c-block wx-text_ZaU8MQ">{{order.member.user_name}}</text>
       <text class="c-block wx-text_AGSsoP" wx:if="{{isshop}}">商家</text>
       <text class="c-block wx-text_2W9cwy" wx:if="{{islevel}}">优质客户</text>
     </view>
     <view class="c-minheight wx-view_2wZcg2">
       <image class="wx-image_tFdnbt" mode="scaleToFill" src="/resources/xiaoxi.png" bindtap='gomessageopt' />
       <view class='fengexian'></view>
-      <image class="wx-image_vJe3HO" mode="scaleToFill" src="/resources/phone.png" bindtap='gophoneopt' />
+      <image class="wx-image_vJe3HO" mode="scaleToFill" src="/resources/phone.png" bindtap='gophoneopt' data-phone='{{order.mobile}}'/>
     </view>
   </view>
   <!--订单信息-->
   <view class="c-minheight wx-view_JQPoPT1">
     <view class="c-minheight wx-view_o76ZdP">
       <text class="c-block wx-text_uhetRv">跑单编号</text>
-      <text class="c-block wx-text_uhetRv">{{orderno}}</text>
+      <text class="c-block wx-text_uhetRv">{{order.runn_no}}</text>
     </view>
     <view class="c-minheight wx-view_o76ZdP">
       <text class="c-block wx-text_uhetRv">跑单时间</text>
-      <text class="c-block wx-text_uhetRv">{{ordertime}}</text>
+      <text class="c-block wx-text_uhetRv">{{order.create_time}}</text>
     </view>
   </view>
   <!--操作按钮-->

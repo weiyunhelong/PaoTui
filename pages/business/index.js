@@ -1,4 +1,7 @@
 // pages/business/index.js
+var requesturl = getApp().globalData.requesturl;//请求接口的地址
+//order_status表示订单状态  
+// 0待接单 1已取消 2已接单 3待执行 4进行中 5已完成 6申请退款 7退款成功 8退款失败 9骑手申请取消 10雇主申请取消
 Page({
 
   /**
@@ -7,25 +10,8 @@ Page({
   data: {
     istsshow: "",//投诉弹窗显示
     isznshow:"",//指南弹窗显示
-    /*订单详情*/
-    ordertypeval:"",//订单类型  
-    orderstatus: 0,//订单状态
-    addre:"",//起始地
-    oaddre: "",//目的地
-    money:0,//价格
-    intro:"",//描述
-    starttime:"",//开始时间
-    endtime:"",//结束时间
-    /*顾客信息*/
-    headimg:"",//用户头像
-    username:"",//用户昵称
-    isshop:true,//是否店家
-    islevel:true,//是否等级
-    phonenum:"",//手机号码
-    /*订单编号时间*/
-    orderid:0,//订单id
-    orderno:"",//订单编号
-    ordertime:"",//下单时间
+    orderid:"",//订单id
+    order: {},//订单详情    
     /*评价的内容*/
     xinglsit:[1,2,3,4,5],//星
     pingfen:4.5,//评分
@@ -52,28 +38,33 @@ Page({
 
     //参数部分
     var orderid = that.data.orderid;
-
-    //获取订单的数据
-    that.setData({
-      /*订单详情*/
-      ordertypeval: "代买",//订单类型  
-      orderstatus: 3,//订单状态
-      addre: "广东省中山市东区古镇镇骏贤居",//起始地
-      oaddre: "广东省中山市东区古镇镇骏贤居",//目的地
-      money: 5.5,//价格
-      intro: "帮我买一罐可乐，要冰的帮我买一罐可乐，要冰的帮我买一罐可乐,要冰的帮我买一罐可乐",//描述
-      starttime: "15:32",//开始时间
-      endtime: "16:25",//结束时间
-      /*顾客信息*/
-      headimg: "/resources/touxiang.png",
-      username: "用户昵称",
-      isshop: true,
-      islevel: true,
-      phonenum: "13812345678",
-      /*订单编号时间*/
-      orderid: 0,
-      orderno: "1326545825441244",
-      ordertime: "2018-03-01 13:12:36"
+    
+    wx.request({
+      url: requesturl+'/receipt/detail',
+      data: {
+        openid:getApp().globalData.openid,		
+        id: orderid
+      },
+      header: {
+        "Content-Type":"application/json"
+      },
+      method: 'GET',
+      success: function(res) {
+        console.log("接单详情:");
+        console.log(res);
+        if(res.data.result){
+          that.setData({
+            order:res.data.data
+          })
+        }else{
+          wx.showToast({
+            title: '获取详情失败',
+            mask:true,
+            duration:2000,
+            icon:'none'
+          })
+        }
+      }
     })
   },
   //抢单操作
@@ -87,9 +78,10 @@ Page({
     })
   },
   //打电话操作
-  gophoneopt: function () {
+  gophoneopt: function (e) {
+    var phone=e.currentTarget.dataset.phone;
     wx.makePhoneCall({
-      phoneNumber: '13812345678',
+      phoneNumber: phone
     })
   },
   //取消订单

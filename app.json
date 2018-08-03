@@ -9,7 +9,9 @@
     "backgroundTextStyle": "dark"
   },
   "pages": [
-    "pages/index/index",       
+    "pages/login/index",
+    "pages/sign/index",
+    "pages/index/index",      
     "pages/paodan/index",
     "pages/message/index",
     "pages/business/index",

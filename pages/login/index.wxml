@@ -1,0 +1,12 @@
+<!--pages/login/index.wxml-->
+
+<!--logo部分-->
+<view class='logov'>
+ <image src='/resources/logo.jpg' class='logoico'></image>
+</view>
+
+<!--提示文字-->
+<view class='tiptxt'>使用微信授权登录小龙快跑骑手端</view>
+
+<!--按钮-->
+<button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="GetUserInfo" class='loginbtn'>微信授权登录</button>
