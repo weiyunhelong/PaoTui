@@ -1,1 +1,140 @@
 /* pages/business/index.wxss */
+
+/*操作按钮层*/
+
+.wx-view_dHiiPT {
+  display: flex;
+  min-height: initial;
+  justify-content: space-between;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  margin-top: 30rpx;
+}
+
+/*地址文字层*/
+
+.wx-text_Vj9cHB {
+  color: rgb(255, 255, 255);
+  font-size: 28rpx;
+  margin-right: 0rpx;
+}
+
+/*分割线*/
+
+.fengexian {
+  width: 2rpx;
+  height: 50rpx;
+  background-color: #fff;
+  margin-right: 20rpx;
+}
+
+/*取消按钮*/
+
+.wx-text_OhLcTU {
+  color: rgb(0, 255, 255);
+  background-color: rgba(255, 255, 255, 1);
+  height: 70rpx;
+  line-height: 70rpx;
+  width: 300rpx;
+  text-align: center;
+  padding: 0 0;
+  font-size: 28rpx;
+}
+
+/*运行按钮*/
+
+.wx-text_ybBOBs {
+  color: rgb(255, 255, 255);
+  font-size: 28rpx;
+  background-color: rgb(0, 255, 255);
+  height: 70rpx;
+  line-height: 70rpx;
+  width: 300rpx;
+  text-align: center;
+  padding: 0 0;
+}
+
+/*上传的图片*/
+
+.wx-image_IGjJPP1 {
+  width: 160rpx;
+  height: 160rpx;
+  margin: 20rpx;
+}
+
+/*提交投诉按钮*/
+
+.wx-button_17cUwW {
+  border-radius: 0px;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  background-color: #0ff;
+  color: #fff;
+  position: relative;
+  display: block;
+}
+
+/*操作指南弹窗部分*/
+
+.wx-view_m11HByj {
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  box-shadow: rgba(0, 0, 0, 0.27) 0px -4rpx 40rpx 0px;
+  padding-bottom: 20rpx;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  top: 220rpx;
+}
+
+/*操作指南内容部分*/
+
+.wx_text_info {
+  font-size: 25rpx;
+  margin: 0 20rpx;
+  text-align: left;
+  overflow-x: auto;
+  height: 85%;
+}
+
+/*我知道了按钮*/
+
+.wx-button_18cUwW {
+  width: 100%;
+  height: 100rpx;
+  background-color: #0ff;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  line-height: 100rpx;
+}
+
+/*抢单按钮*/
+
+.wx-text_yebBOBs {
+  width: 100%;
+  background: #0ff;
+  text-align: center;
+  line-height: 70rpx;
+  color: #fff;
+  font-size: 28rpx;
+}
+
+/*评价的内容*/
+
+.wx-text_eAKhuH {
+  color: rgb(255, 255, 255);
+  font-size: 28rpx;
+  margin-right: 20rpx;
+  margin-bottom: 10rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}

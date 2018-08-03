@@ -9,7 +9,7 @@
         <text class="c-block wx-text_gfZnRH">{{wxname}}</text>
         <view class="c-minheight wx-view_G2Hldj">
           <block wx:for="{{xinglsit}}" wx:key="xitem" wx:for-item="xitem">
-            <image class="wx-image_oNnlIp" mode="scaleToFill" wx:if="{{xitem<fen}}" src="/resources/xing.png" />
+            <image class="wx-image_oNnlIp" mode="scaleToFill" wx:if="{{xitem<=fen}}" src="/resources/xing.png" />
           </block>
           <image class="wx-image_jRpsXD" mode="scaleToFill" wx:if="{{fen%1!=0}}"src="/resources/banxing.png" />
           <text class="c-block wx-text_AE8Cnc">{{fen}}</text>

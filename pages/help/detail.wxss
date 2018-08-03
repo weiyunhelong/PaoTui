@@ -20,5 +20,5 @@ page {
 .bodyinfo {
   font-size: 25rpx;
   color: #fff;
-  margin: 0 30rpx;
+  margin: 0 50rpx;
 }

@@ -1,2 +1,150 @@
 <!--pages/business/index.wxml-->
-<text>pages/business/index.wxml</text>
+<view class="c-minheight wx-view_KqOJvU">
+  <!--顶部菜单部分-->
+  <view class="c-minheight wx-view_lF3o2l">
+    <view class="c-minheight wx-view_sDHbtd">
+      <image class="wx-image_o81ARp" mode="scaleToFill" src="/resources/mddaimai.png" />
+      <text class="c-block wx-text_BuCDli">{{ordertypeval}}</text>
+    </view>
+    <text class="c-block wx-text_vuovO2" wx:if="{{orderstatus==0}}">待接单</text>
+    <text class="c-block wx-text_vuovO2" wx:if="{{orderstatus==1}}">待执行</text>
+    <text class="c-block wx-text_vuovO2" wx:if="{{orderstatus==2}}">完成</text>
+    <text class="c-block wx-text_vuovO2" wx:if="{{orderstatus==3}}">已评价</text>
+    <text class="c-block wx-text_vuovO2" wx:if="{{orderstatus==4}}">已取消</text>
+  </view>
+  <!--评价内容-->
+  <view class="c-minheight wx-view_5u27ZS" wx:if="{{orderstatus==3}}">
+    <view class="c-minheight wx-view_fUEelB">
+      <text class="c-block wx-text_eAKhuH">评分：</text>
+      <block wx:for="{{xinglsit}}" wx:key="xitem" wx:for-item="xitem">
+        <image class="wx-image_LfAJyx" mode="scaleToFill" src="/resources/xing.png" wx:if="{{xitem<=pingfen}}" />
+      </block>
+      <image class="wx-image_jRpsXD" mode="scaleToFill" wx:if="{{pingfen%1!=0}}" src="/resources/banxing.png" />
+    </view>
+    <view class="c-minheight wx-view_nOn7MR">
+      <text class="c-block wx-text_eAKhuH">内容：</text>
+      <view class="c-minheight wx-view_5pA13j">
+        <text class="c-block wx-text_eAKhuH">{{pinginfo}}</text>
+        <view class="c-minheight wx-view_ghWvFg">
+          <block wx:for="{{pingtulist}}" wx:key="item">
+            <image class="wx-image_BVT0xx" mode="scaleToFill" src="{{item}}" />
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class="c-minheight wx-view_aKGF5k">
+      <text class="c-block wx-text_eAKhuH">时间：</text>
+      <text class="c-block wx-text_eAKhuH">{{pingtime}}</text>
+    </view>
+  </view>
+  <!--订单的内容-->
+  <view class="c-minheight wx-view_PPXd851">
+    <view class="c-minheight wx-view_dfNyFR1">
+      <text class="c-block wx-text_FFPqzR">始</text>
+      <text class="c-block wx-text_Vj9cHB">{{addre}}</text>
+      <image class="wx-image_qTVseD" mode="scaleToFill" src="/resources/postion.png" />
+    </view>
+    <view class="c-minheight wx-view_dfNyFR1">
+      <text class="c-block wx-text_FFPqzR1">终</text>
+      <text class="c-block wx-text_Vj9cHB">{{oaddre}}</text>
+      <image class="wx-image_qTVseD" mode="scaleToFill" src="/resources/postion.png" />
+    </view>
+    <view class="c-minheight wx-view_xp9voB1">
+      <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/qian.png" />
+      <text class="c-block wx-text_u2uG4j">￥{{money}}</text>
+    </view>
+    <view class="c-minheight wx-view_XSYzuh1">
+      <image class="wx-image_RYYYOg" mode="scaleToFill" src="/resources/miaoshu.png" />
+      <text class="c-block wx-text_QF0BYA">{{intro}}</text>
+    </view>
+    <view class="c-minheight wx-view_Kv5Tev1">
+      <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png" />
+      <text class="c-block wx-text_1kGNpv">{{starttime}}-{{endtime}}</text>
+    </view>
+    <view class="c-minheight wx-view_XuuAYf">
+      <text catchtap="zhinanopt" class="c-block wx-text_dZAta1">操作指南</text>
+    </view>
+  </view>
+  <!--客户信息-->
+  <view class="c-minheight wx-view_JQPoPT">
+    <view class="c-minheight wx-view_7tuQEA">
+      <image class="wx-image_jDkO78" mode="scaleToFill" src="/resources/touxiang.png" />
+      <text class="c-block wx-text_ZaU8MQ">{{username}}</text>
+      <text class="c-block wx-text_AGSsoP" wx:if="{{isshop}}">商家</text>
+      <text class="c-block wx-text_2W9cwy" wx:if="{{islevel}}">优质客户</text>
+    </view>
+    <view class="c-minheight wx-view_2wZcg2">
+      <image class="wx-image_tFdnbt" mode="scaleToFill" src="/resources/xiaoxi.png" bindtap='gomessageopt' />
+      <view class='fengexian'></view>
+      <image class="wx-image_vJe3HO" mode="scaleToFill" src="/resources/phone.png" bindtap='gophoneopt' />
+    </view>
+  </view>
+  <!--订单信息-->
+  <view class="c-minheight wx-view_JQPoPT1">
+    <view class="c-minheight wx-view_o76ZdP">
+      <text class="c-block wx-text_uhetRv">跑单编号</text>
+      <text class="c-block wx-text_uhetRv">{{orderno}}</text>
+    </view>
+    <view class="c-minheight wx-view_o76ZdP">
+      <text class="c-block wx-text_uhetRv">跑单时间</text>
+      <text class="c-block wx-text_uhetRv">{{ordertime}}</text>
+    </view>
+  </view>
+  <!--操作按钮-->
+  <view class="c-minheight wx-view_dHiiPT">
+    <text class="c-block wx-text_yebBOBs" bindtap='getorderopt' wx:if="{{orderstatus==0}}">抢单</text>
+    <block wx:if="{{orderstatus==1}}">
+      <text class="c-block wx-text_OhLcTU" bindtap='cancelopt'>取消跑单</text>
+      <text class="c-block wx-text_ybBOBs" bindtap='runopt'>开始执行</text>
+    </block>
+  </view>
+  <view class="c-minheight wx-view_MhITsM" wx:if="{{orderstatus!=0}}">
+    <text catchtap="tousuopt" class="c-block wx-text_BWm6IN">投诉雇主</text>
+  </view>
+</view>
+
+<!--弹窗投诉部分-->
+<view class="modalview {{istsshow}}">
+  <view class="wx-view_m9HByj">
+    <view class="c-minheight wx-view_uvWlpb">
+      <image class="wx-image_VzlDgi" mode="scaleToFill" src="/resources/close.png" bindtap='closemodal' />
+    </view>
+    <view class="c-minheight wx-view_lmrNzV">
+      <text class="c-block wx-text_AgStyc">投诉雇主</text>
+    </view>
+    <textarea class="c-block c-fullwidth wx-textarea_9pwDc5" name="textarea1" placeholder="请输入投诉内容" type="textarea" maxlength='200' />
+    <view class="c-minheight wx-view_nxrraU">
+      <image class="wx-image_IGjJPP" mode="scaleToFill" src="/resources/add.png" />
+      <image class="wx-image_IGjJPP1" mode="scaleToFill" src="/resources/tu1.png" />
+      <image class="wx-image_IGjJPP1" mode="scaleToFill" src="/resources/tu1.png" />
+      <image class="wx-image_IGjJPP1" mode="scaleToFill" src="/resources/tu1.png" />
+    </view>
+    <button class="wx-button_17cUwW" size="default" bindtap="postmodal">
+      提交投诉
+    </button>
+  </view>
+</view>
+
+<!--弹窗投诉部分-->
+<view class="modalview {{isznshow}}">
+  <view class="wx-view_m11HByj">
+    <view class="c-minheight wx-view_lmrNzV">
+      <text class="c-block wx-text_AgStyc">操作指南</text>
+    </view>
+    <view class='wx_text_info'>
+      <text decode='true'>
+        今年唯一不同的是，行动最快的竟然是各个二线城市。年轻人还在脑内构思辞职信草稿，职场老手正向有意提供工作的大佬问好。新一年的未来还在迷惘中酝酿，二线城市的人才招揽广告已然杀到！
+        2月27日，杭州地铁1号线龙翔桥站C口，返城潮汹涌，两旁广告箱如往常般亮着瓦力十足的灯光。Sophie经过时，被上头的文字吸引了——“‘蓉漂’计划青年人才驿站”、“成都 · 许你一个美好的未来”。
+       成都抢人抢到了杭州家门口，还来不及为杭州倒吸一口冷气，其它二线城市也纷纷使出杀招。城市政策并非唯一推力，房产开发商为人才争夺战添了一把火。根据中国证券报的报道，2018年春节后，武汉、西安、南京等地多个楼盘均推出优惠政策，“送钱送房送户口”的口号不绝于耳。
+      人口集聚，则为城。
+      二线城市人才争夺战，本质是资源竞争和城市竞争。各城市在这场PK中孰胜孰败？
+      多城市政策齐发，并驱争先
+      “古时千里马常有，伯乐不常有；今日伯乐已翘首期盼，千里马却迟迟不归。”受国家双创政策的春风照拂，从世界范围看，2017全球十大创业生态系统中中国占据两席，北京上海分别排名第二、第七；从中国范围看，杭州紧随北上广深成为排名第五最适宜创业的城市，武汉、天津、苏州、成都、南京依次进入前十排行榜。
+      曾经的“上海后花园”杭州今非昔比一跃成为国际化大都市，先后举办了G20峰会、云栖大会、移动互联网大会等多个享誉国际的会议，拿下2022年亚运会的举办权，杭州的振兴为其他省市起了带头.
+      </text>
+    </view>
+    <button class="wx-button_18cUwW" size="default" bindtap="knowmodal">
+      我知道了
+    </button>
+  </view>
+</view>

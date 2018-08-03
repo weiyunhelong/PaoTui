@@ -1,2 +1,46 @@
 <!--pages/account/index.wxml-->
-<text>pages/account/index.wxml</text>
+<view class="c-minheight wx-view_e9tTYr">
+  <!--菜单部分-->
+  <view class="c-minheight wx-view_V73TWA">
+    <text class="c-block {{chkmenu==1?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkmenuopt' data-id='1'>全部</text>
+    <text class="c-block {{chkmenu==2?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkmenuopt' data-id='2'>跑单</text>
+    <text class="c-block {{chkmenu==3?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkmenuopt' data-id='3'>提现</text>
+  </view>
+
+  <!--列表数据-->
+  <block wx:for="{{datalist}}" wx:key="item">
+    <view class="c-minheight wx-view_7QHnu2">
+      <text class="c-block wx-text_Hch3C9">{{item.time}}</text>
+      <block wx:for="{{item.childs}}" wx:key="citem" wx:for-item="citem">
+        <view class="c-minheight wx-view_ffp5Dq">
+
+          <view class="c-minheight wx-view_DlKnq3" wx:if="{{citem.typeval==2}}">
+            <image class="wx-image_ZTxjkf" mode="scaleToFill" src="/resources/tixianico.png" />
+            <view class="c-minheight wx-view_1N72IJ">
+              <text class="c-block wx-text_GTr4On">提现</text>
+              <text class="c-block wx-text_zy1sxb"></text>
+            </view>
+          </view>
+
+          <view class="c-minheight wx-view_DlKnq3" wx:else>
+            <image class="wx-image_ZTxjkf" mode="scaleToFill" src="/resources/tuikuanico.png" />
+            <view class="c-minheight wx-view_1N72IJ">
+              <text class="c-block wx-text_GTr4On" wx:if="{{citem.typeval==4}}">退款</text>
+              <text class="c-block wx-text_GTr4On">[{{citem.typetxt}}]</text>
+              <text class="c-block wx-text_zy1sxb">{{citem.orderno}}</text>
+            </view>
+          </view>
+
+          <text class="c-block wx-text_5McyvR"  wx:if="{{citem.status==0}}">{{citem.money}}</text>
+          <text class="c-block wx-text_5McyvR1" wx:else>{{citem.money}}</text>
+        </view>
+      </block>
+    </view>
+  </block>
+
+  <!--没有数据的提示-->
+  <view class="c-minheight wx-view_3Ut5XA" wx:if="{{showtip}}">
+    <text class="c-block wx-text_BvZJc5">暂无投诉记录</text>
+  </view>
+  <!--结束标识符-->
+</view>

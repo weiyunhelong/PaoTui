@@ -1647,13 +1647,11 @@ checkbox-group, radio-group {
 }
 
 .wx-text_5McyvR {
-  color: #ffcc5a;
-  font-weight: bold;
+  color: #0ff;
 }
 
 .wx-text_5McyvR1 {
   color: #ffcc5a;
-  font-weight: bold;
 }
 
 .body_qlHHqh {

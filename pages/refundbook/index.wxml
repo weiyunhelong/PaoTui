@@ -1,2 +1,39 @@
 <!--pages/refundbook/index.wxml-->
-<text>pages/refundbook/index.wxml</text>
+<view class="c-minheight wx-view_XwihFK">
+  <!--菜单部分-->
+  <view class="c-minheight wx-view_UzkZaX">
+    <text class="c-block {{chkmenu==1?'wx-text_ORXJYa1':'wx-text_F2IIzE'}}" bindtap='chkmenuopt' data-id='1'>全部</text>
+    <text class="c-block {{chkmenu==2?'wx-text_ORXJYa1':'wx-text_F2IIzE'}}" bindtap='chkmenuopt' data-id='2'>退款中</text>
+    <text class="c-block {{chkmenu==3?'wx-text_ORXJYa1':'wx-text_F2IIzE'}}" bindtap='chkmenuopt' data-id='3'>已退款</text>
+    <text class="c-block {{chkmenu==4?'wx-text_ORXJYa1':'wx-text_F2IIzE'}}" bindtap='chkmenuopt' data-id='4'>拒绝退款</text>
+  </view>
+
+  <!--订单部分-->
+  <block wx:for="{{datalist}}" wx:key="item">
+    <view class="c-minheight wx-view_gorD6N">
+      <view class="c-minheight wx-view_9iXhJA">
+        <image class="wx-image_8TBuNc" mode="scaleToFill" src="/resources/daimai.png" />
+        <text class="c-block wx-text_MVOodA">【{{item.typeval}}】</text>
+        <text class="c-block wx-text_7avRaJ">{{item.orderno}}</text>
+      </view>
+      <view class="wx-view_5QdVHd">
+        <image class="wx-image_8TBuNc" mode="scaleToFill" src="/resources/miaoshu.png" />
+        <view class="wx-view_Wsrfc9">
+          <text class="c-block wx-text_MVOodA">{{item.info}}</text>
+          <view class="c-minheight wx-view_Xx9xdU">
+            <block wx:for="{{item.imglist}}" wx:key="tuitem" wx:for-item="tuitem">
+              <image class="wx-image_z0fK8a" mode="scaleToFill" src="{{tuitem}}" />
+            </block>
+          </view>
+        </view>
+      </view>
+      <view class="c-minheight wx-view_Wmg0Pk">
+        <text class="c-block wx-text_Qd5j7U" wx:if="{{item.status==1}}">退款中</text>
+        <text class="c-block wx-text_Qd5j7U" wx:if="{{item.status==2}}">已退款</text>
+        <text class="c-block wx-text_Qd5j7U" wx:if="{{item.status==3}}">拒绝退款</text>
+        <text class="c-block wx-text_Gn0r6V1" bindtap='godetailopt' data-id='{{item.id}}'>退款详情</text>
+      </view>
+    </view>
+  </block>
+  <!--结束标示符-->
+</view>

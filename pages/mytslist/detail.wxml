@@ -2,10 +2,14 @@
 
 <view class="c-minheight wx-view_W1YqeQ">
   <view class="c-minheight wx-view_nnJOwx">
+  
+    <!--雇主信息-->
     <view class="c-minheight wx-view_6R3LFQ">
       <image class="wx-image_UanGTG" mode="scaleToFill" src="/resources/touxiang.png" />
       <text class="c-block wx-text_7KVuIb">雇主昵称</text>
     </view>
+
+    <!--投诉内容-->
     <view class="c-minheight wx-view_CKL7oQ">
       <view class="c-minheight wx-view_eJY7fz">
         <text class="c-block wx-text_MiAbaY">投诉内容：</text>
@@ -19,15 +23,22 @@
         </view>
       </view>
     </view>
+
+    <!--投诉时间-->
     <view class="c-minheight wx-view_LSe4ga">
       <text class="c-block wx-text_MiAbaY">时间：</text>
       <text class="c-block wx-text_YwWbjJ">2018-03-01  13:12:36</text>
     </view>
+
+     <!--投诉状态-->
     <view class="c-minheight wx-view_LSe4ga">
       <text class="c-block wx-text_MiAbaY">状态：</text>
       <text class="c-block wx-text_YwWbjJ">待处理</text>
     </view>
+
   </view>
+
+  <!--平台回复-->
   <view class="c-minheight wx-view_9KOweV">
     <view class="c-minheight wx-view_LSe4ga">
       <text class="c-block wx-text_MiAbaY">平台回复：</text>
@@ -38,6 +49,8 @@
       <text class="c-block wx-text_YwWbjJ">2018-03-01  13:12:36</text>
     </view>
   </view>
+
+  <!--订单信息-->
   <view class="c-minheight wx-view_PPXd851">
     <view class="c-minheight wx-view_dfNyFR1">
       <text class="c-block wx-text_FFPqzR">始</text>
@@ -70,4 +83,5 @@
       </view>
     </view>
   </view>
+
 </view>

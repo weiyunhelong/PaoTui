@@ -19,6 +19,7 @@
     "pages/mytslist/index",
     "pages/mytslist/detail",
     "pages/refundbook/index",
+    "pages/refundbook/detail",
     "pages/account/index",
     "pages/help/index",
     "pages/help/list",

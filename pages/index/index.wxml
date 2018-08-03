@@ -30,7 +30,7 @@
   <!--完成时间-->
   <view class="c-minheight wx-view_PPXd85" wx:if="{{chkmenu==3}}">
     <text bindtap="chkmenu" data-id='1' class="c-block {{chkmenu==1?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">默认排序</text>
-    <text bindtap="chkmenu" data-id='3' class="c-block {{chkmenu==1?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">服务小费</text>
+    <text bindtap="chkmenu" data-id='2' class="c-block {{chkmenu==1?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">服务小费</text>
     <view class="c-minheight wx-view_nH3S8V" catchtap='timesortopt'>
       <text class="c-block wx-text_9iRv4v1s">完成时间</text>
       <view class="c-minheight wx-view_R2RJ9B" wx:if="{{!timedescsort}}">
