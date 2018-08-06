@@ -1,5 +1,6 @@
 // pages/paodan/index.js
 var orderdata=require('../../utils/orderlist.js');
+var requesturl = getApp().globalData.requesturl;
 
 Page({
 
@@ -53,13 +54,25 @@ Page({
     var chkmenu = that.data.chkmenu;
     console.log("菜单id:" + chkmenu); 
     //查询数据 
-    var orderlist = orderdata.getOrderstatus(chkmenu);
-    console.log("查询结果数据:"); 
-    console.log(orderlist);
-    //赋值部分
-    that.setData({
-      orderlist: orderlist
-    })
+    wx.request({
+      url: requesturl +'/staff/index',
+      data: {
+        openid:getApp().globalData.openid,
+        status: chkmenu
+      },
+      header: {
+        "Content-Type":"application/json"
+      },
+      method: 'GET',
+      success: function(res) {
+        console.log("跑单列表结果:");
+        console.log(res);
+        //赋值部分
+        that.setData({
+          orderlist: res.data.data
+        })
+      }
+    })    
   },
   /**
    * 生命周期函数--监听页面隐藏

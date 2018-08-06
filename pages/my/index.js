@@ -1,4 +1,5 @@
 // pages/my/index.js
+var requesturl = getApp().globalData.requesturl;
 Page({
 
   /**
@@ -16,7 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+   
   },
   
   //提现
@@ -66,9 +67,36 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
-  },
+    var that=this;
 
+    //初始化获取用户的信息
+    that.InitWxUser();
+  },
+  //初始化获取用户的信息
+  InitWxUser:function(){
+    var that=this;
+    //获取用户信息
+    wx.request({
+      url: requesturl +'/staff/detail',
+      data: {
+        openid:getApp().globalData.openid
+      },
+      header: {
+        "Content-Type":"application/json"
+      },
+      method: 'GET',
+      success: function(res) {
+        console.log("获取用户信息得数据");
+        console.log(res);
+
+        that.setData({
+          touxiang: res.data.face,
+          wxname: res.data.name,
+          qian: res.data.total_money
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

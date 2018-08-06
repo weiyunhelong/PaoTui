@@ -1,4 +1,6 @@
 // pages/mytslist/index.js
+var requesturl=getApp().globalData.requesturl;
+
 Page({
 
   /**
@@ -24,7 +26,7 @@ Page({
     var that = this;
     //参数部分
     var chkmenu = that.data.chkmenu;
-
+    
     //请求接口获取参数
     var btslist = [
       {
@@ -48,11 +50,39 @@ Page({
         ]
       },
     ];
+    
+
+    //请求接口获取数据
+    var status="all";
+    if(chkmenu==1){
+      status ="all";
+    }else if (chkmenu == 2) {
+      status = "1";
+    } else if (chkmenu == 3) {
+      status = "0";
+    }
+    wx.request({
+      url: requesturl +'/staff/my_complaint_list',
+      data: {
+        openid:getApp().globalData.openid,
+        status: status
+      },
+      header: {
+        "Content-Type":"application/json"
+      },
+      method: 'GET',
+      success: function(res) {
+        console.log("投诉的列表:");
+        console.log(res);
+      }
+    })
 
     that.setData({
       btslist: btslist,
       showtip: btslist.length == 0 ? true : false
     })
+
+
   },
   //菜单的选中
   chkemnuopt: function (e) {

@@ -11,21 +11,8 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        wx.request({
-          url: that.globalData.requesturl +'/Index/runWxLogin',
-          data: {
-            code: res.code
-          },
-          header: {
-            "Content-Type":"application/x-www-form-urlencoded"
-          },
-          method: 'POST',
-          success: function(res) {
-            console.log("获取openid的值:");
-            console.log(res);
-            that.globalData.openid=res.data;
-          }
-        })
+        that.globalData.code = res.code; 
+        //获取openid              
       }
     })
     // 获取用户信息
@@ -51,7 +38,9 @@ App({
   },
   globalData: {
     userInfo: null,//微信用户的信息
+    code:"",//登录code值
     openid:"",//openid的值
+    uid:"",//用户id
     requesturl: "https://www.fsdragon.com/small",//请求的接口
   }
 })

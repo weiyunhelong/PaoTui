@@ -9,9 +9,10 @@
     "backgroundTextStyle": "dark"
   },
   "pages": [
+    "pages/chat/index",
     "pages/login/index",
+    "pages/index/index",
     "pages/sign/index",
-    "pages/index/index",      
     "pages/paodan/index",
     "pages/message/index",
     "pages/business/index",

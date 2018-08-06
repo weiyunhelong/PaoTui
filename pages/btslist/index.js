@@ -1,4 +1,6 @@
 // pages/btslist/index.js
+var requesturl = getApp().globalData.requesturl;
+
 Page({
 
   /**
@@ -48,7 +50,31 @@ Page({
         ]
       },
     ];
-
+    //状态值
+    var status = "all";
+    if (chkmenu == 1) {
+      status = "all";
+    } else if (chkmenu == 2) {
+      status = "1";
+    } else if (chkmenu == 3) {
+      status = "0";
+    }
+    //请求接口，获取列表数据
+    wx.request({
+      url: requesturl +'/staff/receive_complaint_list',
+      data: {
+        openid:getApp().globalData.openid,
+        status: status
+      },
+      header: {
+        "Content-Type":"application/json"
+      },
+      method: 'GET',
+      success: function(res) {
+        console.log("被投诉的列表:");
+        console.log(res);
+      }
+    })
     that.setData({
       btslist: btslist,
       showtip: btslist.length==0?true:false

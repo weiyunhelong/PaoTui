@@ -1,20 +1,48 @@
 // pages/btslist/detail.js
+var requesturl = getApp().globalData.requesturl;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    id:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-  },
+     var that=this;
 
+     that.setData({
+       id:options.id
+     })
+
+     //初始化详情
+     that.InitDetail();
+  },
+  //初始化详情
+  InitDetail:function(){
+    var that=this;
+
+    wx.request({
+      url: requesturl +'/staff/receive_complaint_list',
+      data: {
+        openid:getApp().globalData.openid,
+        id: that.data.id
+      },
+      header: {
+        "Content-Type":"application/json"
+      },
+      method: 'GET',
+      success: function(res) {
+        console.log("投诉详情结果:");
+        console.log(res);
+        
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -1,20 +1,51 @@
 // pages/mytslist/detail.js
+var requesturl = getApp().globalData.requesturl;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    id:"",//id的值
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-  },
+    var that=this;
 
+    that.setData({
+      id:options.id
+    })
+    //初始化投诉
+    that.InitTousu();
+  },
+  //初始化投诉
+  InitTousu:function(){
+    var that=this;
+
+    //参数部分
+    var id=that.data.id;
+
+    //
+    wx.request({
+      url: requesturl +'/staff/my_complaint_list',
+      data: {
+        openid:getApp().globalData.openid,
+        id: id
+      },
+      header: {
+        "Content-Type":"application/json"
+      },
+      method: 'GET',
+      success: function(res) {
+        console.log("投诉详情结果:");
+        console.log(res);
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

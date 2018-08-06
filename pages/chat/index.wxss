@@ -1,0 +1,204 @@
+/* pages/chat/index.wxss */
+
+page {
+  background-color: #f1f1f1;
+  background-image: none;
+}
+
+/*顶部层*/
+
+.topv {
+  width: 100%;
+  height: 100rpx;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+}
+
+.toptxcss {
+  width: 70rpx;
+  height: 70rpx;
+  margin: 15rpx 10rpx;
+}
+
+.topwxname {
+  line-height: 100rpx;
+  font-size: 28rpx;
+}
+
+/*时间层*/
+
+.timev {
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 25rpx;
+}
+
+/*我的消息*/
+
+.mynewsv {
+  float: right;
+}
+
+/*消息文字*/
+
+.xiaoxitxt {
+  background-color: #9fe956;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  float: right;
+  font-size: 28rpx;
+  color: #fff;
+  min-height: 60rpx;
+  margin-top: 20rpx;
+  max-width: 70%;
+}
+
+.mytxv {
+  float: right;
+}
+
+.mytxcss {
+  width: 70rpx;
+  height: 70rpx;
+  margin: 15rpx 20rpx;
+}
+
+/*消息图片部分*/
+
+.xiaoxituv {
+  width: 200rpx;
+  height: 200rpx;
+  float: right;
+}
+
+.xiaoximg {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 10rpx;
+}
+
+/*消息地图部分*/
+
+.xiaoximapv {
+  width: 80%;
+  height: 300rpx;
+  float: right;
+  margin-top: 30rpx;
+}
+
+.dizhitxt {
+  background-color: #fff;
+  padding: 20rpx 20rpx 10rpx 20rpx;
+  font-size: 30rpx;
+}
+
+.clearv {
+  clear: both;
+}
+
+/*对话人消息*/
+
+.othernewsv {
+  float: left;
+}
+
+/*消息文字*/
+
+.oxiaoxitxt {
+  background-color: #fff;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  float: left;
+  font-size: 28rpx;
+  min-height: 60rpx;
+  margin-top: 20rpx;
+  max-width: 70%;
+}
+
+.omytxv {
+  float: left;
+}
+
+.omytxcss {
+  width: 70rpx;
+  height: 70rpx;
+  margin: 15rpx 20rpx;
+}
+
+/*消息图片部分*/
+
+.oxiaoxituv {
+  width: 200rpx;
+  height: 200rpx;
+  float: left;
+}
+
+.oxiaoximg {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 10rpx;
+}
+
+/*消息地图部分*/
+
+.oxiaoximapv {
+  width: 80%;
+  height: 300rpx;
+  float: left;
+  margin-top: 30rpx;
+}
+
+.odizhitxt {
+  background-color: #fff;
+  padding: 20rpx 20rpx 10rpx 20rpx;
+  font-size: 30rpx;
+}
+
+/*底部按钮部分*/
+
+.bottomv {
+  width: 100%;
+  height: 170rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+/*输入行*/
+
+.inputv {
+  width: 96%;
+  height: 70rpx;
+  margin: 0 2%;
+  display: flex;
+}
+
+.txtcss {
+  width: 83%;
+  height: 70rpx;
+  background-color: #fff;
+  padding: 0 10rpx;
+  border-radius: 10rpx;
+}
+
+.sendbtn {
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  padding: 0 20rpx;
+  background-color: #ddd;
+  color: #fff;
+  margin-left: 20rpx;
+  border-radius: 10rpx;
+}
+
+.btnv {
+  margin-top: 20rpx;
+}
+
+.btntu {
+  width: 48rpx;
+  height: 48rpx;
+  margin: 10rpx 30rpx;
+}

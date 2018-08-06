@@ -138,3 +138,46 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
+
+
+/*协议部分*/
+
+.xieyiv {
+  width: 94%;
+  height: 60rpx;
+  display: flex;
+  margin: 0 3%;
+}
+
+.xieyiico {
+}
+
+.agreetip {
+  font-size: 30rpx;
+  margin-left: 10rpx;
+  color: #fff;
+}
+
+.agreetxt {
+  font-size: 30rpx;
+  color: #0ff;
+}
+
+
+/*取消层*/
+.cancelv{
+  display: flex;
+  margin-left: 20rpx;
+  font-size: 25rpx;
+  color: #ccc;
+}
+.cancelnum{
+  color: #f00;
+}
+
+.canceltip{
+  margin:20rpx;
+  font-size: 25rpx;
+  color: #ccc;
+  text-align: left;
+}

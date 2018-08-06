@@ -70,10 +70,10 @@
       <text class="c-block wx-text_AGSsoP" wx:if="{{isshop}}">商家</text>
       <text class="c-block wx-text_2W9cwy" wx:if="{{islevel}}">优质客户</text>
     </view>
-    <view class="c-minheight wx-view_2wZcg2">
+    <view class="c-minheight wx-view_2wZcg2" wx:if="{{orderstatus!=0}}">
       <image class="wx-image_tFdnbt" mode="scaleToFill" src="/resources/xiaoxi.png" bindtap='gomessageopt' />
       <view class='fengexian'></view>
-      <image class="wx-image_vJe3HO" mode="scaleToFill" src="/resources/phone.png" bindtap='gophoneopt' data-phone='{{order.mobile}}'/>
+      <image class="wx-image_vJe3HO" mode="scaleToFill" src="/resources/phone.png" bindtap='gophoneopt' data-phone='{{order.mobile}}' />
     </view>
   </view>
   <!--订单信息-->
@@ -87,6 +87,14 @@
       <text class="c-block wx-text_uhetRv">{{order.create_time}}</text>
     </view>
   </view>
+
+  <!--同意协议-->
+  <view class='xieyiv' wx:if="{{orderstatus==0}}">
+    <icon type="success" size="20" color='#0ff' class='xieyiico'></icon>
+    <view class='agreetip'>我同意</view>
+    <view class='agreetxt'>《小龙快跑跑腿员服务协议》</view>
+  </view>
+
   <!--操作按钮-->
   <view class="c-minheight wx-view_dHiiPT">
     <text class="c-block wx-text_yebBOBs" bindtap='getorderopt' wx:if="{{orderstatus==0}}">抢单</text>
@@ -109,12 +117,12 @@
     <view class="c-minheight wx-view_lmrNzV">
       <text class="c-block wx-text_AgStyc">投诉雇主</text>
     </view>
-    <textarea class="c-block c-fullwidth wx-textarea_9pwDc5" name="textarea1" placeholder="请输入投诉内容" type="textarea" maxlength='200' />
+    <textarea class="c-block c-fullwidth wx-textarea_9pwDc5" name="textarea1" placeholder="请输入投诉内容" type="textarea" maxlength='200' value='{{tousuinfo}}' bindinput='gettsopt' />
     <view class="c-minheight wx-view_nxrraU">
-      <image class="wx-image_IGjJPP" mode="scaleToFill" src="/resources/add.png" />
-      <image class="wx-image_IGjJPP1" mode="scaleToFill" src="/resources/tu1.png" />
-      <image class="wx-image_IGjJPP1" mode="scaleToFill" src="/resources/tu1.png" />
-      <image class="wx-image_IGjJPP1" mode="scaleToFill" src="/resources/tu1.png" />
+      <image class="wx-image_IGjJPP" mode="scaleToFill" src="/resources/add.png" bindtap='uploadtsopt'/>
+      <block wx:for="{{tousutu}}" wx:key="item">
+        <image class="wx-image_IGjJPP1" mode="scaleToFill" src="/resources/tu1.png" />
+      </block>
     </view>
     <button class="wx-button_17cUwW" size="default" bindtap="postmodal">
       提交投诉
@@ -122,7 +130,36 @@
   </view>
 </view>
 
-<!--弹窗投诉部分-->
+<!--弹窗取消部分-->
+<view class="modalview {{isqxshow}}">
+  <view class="wx-view_m9HByj" style='height:400px;'>
+    <view class="c-minheight wx-view_uvWlpb">
+      <image class="wx-image_VzlDgi" mode="scaleToFill" src="/resources/close.png" bindtap='closeqxmodal' />
+    </view>
+    <view class="c-minheight wx-view_lmrNzV">
+      <text class="c-block wx-text_AgStyc">取消跑单</text>
+    </view>
+    <textarea class="c-block c-fullwidth wx-textarea_9pwDc5" name="textarea1" placeholder="请输入取消原因" type="textarea" maxlength='200' value='{{cancelinfo}}' bindinput='getqxopt' />
+    <view class="c-minheight wx-view_nxrraU">
+      <image class="wx-image_IGjJPP" mode="scaleToFill" src="/resources/add.png" bindtap='uploadqxopt'/>
+      <block wx:for="{{canceltu}}" wx:key="item">
+        <image class="wx-image_IGjJPP1" mode="scaleToFill" src="/resources/tu1.png" />
+      </block>
+    </view>
+    <view class='cancelv'>
+      <view class='redcancel'>本月已取消次数</view>
+      <view class='cancelnum'>{{cacelnum}}/3</view>
+    </view>
+    <view class='canceltip'>
+      需要雇主同意才能取消，单月取消跑单达到3次，将失去接单权。系统从次月才开始推送跑单给您。
+    </view>
+    <button class="wx-button_17cUwW" size="default" bindtap="postbook">
+      提交申请
+    </button>
+  </view>
+</view>
+
+<!--弹窗指南部分-->
 <view class="modalview {{isznshow}}">
   <view class="wx-view_m11HByj">
     <view class="c-minheight wx-view_lmrNzV">
@@ -144,4 +181,9 @@
       我知道了
     </button>
   </view>
+</view>
+
+<!--弹窗提示层-->
+<view class="c-minheight wx-view_5bk2vY {{messagestyle}}" data-c_e_id="wx_view_3f95ccf0">
+  <text class="c-block wx-text_PagCvb" data-c_e_id="wx_text_44e48ca7">{{messagetxt}}</text>
 </view>

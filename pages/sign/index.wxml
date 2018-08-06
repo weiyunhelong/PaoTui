@@ -1,3 +1,150 @@
 <!--pages/sign/index.wxml-->
+<view class="c-minheight wx-view_LUKtEB">
+
+  <!--姓名-->
+  <view class='hangv'>
+    <view class='hangtitle'>姓名:</view>
+    <view class='hanginputv'>
+      <input type='text' placeholder='请输入真实姓名' value='{{name}}' class='txtcss' placeholder-class='tipcss' bindblur='getname' bindconfirm='getname' bindinput='getname'></input>
+    </view>
+  </view>
+
+  <!--身份证号-->
+  <view class='hangv'>
+    <view class='hangtitle'>身份证号:</view>
+    <view class='hanginputv'>
+      <input type='text' placeholder='请输入身份证号' value='{{identity}}' class='txtcss' placeholder-class='tipcss' bindblur='getidentity' bindconfirm='getidentity' bindinput='getidentity'></input>
+    </view>
+  </view>
+
+  <!--现职业-->
+  <view class='hangv'>
+    <view class='hangtitle'>现职业:</view>
+    <view class='hanginputv'>
+      <input type='text' placeholder='如无工作填写待业' value='{{job}}' class='txtcss' placeholder-class='tipcss' bindblur='getjob' bindconfirm='getjob' bindinput='getjob'></input>
+    </view>
+  </view>
+
+  <!--年龄和性别-->
+  <view class='hangv'>
+    <view class='hangtitle'>年龄:</view>
+    <view class='hangyearv'>
+      <input type='number' placeholder='' value='{{year}}' class='txtcss' placeholder-class='tipcss' bindblur='getyear' bindconfirm='getyear' bindinput='getyear'></input>
+    </view>
+
+    <view class='hangtitle'>性别:</view>
+    <view class='hanggenderv'>
+      <picker bindchange="bindPickerChange" value="{{sexindex}}" range="{{genderlist}}">
+        <view class="picker" wx:if="{{sexindex!=-1}}">
+          {{genderlist[sexindex]}}
+        </view>
+        <view class="nopicker" wx:if="{{sexindex==-1}}">
+          请选择
+        </view>
+      </picker>
+    </view>
+  </view>
 
 
+  <!--现住址-->
+  <view class='hangv'>
+    <view class='hangtitle'>现住址:</view>
+    <view class='hanginputv'>
+      <input type='text' placeholder='' value='{{address}}' class='txtcss' placeholder-class='tipcss' bindblur='getaddress' bindconfirm='getaddress' bindinput='getaddress'></input>
+    </view>
+  </view>
+
+  <!--紧急联系人手机号-->
+  <view class='hangv'>
+    <view class='hangmdtitle'>紧急联系人手机号:</view>
+    <view class='hangmdinputv'>
+      <input type='number' placeholder='' value='{{phone}}' class='txtcss' placeholder-class='tipcss' bindblur='getphone' bindconfirm='getphone' bindinput='getphone'></input>
+    </view>
+  </view>
+
+  <!--与紧急联系人关系-->
+  <view class='hangv'>
+    <view class='hangmdtitle'>与紧急联系人关系:</view>
+    <view class='hangmdinputv'>
+      <input type='text' placeholder='例:父子，母子，兄弟' value='{{guanxi}}' class='txtcss' placeholder-class='tipcss' bindblur='getguanxi' bindconfirm='getguanxi' bindinput='getguanxi'></input>
+    </view>
+  </view>
+
+  <!--上传图片-->
+  <view class='tuhangv'>
+    <view class='tutitle'>身份证正面:</view>
+    <view class='tuv'>
+      <image src='/resources/addico.png' class='addico' bindtap='uploadfile' data-id='1' wx:if="{{!isfront}}"></image>
+      <image src='{{fronttu}}' class='addtuico' bindtap='uploadfile' data-id='1' wx:if="{{isfront}}"></image>
+    </view>
+  </view>
+
+  <view class='tuhangv'>
+    <view class='tutitle'>身份证反面:</view>
+    <view class='tuv'>
+      <image src='/resources/addico.png' class='addico' bindtap='uploadfile' data-id='2' wx:if="{{!isback}}"></image>
+      <image src='{{backtu}}' class='addtuico' bindtap='uploadfile' data-id='2' wx:if="{{isback}}"></image>
+    </view>
+  </view>
+
+  <view class='tuhangv'>
+    <view class='tutitle'>手持身份证:</view>
+    <view class='tuv'>
+      <image src='/resources/addico.png' class='addico' bindtap='uploadfile' data-id='3' wx:if="{{!isshouchi}}"></image>
+      <image src='{{shouchitu}}' class='addtuico' bindtap='uploadfile' data-id='3' wx:if="{{isshouchi}}"></image>
+    </view>
+  </view>
+
+  <view class='zhenghangv'>
+    <view class='tutitle'>其他技能证书:</view>
+    <view class='zhengtuv'>
+      <block wx:for="{{zhengtu}}" wx:key="item">
+        <image src='{{item}}' class='zhengtuico'></image>
+      </block>
+      <image src='/resources/addico.png' class='addico' bindtap='uploadzheng' wx:if="{{!iszheng}}"></image>
+    </view>
+  </view>
+
+  <!--同意协议-->
+  <view class='xieyiv' bindtap='agreetopt'>
+    <icon type="success" size="20" color='#ccc' class='xieyiico' wx:if="{{!isagree}}"></icon>
+    <icon type="success" size="20" color='#0ff' class='xieyiico' wx:if="{{isagree}}"></icon>
+    <view class='agreetip'>我同意</view>
+    <view class='agreetxt'>《小龙快跑跑腿员服务协议》</view>
+  </view>
+
+  <!--操作示例和指南-->
+  <view class='lasttip' bindtap='showmodal'>操作示例和指南</view>
+
+  <!--提交申请-->
+  <view class='postbtn' bindtap='postbookopt'>提交申请</view>
+</view>
+
+<!--操作指南部分-->
+<view class="modalview {{isznshow}}">
+  <view class="wx-view_m11HByj">
+    <view class="c-minheight wx-view_lmrNzV">
+      <text class="c-block wx-text_AgStyc">操作指南</text>
+    </view>
+    <view class='wx_text_info'>
+      <text decode='true'>
+        今年唯一不同的是，行动最快的竟然是各个二线城市。年轻人还在脑内构思辞职信草稿，职场老手正向有意提供工作的大佬问好。新一年的未来还在迷惘中酝酿，二线城市的人才招揽广告已然杀到！
+        2月27日，杭州地铁1号线龙翔桥站C口，返城潮汹涌，两旁广告箱如往常般亮着瓦力十足的灯光。Sophie经过时，被上头的文字吸引了——“‘蓉漂’计划青年人才驿站”、“成都 · 许你一个美好的未来”。
+       成都抢人抢到了杭州家门口，还来不及为杭州倒吸一口冷气，其它二线城市也纷纷使出杀招。城市政策并非唯一推力，房产开发商为人才争夺战添了一把火。根据中国证券报的报道，2018年春节后，武汉、西安、南京等地多个楼盘均推出优惠政策，“送钱送房送户口”的口号不绝于耳。
+      人口集聚，则为城。
+      二线城市人才争夺战，本质是资源竞争和城市竞争。各城市在这场PK中孰胜孰败？
+      多城市政策齐发，并驱争先
+      “古时千里马常有，伯乐不常有；今日伯乐已翘首期盼，千里马却迟迟不归。”受国家双创政策的春风照拂，从世界范围看，2017全球十大创业生态系统中中国占据两席，北京上海分别排名第二、第七；从中国范围看，杭州紧随北上广深成为排名第五最适宜创业的城市，武汉、天津、苏州、成都、南京依次进入前十排行榜。
+      曾经的“上海后花园”杭州今非昔比一跃成为国际化大都市，先后举办了G20峰会、云栖大会、移动互联网大会等多个享誉国际的会议，拿下2022年亚运会的举办权，杭州的振兴为其他省市起了带头.
+      </text>
+    </view>
+    <button class="wx-button_18cUwW" size="default" bindtap="knowmodal">
+      我知道了
+    </button>
+  </view>
+</view>
+
+<!--弹窗提示层-->
+<view class="c-minheight wx-view_5bk2vY {{messagestyle}}" data-c_e_id="wx_view_3f95ccf0">
+    <text class="c-block wx-text_PagCvb" data-c_e_id="wx_text_44e48ca7">{{messagetxt}}</text>
+</view>

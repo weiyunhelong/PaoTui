@@ -10,8 +10,8 @@
     <view catchtap="chkmenuopt" wx:if="{{!hasnews}}" data-id='2' class="c-block {{chkmenu==2?'wx-text_MYWDr2':'wx-text_pMYoye'}}">聊天</view>
   </view>
 
-  <!--内容部分-->
-  <block wx:for="{{newslsit}}" wx:key="item">
+  <!--通知内容部分-->
+  <block wx:for="{{newslsit}}" wx:key="item" wx:if="{{chkmenu==1}}">
 
     <view class="c-minheight {{item.isnew?'wx-view_FSAqbP':'wx-view_FSAqbP1'}}">
       <image class="wx-image_4j7TEO" mode="scaleToFill" src="{{item.headerimg}}" />
@@ -24,6 +24,21 @@
           <view class='newstxt'>{{item.info}}</view>
           <view class='newsnum' wx:if="{{item.msgnum>0}}">{{item.msgnum}}</view>
         </view>
+      </view>
+    </view>
+
+  </block>
+
+  <!--聊天内容部分-->
+  <block wx:for="{{chatlist}}" wx:key="item" wx:if="{{chkmenu==2}}">
+
+    <view class="c-minheight {{item.isnew?'wx-view_FSAqbP':'wx-view_FSAqbP1'}}" bindtap='gochat' data-uid='{{item.uid}}'>
+      <image class="wx-image_4j7TEO" mode="scaleToFill" src="{{item.headerimg}}" />
+      <view class="c-minheight wx-view_tM4PI9">      
+        <view class="c-block wx-text_Z2yVpL">
+          <view class='newstxt'>{{item.info}}</view>
+        </view>        
+        <view class='newstime'>{{item.time}}</view>
       </view>
     </view>
 

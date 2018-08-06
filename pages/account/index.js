@@ -1,4 +1,5 @@
 // pages/account/index.js
+var requesturl=getApp().globalData.requesturl;
 Page({
 
   /**
@@ -98,6 +99,23 @@ Page({
     that.setData({
       datalist: datalist,
       showtip:datalist.length==0?true:false
+    })
+    //请求接口获取账户流水
+    wx.request({
+      url: requesturl +'/staff/account_details',
+      data: {
+        openid:getApp().globalData.openid
+      },
+      header: {
+        "Content_Type":"application/json"
+      },
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function(res) {
+        console.log("获取流水信息:");
+        console.log(res);
+      }
     })
   },
   //选中菜单操作
