@@ -9,7 +9,6 @@
     "backgroundTextStyle": "dark"
   },
   "pages": [
-    "pages/chat/index",
     "pages/login/index",
     "pages/index/index",
     "pages/sign/index",
@@ -27,6 +26,7 @@
     "pages/help/index",
     "pages/help/list",
     "pages/help/detail",
+    "pages/chat/index",
     "pages/my/index"
   ],
   "tabBar": {
