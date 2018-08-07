@@ -8,6 +8,8 @@ Page({
    */
   data: {
     id:"",//id的值
+    order:{},//订单详情
+    feedback:{},//平台回复
   },
 
   /**

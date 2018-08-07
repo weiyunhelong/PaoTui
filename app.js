@@ -1,18 +1,45 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function() {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    
-    var that=this;
+
+    var that = this;
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        that.globalData.code = res.code; 
-        //获取openid              
+        that.globalData.code = res.code;
+        //获取openid   
+        wx.request({
+          url: that.globalData.requesturl + '/Index/runWxLogin',
+          data: {
+            code: getApp().globalData.code
+          },
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          method: 'POST',
+          success: function(res) {
+            console.log("登录结果:");
+            console.log(res);
+
+            if (res.data.result) {
+              getApp().globalData.openid = res.data.data.openid;//openid
+              getApp().globalData.uid = res.data.data.staff_id;//uid
+              getApp().globalData.cancel_count = res.data.data.cancel_count;//取消次数
+              
+              if (res.data.data.is_new_staff==0) {
+                //注册页面 
+                wx.redirectTo({
+                  url: '../login/index',
+                })
+              } 
+            }
+          }
+        })
       }
     })
     // 获取用户信息
@@ -37,14 +64,14 @@ App({
     })
   },
   globalData: {
-    userInfo: null,//微信用户的信息
-    code:"",//登录code值
-    openid:"",//openid的值
-    uid:"",//用户id
-    isnewuser: false,//是否是新用户
-    cancel_count:0,//取消的次数
-    requesturl: "https://www.fsdragon.com/small",//请求的接口
-    orderstatus:0,//订单状态值:
+    userInfo: null, //微信用户的信息
+    code: "", //登录code值
+    openid: "", //openid的值
+    uid: "", //用户id
+    isnewuser: false, //是否是新用户
+    cancel_count: 0, //取消的次数
+    requesturl: "https://www.fsdragon.com/small", //请求的接口
+    orderstatus: 0, //订单状态值:
     /*******
      * 1:待接单
      * 2:待支付

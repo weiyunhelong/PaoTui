@@ -16,7 +16,7 @@
         <view class="c-minheight wx-view_3v6GL7">
           <text class="c-block wx-text_YwWbjJ">雇主恶意差评，不配合验收订单。</text>
           <view class="c-minheight wx-view_JtSjk2">
-            <image class="wx-image_7vnZHV" mode="scaleToFill" src="/resources/tu1.png" />
+             <image class="wx-image_7vnZHV" mode="scaleToFill" src="/resources/tu1.png" />
              <image class="wx-image_7vnZHV" mode="scaleToFill" src="/resources/tu1.png" />
              <image class="wx-image_7vnZHV" mode="scaleToFill" src="/resources/tu1.png" />
           </view>

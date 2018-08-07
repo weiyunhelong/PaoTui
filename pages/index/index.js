@@ -90,8 +90,11 @@ Page({
       title: '正在加载中...',
       mask: true
     })
-    //获取经纬度
-    that.InitLocation();
+    //优先获取openid
+    setTimeout(function(){
+      //获取经纬度
+      that.InitLocation();
+    },2000)
   },
   //获取订单列表
   InitOrder: function() {

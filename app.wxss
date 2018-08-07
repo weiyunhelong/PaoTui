@@ -177,7 +177,7 @@ checkbox-group, radio-group {
   margin-right: 40rpx;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  padding-top:20rpx;
 }
 
 .wx-text_FFPqzR1 {

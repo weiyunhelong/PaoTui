@@ -18,8 +18,8 @@
         <view class="c-minheight wx-view_DlKnq3">
           <image class="wx-image_ZTxjkf" mode="scaleToFill" src="/resources/tsico.png" />
           <view class="c-minheight wx-view_1N72IJ">
-            <text class="c-block wx-text_GTr4On">[{{item.typeval}}]</text>
-            <text class="c-block wx-text_zy1sxb">{{item.orderno}}</text>
+            <text class="c-block wx-text_GTr4On">[{{item.run_type}}]</text>
+            <text class="c-block wx-text_zy1sxb">{{item.run_no}}</text>
           </view>
         </view>
         <!--表述和图片-->

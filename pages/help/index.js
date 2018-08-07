@@ -1,4 +1,6 @@
 // pages/help/index.js
+var requesturl = getApp().globalData.requesturl;
+
 Page({
 
   /**
@@ -20,24 +22,31 @@ Page({
   IniMenuList:function(){
     var that=this;
     //请求获取参数
-    var menulist=[
-      {
-        id:1,
-        title:"文章分类一"
+    wx.request({
+      url: requesturl +'/Articlecenter/index',
+      data: {
+        openid:getApp().globalData.openid,
+        pid:2
       },
-      {
-        id: 2,
-        title: "文章分类二"
+      header: {
+        "Content-Type":"application/x-www-form-urlencoded"
       },
-      {
-        id: 3,
-        title: "文章分类三"
-      }
-    ];
+      method: 'POST',
+      success: function(res) {
+        console.log("帮助列表结果:");
+        console.log(res);
 
-    that.setData({
-      menulist: menulist
+        if(res.data.result){
+
+          that.setData({
+            menulist: res.data.data
+          })
+        }else{
+          console.log("获取数据失败");
+        }
+      }
     })
+
   },
   //跳转到文章列表
   gohelp:function(e){
