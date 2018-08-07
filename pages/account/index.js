@@ -24,82 +24,7 @@ Page({
     var that=this;
     //参数部分
     var chkmenu = that.data.chkmenu;
-
-    //获取列表数据
-    var datalist=[
-      {
-        id:1,
-        time:"2018年06月",
-        childs:[
-          {
-            id:1,
-            typeval:1,
-            typetxt:"代买",
-            orderno:"2326541515122",
-            money:"+5",
-            status:0
-          },
-          {
-            id: 2,
-            typeval: 2,
-            typetxt: "",
-            orderno: "",
-            money: "-100",
-            status: -1
-          },
-          {
-            id: 3,
-            typeval: 3,
-            typetxt: "代办",
-            orderno: "2326541515123",
-            money: "+4.25",
-            status: 0
-          },
-          {
-            id: 4,
-            typeval: 4,
-            typetxt: "代买",
-            orderno: "2326541515123",
-            money: "+4.25",
-            status: 0
-          },
-        ]
-      },
-      {
-        id: 2,
-        time: "2018年05月",
-        childs: [
-          {
-            id: 1,
-            typeval: 1,
-            typetxt: "代买",
-            orderno: "2326541515122",
-            money: "+5",
-            status: 0
-          },
-          {
-            id: 2,
-            typeval: 2,
-            typetxt: "",
-            orderno: "",
-            money: "-100",
-            status: -1
-          },
-          {
-            id: 3,
-            typeval: 3,
-            typetxt: "代办",
-            orderno: "2326541515123",
-            money: "+4.25",
-            status: 0
-          },
-        ]
-      },
-    ];
-    that.setData({
-      datalist: datalist,
-      showtip:datalist.length==0?true:false
-    })
+    
     //请求接口获取账户流水
     wx.request({
       url: requesturl +'/staff/account_details',
@@ -115,6 +40,13 @@ Page({
       success: function(res) {
         console.log("获取流水信息:");
         console.log(res);
+
+        if(res.data.result==0){
+          that.setData({
+            datalist: res.data.data,
+            showtip: res.data.data.length == 0 ? true : false
+          })
+        }
       }
     })
   },

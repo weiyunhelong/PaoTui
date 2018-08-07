@@ -80,8 +80,7 @@ Page({
         url: requesturl + '/staff/cash',
         data: {
           openid: getApp().globalData.openid,
-          money: parseFloat(money),
-          acc_id: ""
+          money: parseFloat(money)
         },
         header: {
           "Content-Type":"application/json"

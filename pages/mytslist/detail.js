@@ -31,7 +31,7 @@ Page({
 
     //
     wx.request({
-      url: requesturl +'/staff/my_complaint_list',
+      url: requesturl +'/invoice/my_complaint',
       data: {
         openid:getApp().globalData.openid,
         id: id

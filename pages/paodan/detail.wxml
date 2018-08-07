@@ -1,4 +1,4 @@
-<!--pages/business/index.wxml-->
+<!--pages/paodan/detail.wxml-->
 <view class="c-minheight wx-view_KqOJvU">
   <!--顶部菜单部分-->
   <view class="c-minheight wx-view_lF3o2l">
@@ -98,13 +98,13 @@
 
   <!--操作按钮-->
   <view class="c-minheight wx-view_dHiiPT">
-    <text class="c-block wx-text_yebBOBs" bindtap='getorderopt' wx:if="{{orderstatus==1}}">抢单</text>
-    <block wx:if="{{orderstatus==3}}">
+    <text class="c-block wx-text_yebBOBs" bindtap='getorderopt' wx:if="{{order.order_status==1}}">抢单</text>
+    <block wx:if="{{order.order_status==3}}">
       <text class="c-block wx-text_OhLcTU" bindtap='cancelopt'>取消跑单</text>
       <text class="c-block wx-text_ybBOBs" bindtap='runopt'>开始执行</text>
     </block>
   </view>
-  <view class="c-minheight wx-view_MhITsM" wx:if="{{orderstatus!=1}}">
+  <view class="c-minheight wx-view_MhITsM" wx:if="{{order.order_status!=1}}">
     <text catchtap="tousuopt" class="c-block wx-text_BWm6IN">投诉雇主</text>
   </view>
 </view>
@@ -122,7 +122,7 @@
     <view class="c-minheight wx-view_nxrraU">
       <image class="wx-image_IGjJPP" mode="scaleToFill" src="/resources/add.png" bindtap='uploadtsopt' />
       <block wx:for="{{tousutu}}" wx:key="item">
-        <image class="wx-image_IGjJPP1" mode="scaleToFill" src="/resources/tu1.png" />
+       <image class="wx-image_IGjJPP1" mode="scaleToFill" src="{{item}}" />
       </block>
     </view>
     <button class="wx-button_17cUwW" size="default" bindtap="postmodal">
@@ -144,7 +144,7 @@
     <view class="c-minheight wx-view_nxrraU">
       <image class="wx-image_IGjJPP" mode="scaleToFill" src="/resources/add.png" bindtap='uploadqxopt' />
       <block wx:for="{{canceltu}}" wx:key="item">
-        <image class="wx-image_IGjJPP1" mode="scaleToFill" src="/resources/tu1.png" />
+       <image class="wx-image_IGjJPP1" mode="scaleToFill" src="{{item}}" />
       </block>
     </view>
     <view class='cancelv'>
@@ -168,7 +168,7 @@
     </view>
     <view class='wx_text_info'>
       <text decode='true'>
-        {{zhinaninfo}}
+       {{zhinaninfo}}
       </text>
     </view>
     <button class="wx-button_18cUwW" size="default" bindtap="knowmodal">
@@ -177,16 +177,15 @@
   </view>
 </view>
 
-
 <!--弹窗协议部分-->
 <view class="modalview {{isxyshow}}">
   <view class="wx-view_m11HByj">
     <view class="c-minheight wx-view_lmrNzV">
-      <text class="c-block wx-text_AgStyc">协议内容</text>
+      <text class="c-block wx-text_AgStyc">操作协议</text>
     </view>
     <view class='wx_text_info'>
       <text decode='true'>
-        {{xieyiinfo}}
+       {{xieyiinfo}}
       </text>
     </view>
     <button class="wx-button_18cUwW" size="default" bindtap="xieyimodal">

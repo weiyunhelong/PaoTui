@@ -48,7 +48,9 @@ Page({
         {
           getApp().globalData.openid = res.data.data.openid;//openid
           getApp().globalData.uid=res.data.data.staff_id;//uid
-          if (res.data.data.name == "") {
+          getApp().globalData.cancel_count = res.data.data.cancel_count;//取消次数
+         
+          if (res.data.data.name == "") {            
             //注册页面 
             wx.redirectTo({
               url: '../sign/index',

@@ -5,11 +5,11 @@
   <view class="c-minheight wx-view_2llUqR" >
     <scroll-view class="c-minheight wx-scroll-view_M0guNR"  lower-threshold="50" scroll-x="True" style="overflow-x:  auto; overflow-y: hidden; " upper-threshold="50">
       <view class="c-minheight wx-view_2iKOhp" >
-        <text class="c-block wx-text_YmSCZi {{chkmenu==0?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="0">全部</text>
-        <text class="c-block wx-text_YmSCZi {{chkmenu==1?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="1">待支付</text>
-        <text class="c-block wx-text_YmSCZi {{chkmenu==2?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="2">待执行</text>
-        <text class="c-block wx-text_YmSCZi {{chkmenu==3?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="3">进行中</text>
-        <text class="c-block wx-text_YmSCZi {{chkmenu==4?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="4">待验收</text>
+        <text class="c-block wx-text_YmSCZi {{chkmenu==1?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="1">全部</text>
+        <text class="c-block wx-text_YmSCZi {{chkmenu==2?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="2">待支付</text>
+        <text class="c-block wx-text_YmSCZi {{chkmenu==3?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="3">待执行</text>
+        <text class="c-block wx-text_YmSCZi {{chkmenu==4?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="4">进行中</text>
+        <text class="c-block wx-text_YmSCZi {{chkmenu==14?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="14">待验收</text>
         <text class="c-block wx-text_YmSCZi {{chkmenu==5?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="5">待评价</text>
         <text class="c-block wx-text_YmSCZi {{chkmenu==6?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="6">已结束</text>
         <text class="c-block wx-text_YmSCZi {{chkmenu==7?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="7">已取消</text>
@@ -20,12 +20,12 @@
 
   <!--列表数据-->
   <block wx:for="{{orderlist}}" wx:key="item" wx:for-index="x">
-    <view class="c-minheight wx-view_PPXd851" >
+    <view class="c-minheight wx-view_PPXd851" data-id='{{item.id}}' bindtap='godetail'>
 
       <view class="c-minheight wx-view_7tuQEA"  style='justify-content:space-between;'>
         <view class='userinfov'>
           <image class="wx-image_jDkO78"  mode="scaleToFill" src="{{item.member.user_headimg}}" />
-          <text class="c-block wx-text_ZaU8MQ" >{{item.member.user_name}}</text>
+          <text class="c-block wx-text_ZaU8MQ" >{{item.member.nick_name}}</text>
           <view class='shopv'>
             <view class='xiaoxiv' wx:if="{{item.news}}">
               <image src='/resources/xiaoxih.png' class='xiaoxitu'></image>
@@ -34,7 +34,7 @@
             <image src='/resources/xiaoxi.png' class='xiaoxitu' wx:if="{{!item.news}}"></image>
           </view>
         </view>
-        <view class='biaoqianv' wx:if="{{x==0}}">
+        <view class='biaoqianv' wx:if="{{item.level!=null}}">
           <image src='/resources/biaoqian.png' class='biaoqianimg'></image>
           <view class='biaoqiantxt'>S</view>
         </view>
@@ -52,7 +52,9 @@
         <image class="wx-image_PYrvOU"  mode="scaleToFill" src="/resources/daimai.png" />
         <text class="c-block wx-text_tBG9kh" >代买</text>
         <image class="wx-image_uM6VvD"  mode="scaleToFill" src="/resources/qian.png" />
-        <text class="c-block wx-text_u2uG4j" >￥{{item.cost}}</text>
+        <text class="c-block wx-text_u2uG4j" >￥{{item.cost}}</text>        
+        <image class="wx-image_uM6VvD"  mode="scaleToFill" src="/resources/qian.png" style='margin-left:60rpx;'  wx:if="{{item.tip!='0.00'}}"/>
+        <text class="c-block wx-text_u2uG4j" wx:if="{{item.tip!='0.00'}}">￥{{item.tip}}</text>
       </view>
       <view class="c-minheight wx-view_XSYzuh" >
         <image class="wx-image_RYYYOg"  mode="scaleToFill" src="/resources/miaoshu.png" />
@@ -64,15 +66,73 @@
       </view>
       <view class="c-minheight wx-view_co23rd"  />
       <view class="c-minheight wx-view_V8DLtP" >
-        <text class="c-block wx-text_UQYh9c" >{{item.order_status_val}}</text>
-        <view class="c-minheight wx-view_oVtGKg" >
-          <text class="c-block wx-text_9JmF1M"  wx:if="{{item.order_status<4}}" bindtap="cancelorder" data-order_id="{{item.id}}">取消跑单</text>
-          <text class="c-block wx-text_HoPYvU"  wx:if="{{item.order_status==2}}" bindtap='startorder' data-order_id="{{item.id}}">开始执行</text>
-          <text class="c-block wx-text_HoPYvU"  wx:if="{{item.order_status==3}}" bindtap='startorder' data-order_id="{{item.id}}">执行中</text>
-          <text class="c-block wx-text_CR9emH"  wx:if="{{item.order_status>3}}" bindtap='complaint' data-employer_id="{{}}">投诉雇主</text>
+        <text class="c-block wx-text_UQYh9c" >{{item.order_explain}}</text>
+        <view class="c-minheight wx-view_oVtGKg">
+          <text class="c-block wx-text_9JmF1M"  wx:if="{{item.order_status<=4}}"  catchtap="cancelorder" data-id="{{item.id}}">取消跑单</text>
+          <text class="c-block wx-text_HoPYvU"  wx:if="{{item.order_status==3}}" catchtap='runopt' data-id="{{item.id}}">开始执行</text>
+          <text class="c-block wx-text_HoPYvU"  wx:if="{{item.order_status==4}}" >执行中</text>
+          <text class="c-block wx-text_CR9emH"  wx:if="{{item.order_status>3}}" catchtap='tousuopt' data-id="{{item.id}}">投诉雇主</text>
         </view>
       </view>
     </view>
   </block>
 
+</view>
+
+
+
+<!--弹窗投诉部分-->
+<view class="modalview {{istsshow}}">
+  <view class="wx-view_m9HByj">
+    <view class="c-minheight wx-view_uvWlpb">
+      <image class="wx-image_VzlDgi" mode="scaleToFill" src="/resources/close.png" bindtap='closemodal' />
+    </view>
+    <view class="c-minheight wx-view_lmrNzV">
+      <text class="c-block wx-text_AgStyc">投诉雇主</text>
+    </view>
+    <textarea class="c-block c-fullwidth wx-textarea_9pwDc5" name="textarea1" placeholder="请输入投诉内容" type="textarea" maxlength='200' value='{{tousuinfo}}' bindinput='gettsopt' bindblur='gettsopt' bindconfirm='gettsopt'/>
+    <view class="c-minheight wx-view_nxrraU">
+      <image class="wx-image_IGjJPP" mode="scaleToFill" src="/resources/add.png" bindtap='uploadtsopt' />
+      <block wx:for="{{tousutu}}" wx:key="item">
+        <image class="wx-image_IGjJPP1" mode="scaleToFill" src="{{item}}" />
+      </block>
+    </view>
+    <button class="wx-button_17cUwW" size="default" bindtap="postmodal">
+      提交投诉
+    </button>
+  </view>
+</view>
+
+<!--弹窗取消部分-->
+<view class="modalview {{isqxshow}}">
+  <view class="wx-view_m9HByj" style='height:400px;'>
+    <view class="c-minheight wx-view_uvWlpb">
+      <image class="wx-image_VzlDgi" mode="scaleToFill" src="/resources/close.png" bindtap='closeqxmodal' />
+    </view>
+    <view class="c-minheight wx-view_lmrNzV">
+      <text class="c-block wx-text_AgStyc">取消跑单</text>
+    </view>
+    <textarea class="c-block c-fullwidth wx-textarea_9pwDc5" name="textarea1" placeholder="请输入取消原因" type="textarea" maxlength='200' value='{{cancelinfo}}' bindinput='getqxopt' bindblur='getqxopt' bindconfirm='getqxopt'/>
+    <view class="c-minheight wx-view_nxrraU">
+      <image class="wx-image_IGjJPP" mode="scaleToFill" src="/resources/add.png" bindtap='uploadqxopt' />
+      <block wx:for="{{canceltu}}" wx:key="item">
+        <image class="wx-image_IGjJPP1" mode="scaleToFill" src="{{item}}" />
+      </block>
+    </view>
+    <view class='cancelv'>
+      <view class='redcancel'>本月已取消次数</view>
+      <view class='cancelnum'>{{cacelnum}}/3</view>
+    </view>
+    <view class='canceltip'>
+      需要雇主同意才能取消，单月取消跑单达到3次，将失去接单权。系统从次月才开始推送跑单给您。
+    </view>
+    <button class="wx-button_17cUwW" size="default" bindtap="postbook">
+      提交申请
+    </button>
+  </view>
+</view>
+
+<!--弹窗提示层-->
+<view class="c-minheight wx-view_5bk2vY {{messagestyle}}" data-c_e_id="wx_view_3f95ccf0">
+  <text class="c-block wx-text_PagCvb" data-c_e_id="wx_text_44e48ca7">{{messagetxt}}</text>
 </view>

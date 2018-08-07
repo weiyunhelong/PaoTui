@@ -5,7 +5,7 @@
     "navigationBarBackgroundColor": "#000000",
     "navigationBarTitleText": "小龙快跑-骑手端",
     "backgroundColor": "#ffffff",
-    "enablePullDownRefresh": true,
+    "enablePullDownRefresh": false,
     "backgroundTextStyle": "dark"
   },
   "pages": [
@@ -13,6 +13,7 @@
     "pages/index/index",
     "pages/sign/index",
     "pages/paodan/index",
+    "pages/paodan/detail",
     "pages/message/index",
     "pages/business/index",
     "pages/tixian/index",

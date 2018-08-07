@@ -90,9 +90,10 @@ Page({
         console.log(res);
 
         that.setData({
-          touxiang: res.data.face,
-          wxname: res.data.name,
-          qian: res.data.total_money
+          touxiang: res.data.avatarUrl,
+          wxname: res.data.nickName,
+          qian: res.data.money,
+          fen:res.data.star
         })
       }
     })

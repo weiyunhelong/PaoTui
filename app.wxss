@@ -175,6 +175,9 @@ checkbox-group, radio-group {
   color: rgb(255, 255, 255);
   font-size: 28rpx;
   margin-right: 40rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .wx-text_FFPqzR1 {
@@ -212,7 +215,7 @@ checkbox-group, radio-group {
 .wx-image_uM6VvD {
   width: 40rpx;
   height: 40rpx;
-  margin-right: 40rpx;
+  margin-right: 25rpx;
 }
 
 .wx-text_u2uG4j {
@@ -373,8 +376,8 @@ checkbox-group, radio-group {
   align-items: center;
   justify-content: flex-start;
   min-height: 70rpx;
-  width: 80%;
   margin-left: 20rpx;
+  width: 95%;
 }
 
 .wx-view_JQPoPT {

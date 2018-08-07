@@ -6,7 +6,7 @@ Page({
   data: {
     weidu: 0, //纬度
     jingdu: 0, //经度
-    chkmenu: 1, //选中的菜单的值
+    chkmenu: 0, //选中的菜单的值
     feedescsort: false, //服务小费排序
     timedescsort: false, //完成时间排序
     orderlist: [], //订单列表   
@@ -99,16 +99,31 @@ Page({
 
     //参数部分
     var chkmenu = that.data.chkmenu, //选中的菜单的值
-      feedescsort = that.data.chkmenu, //服务小费排序
-      timedescsort = that.data.chkmenu; //完成时间排序
+      feedescsort = that.data.feedescsort, //服务小费排序
+      timedescsort = that.data.timedescsort; //完成时间排序
 
+    var sort="asc";
+
+    if (chkmenu==1){
+      if (!feedescsort){
+        sort="desc";
+      }
+    }
+
+    if (chkmenu == 2) {
+      if (!timedescsort) {
+        sort = "desc";
+      }
+    }
     //请求接口
     wx.request({
       url: requesturl + '/receipt/index',
       data: {
         openid: getApp().globalData.openid,
-        lng: that.data.weidu,
-        lat: that.data.jingdu,
+        lng: that.data.jingdu,//经度
+        lat: that.data.weidu,//纬度
+        orderType: chkmenu,//排序方式：0：默认；1：服务消费；2：完成时间
+        orderWay: sort//asc：升序；desc：降序
       },
       header: {
         'Content-Type': 'application/json'
@@ -119,7 +134,7 @@ Page({
         console.log(res);
         if (res.data.result) {
           that.setData({
-            //orderlist:res.data.data
+            orderlist:res.data.data
           })
         } else {
           wx.showToast({
@@ -133,52 +148,6 @@ Page({
       complete: function() {
         wx.hideLoading();
       }
-    })
-    //请求接口获取订单列表
-    var orderlist = [{
-        id: 1,
-        member: {
-          user_headimg: "/resources/touxiang.png",
-          user_name: "代买用户",
-          isshop: false
-        },
-        addr: "广东省中山市东区古镇镇骏贤居",
-        juli: 2.5,
-        o_addr: "广东省中山市东区古镇镇骏贤居",
-        type_desc: "代买",
-        cost: 5.5,
-        isshang: false,
-        shang: 0,
-        title: "帮我买一罐可乐，要冰的，快点送到，谢谢任务帮我买一罐可乐，要冰的，快点送到，谢谢任务",
-        start_time: "15:32",
-        end_time: "16:25",
-        level: ""
-      },
-      {
-        id: 2,
-        member: {
-          user_headimg: "/resources/touxiang.png",
-          user_name: "商铺用户",
-          isshop: true,
-          ismember: true
-        },
-        addr: "广东省中山市东区古镇镇骏贤居",
-        juli: 2.5,
-        o_addr: "广东省中山市东区古镇镇骏贤居",
-        type_desc: "代送",
-        cost: 5.5,
-        isshang: true,
-        shang: 5.5,
-        title: "帮我买一罐可乐，要冰的，快点送到，谢谢任务帮我买一罐可乐，要冰的，快点送到，谢谢任务",
-        start_time: "15:32",
-        end_time: "16:25",
-        level: "优质客户"
-      },
-    ];
-
-    //赋值部分
-    that.setData({
-      orderlist: orderlist
     })
   },
 })

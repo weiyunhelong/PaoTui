@@ -41,6 +41,22 @@ App({
     code:"",//登录code值
     openid:"",//openid的值
     uid:"",//用户id
+    isnewuser: false,//是否是新用户
+    cancel_count:0,//取消的次数
     requesturl: "https://www.fsdragon.com/small",//请求的接口
+    orderstatus:0,//订单状态值:
+    /*******
+     * 1:待接单
+     * 2:待支付
+     * 3:支付成功
+     * 4:进行中
+     * 5:确认收货
+     * 6:结束
+     * 7:已取消
+     * 8:退款中
+     * 9:退款成功
+     * 10:退款失败
+     * 11:已评价
+     * *****/
   }
 })

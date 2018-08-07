@@ -26,8 +26,8 @@
         <view class="c-minheight wx-view_OH3iiM">
           <image class="wx-image_QL5YpT" mode="scaleToFill" src="/resources/miaoshu.png" />
           <view class="wx-view_3NZ4vV">
-            <text class="c-block wx-text_of9VYP">{{item.desc}}</text>
-            <block wx:for="{{item.imglist}}" wx:key="imgitem" wx:for-item="imgitem">
+            <text class="c-block wx-text_of9VYP">{{item.content}}</text>
+            <block wx:for="{{item.imgs}}" wx:key="imgitem" wx:for-item="imgitem">
               <image class="wx-image_AVmash" mode="scaleToFill" src="{{imgitem}}" />
             </block>
           </view>
@@ -35,8 +35,7 @@
       </view>
       <!--状态值-->
       <view class="c-minheight wx-view_Wmg0Pk">
-        <text class="c-block wx-text_Qd5j7U" wx:if="{{item.status==1}}">待处理</text>
-        <text class="c-block wx-text_Qd5j7U" wx:if="{{item.status==2}}">已处理</text>
+        <text class="c-block wx-text_Qd5j7U">{{item.status_explain}}</text>
         <text class="c-block wx-text_Gn0r6V" bindtap='gochkbtsopt' data-id='{{item.id}}'>查看</text>
       </view>
     </view>

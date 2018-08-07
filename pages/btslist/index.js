@@ -26,30 +26,6 @@ Page({
     var that=this;
     //参数部分
     var chkmenu = that.data.chkmenu;
-
-    //请求接口获取参数
-    var btslist=[
-      {
-       id:1,
-       typeval:"代买",
-       orderno:"2326541515122",
-       desc:"超时完成任务了。",
-       status:1,
-       imglist:[]
-      },
-      {
-        id: 2,
-        typeval: "代买",
-        orderno: "2326541515123",
-        desc: "51分8篮板8助攻，我不想说这一场比赛詹姆斯输了。不论是有个别的争议球没有吹，还是最后4.7秒那个希尔的罚球与JR的传球，各种状况都撞到一块，最后加时赛里詹姆斯甚至51分8篮板8助攻",
-        status: 2,
-        imglist: [
-          "/resources/tu1.png",
-          "/resources/tu1.png",
-          "/resources/tu1.png"
-        ]
-      },
-    ];
     //状态值
     var status = "all";
     if (chkmenu == 1) {
@@ -73,11 +49,18 @@ Page({
       success: function(res) {
         console.log("被投诉的列表:");
         console.log(res);
+
+        if(res.data.result){
+          that.setData({
+            btslist: res.data.data,
+            showtip: res.data.data.length == 0 ? true : false
+          })
+        }else{
+          that.setData({
+            showtip: true 
+          })
+        }
       }
-    })
-    that.setData({
-      btslist: btslist,
-      showtip: btslist.length==0?true:false
     })
   },
   //菜单的选中

@@ -1,4 +1,5 @@
 // pages/refundbook/index.js
+var requesturl = getApp().globalData.requesturl;
 Page({
 
   /**

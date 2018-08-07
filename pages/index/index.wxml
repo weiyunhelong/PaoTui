@@ -2,17 +2,17 @@
 
 <!--顶部的菜单部分-->
 <view class="c-minheight wx-view_LUKtEB">
-  
+
   <!--默认排序-->
-  <view class="c-minheight wx-view_PPXd85" wx:if="{{chkmenu==1}}">
-    <text catchtap="chkmenu" data-id='1' class="c-block {{chkmenu==1?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">默认排序</text>
-    <text catchtap="chkmenu" data-id='2' class="c-block {{chkmenu==2?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">服务小费</text>
-    <text catchtap="chkmenu" data-id='3' class="c-block {{chkmenu==3?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">完成时间</text>
+  <view class="c-minheight wx-view_PPXd85" wx:if="{{chkmenu==0}}">
+    <text catchtap="chkmenu" data-id='0' class="c-block {{chkmenu==0?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">默认排序</text>
+    <text catchtap="chkmenu" data-id='1' class="c-block {{chkmenu==1?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">服务小费</text>
+    <text catchtap="chkmenu" data-id='2' class="c-block {{chkmenu==2?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">完成时间</text>
   </view>
 
   <!--服务小费-->
-  <view class="c-minheight wx-view_PPXd85" wx:if="{{chkmenu==2}}">
-    <text bindtap="chkmenu" data-id='1' class="c-block {{chkmenu==1?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">默认排序</text>
+  <view class="c-minheight wx-view_PPXd85" wx:if="{{chkmenu==1}}">
+    <text bindtap="chkmenu" data-id='0' class="c-block {{chkmenu==0?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">默认排序</text>
     <view class="c-minheight wx-view_nH3S8V" catchtap='feesortopt'>
       <text class="c-block wx-text_9iRv4v1s">服务小费</text>
       <view class="c-minheight wx-view_R2RJ9B" wx:if="{{!feedescsort}}">
@@ -24,13 +24,13 @@
         <image class="wx-image_Tvtgyk" mode="scaleToFill" src="/resources/down.png" />
       </view>
     </view>
-    <text bindtap="chkmenu" data-id='3' class="c-block {{chkmenu==1?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">完成时间</text>
+    <text bindtap="chkmenu" data-id='2' class="c-block {{chkmenu==2?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">完成时间</text>
   </view>
-  
+
   <!--完成时间-->
-  <view class="c-minheight wx-view_PPXd85" wx:if="{{chkmenu==3}}">
-    <text bindtap="chkmenu" data-id='1' class="c-block {{chkmenu==1?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">默认排序</text>
-    <text bindtap="chkmenu" data-id='2' class="c-block {{chkmenu==1?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">服务小费</text>
+  <view class="c-minheight wx-view_PPXd85" wx:if="{{chkmenu==2}}">
+    <text bindtap="chkmenu" data-id='0' class="c-block {{chkmenu==0?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">默认排序</text>
+    <text bindtap="chkmenu" data-id='1' class="c-block {{chkmenu==1?'wx-text_9iRv4v':'wx-text_9iRv4v1'}}">服务小费</text>
     <view class="c-minheight wx-view_nH3S8V" catchtap='timesortopt'>
       <text class="c-block wx-text_9iRv4v1s">完成时间</text>
       <view class="c-minheight wx-view_R2RJ9B" wx:if="{{!timedescsort}}">
@@ -48,21 +48,22 @@
   <!--内容部分-->
   <block wx:for="{{orderlist}}" wx:key="item" wx:for-index="x">
     <navigator url='/pages/business/index?id={{item.id}}'>
-      
+
       <view class="c-minheight wx-view_PPXd851">
-        <!--第一行，用户信息--> 
+        <!--第一行，用户信息-->
         <view class="c-minheight wx-view_7tuQEA" style='justify-content:space-between;'>
           <view class='userinfov'>
             <image class="wx-image_jDkO78" mode="scaleToFill" src="{{item.member.user_headimg}}" />
             <text class="c-block wx-text_ZaU8MQ">{{item.member.user_name}}</text>
             <view class='shopv'>
-              <view class='redv' wx:if="{{item.member.isshop}}">商家</view>
-              <view class='redv' wx:if="{{item.level!=''}}">{{item.level}}</view>
+              <block wx:for="{{item.tag_list}}" wx:key="titem" wx:for-item="titem">
+                <view class='redv'>{{titem}}</view>
+              </block>
             </view>
           </view>
-          <view class='biaoqianv' wx:if="{{x==0}}">
+          <view class='biaoqianv' wx:if="{{item.level!=null}}">
             <image src='/resources/biaoqian.png' class='biaoqianimg'></image>
-            <view class='biaoqiantxt'>S</view>
+            <view class='biaoqiantxt'>{{item.level}}</view>
           </view>
         </view>
         <!--第二行，起始地-->
@@ -80,12 +81,10 @@
         <view class="c-minheight wx-view_xp9voB">
           <image class="wx-image_PYrvOU" mode="scaleToFill" src="/resources/daimai.png" />
           <text class="c-block wx-text_tBG9kh">{{item.type_desc}}</text>
-         
           <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/qian.png" />
           <text class="c-block wx-text_u2uG4j">￥{{item.cost}}</text>
-
-          <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" style='margin-left:60rpx;' wx:if="{{item.isshang}}"/>
-          <text class="c-block wx-text_u2uG4j" wx:if="{{item.isshang}}">￥{{item.shang}}</text>
+          <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" style='margin-left:60rpx;' wx:if="{{item.tip!='0.00'}}" />
+          <text class="c-block wx-text_u2uG4j" wx:if="{{item.tip!='0.00'}}">￥{{item.tip}}</text>
         </view>
         <!--第五行，备注内容-->
         <view class="c-minheight wx-view_XSYzuh">

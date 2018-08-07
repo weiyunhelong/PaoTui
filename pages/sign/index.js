@@ -30,6 +30,8 @@ Page({
     zhinaninfo: "", //指南
     messagestyle: "", //提示弹窗
     messagetxt: "", //提示内容
+    isxyshow:false,
+    xiyiinfo:"",//用户协议
   },
 
   /**
@@ -43,6 +45,8 @@ Page({
     })
     //初始化操作指南
     that.InitZN();
+    //初始化用户协议
+    that.InitXY();
   },
   //初始化操作指南
   InitZN: function() {
@@ -50,6 +54,30 @@ Page({
 
     that.setData({
       zhinaninfo: "今年唯一不同的是，行动最快的竟然是各个二线城市。年轻人还在脑内构思辞职信草稿，职场老手正向有意提供工作的大佬问好。新一年的未来还在迷惘中酝酿，二线城市的人才招揽广告已然杀到！     2月27日，杭州地铁1号线龙翔桥站C口，返城潮汹涌，两旁广告箱如往常般亮着瓦力十足的灯光。Sophie经过时，被上头的文字吸引了——“‘蓉漂’计划青年人才驿站”、“成都 · 许你一个美好的未来”。     成都抢人抢到了杭州家门口，还来不及为杭州倒吸一口冷气，其它二线城市也纷纷使出杀招。城市政策并非唯一推力，房产开发商为人才争夺战添了一把火。根据中国证券报的报道，2018年春节后，武汉、西安、南京等地多个楼盘均推出优惠政策，“送钱送房送户口”的口号不绝于耳。 人口集聚，则为城。  二线城市人才争夺战，本质是资源竞争和城市竞争。各城市在这场PK中孰胜孰败？   多城市政策齐发，并驱争先 “古时千里马常有，伯乐不常有；今日伯乐已翘首期盼，千里马却迟迟不归。”受国家双创政策的春风照拂，从世界范围看，2017全球十大创业生态系统中中国占据两席，北京上海分别排名第二、第七；从中国范围看，杭州紧随北上广深成为排名第五最适宜创业的城市，武汉、天津、苏州、成都、南京依次进入前十排行榜。 曾经的“上海后花园”杭州今非昔比一跃成为国际化大都市，先后举办了G20峰会、云栖大会、移动互联网大会等多个享誉国际的会议，拿下2022年亚运会的举办权，杭州的振兴为其他省市起了带头"
+    })
+  },
+  //初始化用户协议
+  InitXY:function(){
+    var that=this;
+
+    //请求接口获取用户协议
+    wx.request({
+      url: requesturl +'/Helpcenter/index',
+      data: {
+        openid:getApp().globalData.openid
+      },
+      header: {
+        "Content-Type":"application/json"
+      },
+      method: 'GET',
+      success: function(res) {
+        console.log("用户协议内容:");
+        console.log(res);
+
+        that.setData({
+          xiyiinfo:res.data.data
+        })
+      }
     })
   },
   //姓名
@@ -254,6 +282,21 @@ Page({
       isagree: !that.data.isagree
     })
   },
+  //显示协议
+  showxyopt: function () {
+    var that = this;
+    that.setData({
+      isxyshow: "c-state1"
+    })
+  },
+  //协议我知道了
+  xieyimodal: function () {
+    var that = this;
+
+    that.setData({
+      isxyshow: ""
+    })
+  },
   //显示指南
   showmodal: function() {
     var that = this;
@@ -353,6 +396,7 @@ Page({
           console.log("提交申请结果:");
           console.log(res);
           if (res.data.data.result){
+            getApp().globalData.isnewuser = true;
             wx.switchTab({
               url: '../index/index',
             })
