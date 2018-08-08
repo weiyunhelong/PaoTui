@@ -280,6 +280,31 @@ Page({
       }
     })
   },
+  //执行中
+  finishopt: function () {
+    var that = this;
+
+    //参数部分
+    wx.request({
+      url: requesturl + '/receipt/tasks',
+      data: {
+        openid: getApp().globalData.openid,
+        state_des: "complete",
+        legs_id: that.data.orderid
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log("开始执行的结果:");
+        console.log(res);
+        if (!res.data.result) {
+          that.showAlert(res.data.msg);
+        }
+      }
+    })
+  },
   //投诉雇主
   tousuopt: function () {
     var that = this;

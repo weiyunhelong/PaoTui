@@ -8,6 +8,7 @@
     </view>
     <text class="c-block wx-text_vuovO2">{{order.status_explain}}</text>
   </view>
+  
   <!--评价内容-->
   <view class="c-minheight wx-view_5u27ZS" wx:if="{{order.order_status==11}}">
     <view class="c-minheight wx-view_fUEelB">
@@ -99,9 +100,14 @@
   <!--操作按钮-->
   <view class="c-minheight wx-view_dHiiPT">
     <text class="c-block wx-text_yebBOBs" bindtap='getorderopt' wx:if="{{order.order_status==1}}">抢单</text>
+    <text class="c-block wx-text_ybbBOBs" bindtap='cancelopt' wx:if="{{order.order_status==2}}">取消跑单</text>
     <block wx:if="{{order.order_status==3}}">
       <text class="c-block wx-text_OhLcTU" bindtap='cancelopt'>取消跑单</text>
       <text class="c-block wx-text_ybBOBs" bindtap='runopt'>开始执行</text>
+    </block>
+    <block wx:if="{{order.order_status==4}}">
+      <text class="c-block wx-text_OhLcTU" bindtap='cancelopt'>取消跑单</text>
+      <text class="c-block wx-text_ybBOBs" bindtap='finishopt'>执行中</text>
     </block>
   </view>
   <view class="c-minheight wx-view_MhITsM" wx:if="{{order.order_status!=1}}">

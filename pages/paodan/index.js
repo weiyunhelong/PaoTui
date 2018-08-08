@@ -95,6 +95,12 @@ Page({
       url: '../paodan/detail?id=' + id,
     })
   },
+  //调整到消息
+  gonews:function(e){
+    wx.switchTab({
+      url: '../message/index?uid='+e.currentTarget.dataset.id,
+    })
+  },
   //取消跑单
   cancelorder: function(e) {
     var that = this;
@@ -244,6 +250,34 @@ Page({
       method: 'GET',
       success: function(res) {
         console.log("开始执行的结果:");
+        console.log(res);
+        if (!res.data.result) {
+          that.showAlert(res.data.msg);
+        }
+        that.InitOrder();
+      }
+    })
+  },
+  //进行中
+  finishopt:function(e){
+    var that = this;
+
+    //参数部分
+    var id = e.currentTarget.dataset.id;
+    //请求接口提交
+    wx.request({
+      url: requesturl + '/receipt/tasks',
+      data: {
+        openid: getApp().globalData.openid,
+        state_des: "complete",
+        legs_id: id
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log("完成执行的结果:");
         console.log(res);
         if (!res.data.result) {
           that.showAlert(res.data.msg);

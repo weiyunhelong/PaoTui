@@ -8,7 +8,7 @@ Page({
    */
   data: {
     money: 0, //账户余额
-    menkan: 50, //提款门槛
+    menkan: 0, //提款门槛
     tikuan: "", //提款的钱
     messagestyle: "", //提示的样式
     messageinfo: "", //提示的内容
@@ -67,7 +67,7 @@ Page({
     } else if (money < parseFloat(tikuan)) {
       that.setData({
         messagestyle: 'c-state1',
-        messageinfo: "账户余额小于提款金额"
+        messageinfo: "余额不足"
       });
       setTimeout(function() {
         that.setData({
@@ -86,19 +86,17 @@ Page({
           "Content-Type":"application/json"
         },
         method: 'GET',
-        dataType: 'json',
-        responseType: 'text',
         success: function(res) {
           console.log("提现结果:");
           console.log(res);
           if(res.data.result){
-
+            that.showAlert("提现成功，48小时之后到帐!");
             that.setData({
               money: money - parseFloat(tikuan)
             })
           }else{
             //弹窗显示内容
-            that.showAlert("提现获取失败!");
+            that.showAlert(res.data.msg);
           }
         }
       })     
@@ -106,6 +104,8 @@ Page({
   },
   //弹窗显示提示内容
   showAlert:function(message){
+    var that=this;
+
     that.setData({
       messagestyle: 'c-state1',
       messageinfo: message

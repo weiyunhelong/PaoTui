@@ -15,6 +15,32 @@
   min-height: initial;
   align-items: center;
   justify-content: space-between;
-  padding: 10rpx 30rpx;
+  padding: 20rpx 30rpx;
   margin-bottom: 4rpx;
+}
+
+.wx-text_GTr4On {
+  font-size: 28rpx;
+  color: rgb(255, 255, 255);
+  margin-right: 3px;
+}
+
+.wx-text_zy1sxb {
+  font-size: 28rpx;
+  color: #0ff;
+}
+
+.wx-text_5McyvR {
+  color: #0ff;
+}
+
+.wx-text_5McyvR1 {
+  color: #ffcc5a;
+}
+
+.wx-view_3Ut5XA {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200rpx;
 }

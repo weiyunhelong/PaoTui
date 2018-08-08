@@ -124,6 +124,16 @@
   color: #fff;
   font-size: 28rpx;
 }
+/*抢单按钮*/
+
+.wx-text_ybbBOBs {
+  width: 100%;
+  color: #0ff;
+  text-align: center;
+  line-height: 70rpx;
+  background-color: #fff;
+  font-size: 28rpx;
+}
 
 /*评价的内容*/
 

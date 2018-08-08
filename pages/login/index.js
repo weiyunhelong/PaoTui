@@ -50,7 +50,7 @@ Page({
           getApp().globalData.uid=res.data.data.staff_id;//uid
           getApp().globalData.cancel_count = res.data.data.cancel_count;//取消次数
          
-          if (res.data.data.is_new_staff == 1) {            
+          if (res.data.data.name == "") {            
             //注册页面 
             wx.redirectTo({
               url: '../sign/index',

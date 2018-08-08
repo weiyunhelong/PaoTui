@@ -7,8 +7,7 @@ Page({
    */
   data: {
     id:"",
-    order: {},//订单详情
-    feedback: {},//平台回复
+    dataorder: {},//投诉详情
   },
 
   /**
@@ -29,7 +28,7 @@ Page({
     var that=this;
 
     wx.request({
-      url: requesturl +'/staff/receive_complaint_list',
+      url: requesturl +'/staff/my_complaint',
       data: {
         openid:getApp().globalData.openid,
         id: that.data.id
@@ -42,6 +41,13 @@ Page({
         console.log("投诉详情结果:");
         console.log(res);
         
+        if(res.data.result){
+          that.setData({
+            dataorder:res.data.data
+          })
+        }else{
+          console.log("获取投诉详情失败！");
+        }
       }
     })
   },

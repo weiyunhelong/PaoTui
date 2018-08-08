@@ -8,8 +8,8 @@ Page({
   data: {
     touxiang:"/resources/touxiang.png",//头像
     wxname:"用户昵称",//用户昵称
-    fen: 4.5,//打分
-    qian:52.5,//钱
+    fen: 0,//打分
+    qian:0,//钱
     xinglsit:[1,2,3,4,5],//星分数显示使用
   },
 

@@ -1,5 +1,7 @@
 // pages/chat/index.js
 var requesturl = getApp().globalData.requesturl;
+var socketOpen = false;//socket状态
+var socketMsgQueue = [];//发送的消息
 
 Page({
 
@@ -8,9 +10,12 @@ Page({
    */
   data: {
     chatlist: [],//聊天列表
-    to_uid: "",//兑换用户
-    page_index: 1,//页码
-    page_size: 10,//每页记录数
+    to_uid: "",//对话用户id
+    to_utx: "",//对话用户头像
+    to_uname: "",//对话用户昵称
+    from_uid:"",//我的uid
+    mytx:"",//我的头像
+    myname:"",//我的昵称
     typeval:2,//对话类型
     info:"",//
     phone:"13812345678",//手机号码
@@ -29,41 +34,32 @@ Page({
     that.setData({
       to_uid: options.uid
     })
-
-    //初始化聊天列表
-    var chatlist= that.InitChatlist();
-
-    that.setData({
-      chatlist: chatlist
-    })
+    //获取我的用户的信息
+    that.InitMyInfo();
   },
-  //初始化聊天列表
-  InitChatlist: function() {
-    var that = this;
-    //参数部分
-    var to_uid = that.data.uid,
-      page_index = that.data.page_index,
-      page_size = that.data.page_size;
 
-    //获取聊天
+  //获取我的用户的信息
+  InitMyInfo:function(){
+    var that=this; 
+    
     wx.request({
-      url: requesturl + '/Chat/getChatHistory',
+      url: requesturl +'/staff/detail',
       data: {
-        openid: getApp().globalData.openid,
-        from_uid: getApp().globalData.uid,
-        to_uid: that.data.to_uid,
-        page_index: that.data.page_index,
-        page_size: that.data.page_size
+        openid: getApp().globalData.openid
       },
       header: {
-        "Content-Type":"application/x-www-form-urlencoded"
+        "Content-Type": "application/json"
       },
-      method: 'POST',
-      success: function(res) {
-        console.log("获取聊天数据:");
+      method: 'GET',
+      success: function (res) {
+        console.log("获取用户信息得数据");
         console.log(res);
 
-        return res.data.data;
+        that.setData({
+          mytx: res.data.avatarUrl,
+          from_uid: res.data.staff_id,
+          myname: res.data.nickName
+        })
       }
     })
   },
@@ -81,7 +77,7 @@ Page({
   sendopt:function(){
     var that=this;
     //参数部分
-    var info="";
+    var info = that.data.info;
 
     if(info==""){
       wx.showToast({
@@ -92,14 +88,21 @@ Page({
       })
     }else{
       /**TODO 发送消息**/
+      var msg = {
+        from_uid: that.data.from_uid,
+        to_uid: that.data.to_uid,
+        message: info,
+        message_format: 0
+      }
+      that.sendSocketMessage(msg);
+      that.setData({
+        info: ""
+      })
     }
   },
   //上传图片
   uploadtu:function(){
     var that = this;
-    //参数部分
-    var id = e.currentTarget.dataset.id;
-    id = parseInt(id);
 
     //选择图片
     wx.chooseImage({
@@ -126,7 +129,14 @@ Page({
             console.log("上传图片的结果");
             console.log(res);
            
-             /***TODO 提交到聊天记录***/
+            /***TODO 提交到聊天记录***/
+            var msg = {
+              from_uid: that.data.from_uid,
+              to_uid: that.data.to_uid,
+              message: res.data,
+              message_format: 1
+            }
+            that.sendSocketMessage(msg);
           },
           complete: function (res) {
             wx.hideLoading();
@@ -140,7 +150,7 @@ Page({
     var that=this;
     //拨打手机号码
     wx.makePhoneCall({
-      phoneNumber: that.data.phoneNumber,
+      phoneNumber: that.data.phone,
     })
   },
   //选择地图
@@ -158,6 +168,14 @@ Page({
           jingdu: res.longitude,//经度
           weidu: res.latitude,//纬度
         })
+        /**TODO发送地图信息**/
+        var msg = {
+          from_uid:that.data.from_uid,
+          to_uid: that.data.to_uid ,
+          message: res.name + "," +res.address + "," + res.longitude + "," + res.latitude, 
+          message_format:2
+        }
+        that.sendSocketMessage(msg);
       },
     })
     
@@ -166,9 +184,40 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    var that=this;
+    //连接socket
+    wx.connectSocket({
+      url: 'ws://www.fsdragon.com:8088?uid=' + that.data.from_uid + '&uname=' + that.data.myname +'&avatar=' + that.data.mytx
+    })
+    //打开链接
+    wx.onSocketOpen(function (res) {
+      console.log('WebSocket连接已打开！');
+      socketOpen=true;
+      for (var i = 0; i < socketMsgQueue.length; i++) {
+        sendSocketMessage(socketMsgQueue[i])
+      }
+      socketMsgQueue = []
+    })
+    //连接错误
+    wx.onSocketError(function (res) {
+      console.log('WebSocket连接打开失败，请检查！')
+    })
+    //接受服务器消息
+    wx.onSocketMessage(function (res) {
+      console.log('收到服务器内容：' + res.data)
+    })
+    
   },
-
+  //发送消息
+  sendSocketMessage:function (msg) {
+    if(socketOpen) {
+      wx.sendSocketMessage({
+        data: msg
+      })
+    } else {
+      socketMsgQueue.push(msg)
+    }
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -180,14 +229,13 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+   
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
   },
 
   /**

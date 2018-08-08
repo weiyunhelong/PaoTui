@@ -32,7 +32,7 @@
   <!--聊天内容部分-->
   <block wx:for="{{chatlist}}" wx:key="item" wx:if="{{chkmenu==2}}">
 
-    <view class="c-minheight {{item.isnew?'wx-view_FSAqbP':'wx-view_FSAqbP1'}}" bindtap='gochat' data-uid='{{item.uid}}'>
+    <view class="c-minheight {{item.isnew?'wx-view_FSAqbP':'wx-view_FSAqbP1'}}" bindtap='gochat' data-uid='{{item.uid}}'  data-utx='{{item.headerimg}}'  data-uname='张三'>
       <image class="wx-image_4j7TEO" mode="scaleToFill" src="{{item.headerimg}}" />
       <view class="c-minheight wx-view_tM4PI9">      
         <view class="c-block wx-text_Z2yVpL">

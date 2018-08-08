@@ -11,6 +11,7 @@ Page({
     chkmenu: 1, //菜单的选中
     newslsit: [], //通知列表
     chatlist: [], //聊天列表
+    uid:"",//用户id
   },
 
   /**
@@ -18,7 +19,9 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
-
+    that.setData({
+      uid: options.uid == undefined ? "" : options.uid
+    })
     //初始化数据
     that.InitMessage();
   },
@@ -125,8 +128,10 @@ Page({
     var that=this;
     //参数部分
     var uid=e.currentTarget.dataset.uid;
+    var utx = e.currentTarget.dataset.utx;
+    var uname = e.currentTarget.dataset.uname;
     wx.navigateTo({
-      url: '../chat/index?uid='+uid,
+      url: '../chat/index?uid=' + uid + "&utx=" + utx + "&uname" + uname,
     })
   },
   /**

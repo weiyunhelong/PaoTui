@@ -85,7 +85,7 @@ Page({
     //参数部分
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '../btslist/detail?id=' + id,
+      url: '../mytslist/detail?id=' + id,
     })
   },
   /**

@@ -26,7 +26,7 @@
         <view class='userinfov'>
           <image class="wx-image_jDkO78"  mode="scaleToFill" src="{{item.member.user_headimg}}" />
           <text class="c-block wx-text_ZaU8MQ" >{{item.member.nick_name}}</text>
-          <view class='shopv'>
+          <view class='shopv' catchtap='gonews' data-id='{{item.uid}}'>
             <view class='xiaoxiv' wx:if="{{item.news}}">
               <image src='/resources/xiaoxih.png' class='xiaoxitu'></image>
               <view class='hongdian'></view>
@@ -70,8 +70,8 @@
         <view class="c-minheight wx-view_oVtGKg">
           <text class="c-block wx-text_9JmF1M"  wx:if="{{item.order_status<=4}}"  catchtap="cancelorder" data-id="{{item.id}}">取消跑单</text>
           <text class="c-block wx-text_HoPYvU"  wx:if="{{item.order_status==3}}" catchtap='runopt' data-id="{{item.id}}">开始执行</text>
-          <text class="c-block wx-text_HoPYvU"  wx:if="{{item.order_status==4}}" >执行中</text>
-          <text class="c-block wx-text_CR9emH"  wx:if="{{item.order_status>3}}" catchtap='tousuopt' data-id="{{item.id}}">投诉雇主</text>
+          <text class="c-block wx-text_HoPYvU"  wx:if="{{item.order_status==4}}" catchtap='finishopt' data-id="{{item.id}}">执行中</text>
+          <text class="c-block wx-text_CR9emH"  wx:if="{{item.order_status>4}}" catchtap='tousuopt' data-id="{{item.id}}">投诉雇主</text>
         </view>
       </view>
     </view>
