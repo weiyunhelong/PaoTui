@@ -173,9 +173,7 @@
       <text class="c-block wx-text_AgStyc">操作指南</text>
     </view>
     <view class='wx_text_info'>
-      <text decode='true'>
-       {{zhinaninfo}}
-      </text>
+      <rich-text nodes="{{zhinaninfo}}"></rich-text> 
     </view>
     <button class="wx-button_18cUwW" size="default" bindtap="knowmodal">
       我知道了
@@ -190,9 +188,7 @@
       <text class="c-block wx-text_AgStyc">操作协议</text>
     </view>
     <view class='wx_text_info'>
-      <text decode='true'>
-       {{xieyiinfo}}
-      </text>
+       <rich-text nodes="{{xieyiinfo}}"></rich-text> 
     </view>
     <button class="wx-button_18cUwW" size="default" bindtap="xieyimodal">
       我知道了

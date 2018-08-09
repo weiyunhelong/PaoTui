@@ -1,5 +1,4 @@
 /**app.wxss**/
-
 /*整个页面的背景*/
 
 page {
@@ -27,7 +26,7 @@ switch, action-sheet, action-sheet-item, action-sheet-cancel, modal, toast,
 loading, navigator, audio, image, video, map, canvas {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box;
+  box-sizing: border-box;  
 }
 
 page {

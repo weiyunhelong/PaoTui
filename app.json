@@ -11,6 +11,7 @@
   "pages": [
     "pages/index/index",
     "pages/sign/index",
+    "pages/sign/result",
     "pages/paodan/index",
     "pages/paodan/detail",
     "pages/message/index",
