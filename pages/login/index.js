@@ -20,6 +20,10 @@ Page({
   },
   //授权登录
   GetUserInfo: function(e) {
+    wx.showLoading({
+      title: '正在登录中...',
+      mask:true
+    })
     console.log("授权用户的信息:");
     console.log(e);
     getApp().globalData.userInfo = e.detail.userInfo;
@@ -49,16 +53,28 @@ Page({
           getApp().globalData.openid = res.data.data.openid;//openid
           getApp().globalData.uid=res.data.data.staff_id;//uid
           getApp().globalData.cancel_count = res.data.data.cancel_count;//取消次数
+
+          getApp().globalData.isnewuser = res.data.data.is_new_staff==1?true:false;//是不是新骑手
          
-          if (res.data.data.name == "") {            
+          if (res.data.data.name == "") {
             //注册页面 
+            wx.redirectTo({
+              url: '../login/index',
+            })
+          } else if (res.data.data.is_examine == 1) {
+            //首页页面 
+            wx.switchTab({
+              url: '../index/index',
+            })
+          } else if (res.data.data.is_examine == 0) {
+            //入住页面 
             wx.redirectTo({
               url: '../sign/index',
             })
           } else {
-            //抢单大厅
-            wx.switchTab({
-              url: '../index/index',
+            //注册结果页面
+            wx.redirectTo({
+              url: '../sign/result?status=' + res.data.data.is_examine + "&reason=" + res.data.data.fail_reason,
             })
           }
         } else {
@@ -69,6 +85,7 @@ Page({
             icon: 'none'
           })
         }
+      wx.hideLoading();  
       }
     })
   },

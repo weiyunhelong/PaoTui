@@ -1,1 +1,26 @@
 /* pages/sign/result.wxss */
+
+.tipv {
+  color: #fff;
+  line-height: 300rpx;
+  text-align: center;
+  font-size: 32rpx;
+}
+
+.tipsv {
+  color: #fff;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.signv {
+  width: 40%;
+  height: 70rpx;
+  background-color: #0cf;
+  color: #fff;
+  margin: 30rpx 30%;
+  text-align: center;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+}

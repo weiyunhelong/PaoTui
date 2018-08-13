@@ -1,5 +1,4 @@
 // pages/paodan/index.js
-var orderdata = require('../../utils/orderlist.js');
 var requesturl = getApp().globalData.requesturl;
 
 Page({

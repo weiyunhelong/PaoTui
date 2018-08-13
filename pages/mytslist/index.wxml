@@ -28,7 +28,7 @@
           <view class="wx-view_3NZ4vV">
             <text class="c-block wx-text_of9VYP">{{item.content}}</text>
             <block wx:for="{{item.imgs}}" wx:key="imgitem" wx:for-item="imgitem">
-              <image class="wx-image_AVmash" mode="scaleToFill" src="{{imgitem}}" />
+              <image class="wx-image_AVmash" mode="scaleToFill" src="{{imgitem}}" wx:if="{{imgitem!=''}}"/>
             </block>
           </view>
         </view>

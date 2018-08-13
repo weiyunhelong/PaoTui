@@ -12,10 +12,7 @@ Page({
     isnewuser: false,//是否是新用户
     /*评价的内容*/
     xinglsit: [1, 2, 3, 4, 5], //星
-    pingfen: 4.5, //评分
-    pinginfo: "评价内容，富士康打飞机违法评价内容.", //评分内容 
-    pingtulist: ["/resources/tu1.png", "/resources/tu1.png", "/resources/tu1.png"],
-    pingtime: "2018-03-01  13:12:36", //评分时间
+    comments:[], //评价列表
     /*投诉雇主*/
     istsshow: "", //投诉弹窗显示
     tousuinfo: "", //投诉内容
@@ -94,7 +91,8 @@ Page({
         console.log(res);
         if (res.data.result) {
           that.setData({
-            order: res.data.data
+            order: res.data.data,
+            comments: res.data.data.comments//评价部分
           })
 
           //获取指南协议内容

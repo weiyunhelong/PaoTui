@@ -11,28 +11,30 @@
   
   <!--评价内容-->
   <view class="c-minheight wx-view_5u27ZS" wx:if="{{order.order_status==11}}">
+   <block wx:for="{{comments}}" wx:key="item">
     <view class="c-minheight wx-view_fUEelB">
       <text class="c-block wx-text_eAKhuH">评分：</text>
       <block wx:for="{{xinglsit}}" wx:key="xitem" wx:for-item="xitem">
-        <image class="wx-image_LfAJyx" mode="scaleToFill" src="/resources/xing.png" wx:if="{{xitem<=pingfen}}" />
+        <image class="wx-image_LfAJyx" mode="scaleToFill" src="/resources/xing.png" wx:if="{{xitem<=item.star}}" />
       </block>
-      <image class="wx-image_jRpsXD" mode="scaleToFill" wx:if="{{pingfen%1!=0}}" src="/resources/banxing.png" />
+      <image class="wx-image_jRpsXD" mode="scaleToFill" wx:if="{{item.star%1!=0}}" src="/resources/banxing.png" />
     </view>
     <view class="c-minheight wx-view_nOn7MR">
       <text class="c-block wx-text_eAKhuH">内容：</text>
       <view class="c-minheight wx-view_5pA13j">
-        <text class="c-block wx-text_eAKhuH">{{pinginfo}}</text>
+        <text class="c-block wx-text_eAKhuH">{{item.desc}}</text>
         <view class="c-minheight wx-view_ghWvFg">
-          <block wx:for="{{pingtulist}}" wx:key="item">
-            <image class="wx-image_BVT0xx" mode="scaleToFill" src="{{item}}" />
+          <block wx:for="{{item.imgs}}" wx:key="tuitem" wx:for-item="tuitem">
+            <image class="wx-image_BVT0xx" mode="scaleToFill" src="{{tuitem}}"  wx:if="{{tuitem!=''}}"/>
           </block>
         </view>
       </view>
     </view>
     <view class="c-minheight wx-view_aKGF5k">
       <text class="c-block wx-text_eAKhuH">时间：</text>
-      <text class="c-block wx-text_eAKhuH">{{pingtime}}</text>
+      <text class="c-block wx-text_eAKhuH">{{item.comment_time}}</text>
     </view>
+    </block>
   </view>
 
   <!--订单的内容-->

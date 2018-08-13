@@ -19,7 +19,12 @@ Page({
   },
   //页面的初始化
   onLoad: function() {
-
+    
+    if (getApp().globalData.openid==""){
+      wx.redirectTo({
+        url: '../login/index',
+      })
+    }
   },
   //获取经纬度
   InitLocation: function() {

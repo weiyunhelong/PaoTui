@@ -3,8 +3,6 @@
   <view class='title'>{{title}}</view>
 
   <view class='bodyinfo'>
-    <text decode='true'>
- {{info}}
-  </text>
+    <rich-text nodes="{{info}}"></rich-text>
   </view>
 </view>

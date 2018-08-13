@@ -11,35 +11,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        that.globalData.code = res.code;
-        //获取openid   
-        wx.request({
-          url: that.globalData.requesturl + '/Index/runWxLogin',
-          data: {
-            code: getApp().globalData.code
-          },
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          method: 'POST',
-          success: function(res) {
-            console.log("登录结果:");
-            console.log(res);
-
-            if (res.data.result) {
-              getApp().globalData.openid = res.data.data.openid;//openid
-              getApp().globalData.uid = res.data.data.staff_id;//uid
-              getApp().globalData.cancel_count = res.data.data.cancel_count;//取消次数
-              
-              if (res.data.data.name=="") {
-                //注册页面 
-                wx.redirectTo({
-                  url: '../login/index',
-                })
-              } 
-            }
-          }
-        })
+        that.globalData.code = res.code;        
       }
     })
     // 获取用户信息

@@ -16,3 +16,10 @@
   color: #fff;
   line-height: 50rpx;
 }
+
+.wx-text_XzBqYd {
+  color: rgb(255, 255, 255);
+  font-size: 24rpx;
+  text-align: right;
+  width: 100%;
+}

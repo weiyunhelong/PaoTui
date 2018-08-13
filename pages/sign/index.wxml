@@ -45,6 +45,26 @@
     </view>
   </view>
 
+  <!--手机号码-->
+  <view class='hangv'>
+    <view class='hangtitle'>手机号码:</view>
+    <view class='hanginputv'>
+      <input type='text' placeholder='请填写您的手机号码' value='{{mobile}}' class='txtcss' placeholder-class='tipcss' bindblur='getmobile' bindconfirm='getmobile'></input>
+    </view>
+  </view>
+
+  <!--短信验证码-->
+  <view class='hangv'>
+    <view class='hangtitle'>短信验证码:</view>
+    <view class='hangyearv'>
+      <input type='number' placeholder='' value='{{mgscode}}' class='txtcss' placeholder-class='tipcss' bindblur='validatecode' bindconfirm='validatecode' bindinput='validatecode'></input>
+    </view>
+
+    <view class='sendcodebtn' bindtap="{{codetip=='获取验证码'?'sendcode':''}}">{{codetip}}</view>
+
+  </view>
+
+
 
   <!--现住址-->
   <view class='hangv'>
@@ -127,9 +147,7 @@
       <text class="c-block wx-text_AgStyc">操作指南</text>
     </view>
     <view class='wx_text_info'>
-      <text decode='true'>
-      {{zhinaninfo}}
-      </text>
+      <rich-text nodes="{{zhinaninfo}}"></rich-text>
     </view>
     <button class="wx-button_18cUwW" size="default" bindtap="knowmodal">
       我知道了
@@ -144,9 +162,7 @@
       <text class="c-block wx-text_AgStyc">用户协议</text>
     </view>
     <view class='wx_text_info'>
-      <text decode='true'>
-        {{xiyiinfo}}
-      </text>
+      <rich-text nodes="{{xiyiinfo}}"></rich-text>
     </view>
     <button class="wx-button_18cUwW" size="default" bindtap="xieyimodal">
       我知道了

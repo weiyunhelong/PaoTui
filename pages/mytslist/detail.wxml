@@ -10,14 +10,14 @@
     </view>
 
     <!--投诉内容-->
-    <view class="c-minheight wx-view_CKL7oQ">
-      <view class="c-minheight wx-view_eJY7fz">
+    <view class="wx-view_CKL7oQ">
+      <view class="wx-view_eJY7fz">
         <text class="c-block wx-text_MiAbaY">投诉内容：</text>
-        <view class="c-minheight wx-view_3v6GL7">
+        <view class="wx-view_3v6GL7">
           <text class="c-block wx-text_YwWbjJ">{{datainfo.content}}</text>
-          <view class="c-minheight wx-view_JtSjk2">
+          <view class="wx-view_JtSjk2">
             <block wx:for="{{datainfo.imgs}}" wx:key="tuitem">
-              <image class="wx-image_7vnZHV" mode="scaleToFill" src="{{item}}" />
+              <image class="wx-image_7vnZHV" mode="scaleToFill" src="{{item}}" wx:if="{{item!=''}}"/>
             </block>
           </view>
         </view>

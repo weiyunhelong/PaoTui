@@ -8,32 +8,7 @@
     </view>
     <text class="c-block wx-text_vuovO2">{{order.status_explain}}</text>
   </view>
-  <!--评价内容-->
-  <view class="c-minheight wx-view_5u27ZS" wx:if="{{order.order_status==11}}">
-    <view class="c-minheight wx-view_fUEelB">
-      <text class="c-block wx-text_eAKhuH">评分：</text>
-      <block wx:for="{{xinglsit}}" wx:key="xitem" wx:for-item="xitem">
-        <image class="wx-image_LfAJyx" mode="scaleToFill" src="/resources/xing.png" wx:if="{{xitem<=pingfen}}" />
-      </block>
-      <image class="wx-image_jRpsXD" mode="scaleToFill" wx:if="{{pingfen%1!=0}}" src="/resources/banxing.png" />
-    </view>
-    <view class="c-minheight wx-view_nOn7MR">
-      <text class="c-block wx-text_eAKhuH">内容：</text>
-      <view class="c-minheight wx-view_5pA13j">
-        <text class="c-block wx-text_eAKhuH">{{pinginfo}}</text>
-        <view class="c-minheight wx-view_ghWvFg">
-          <block wx:for="{{pingtulist}}" wx:key="item">
-            <image class="wx-image_BVT0xx" mode="scaleToFill" src="{{item}}" />
-          </block>
-        </view>
-      </view>
-    </view>
-    <view class="c-minheight wx-view_aKGF5k">
-      <text class="c-block wx-text_eAKhuH">时间：</text>
-      <text class="c-block wx-text_eAKhuH">{{pingtime}}</text>
-    </view>
-  </view>
-
+  
   <!--订单的内容-->
   <view class="c-minheight wx-view_PPXd851">
     <view class="c-minheight wx-view_dfNyFR1">
@@ -71,7 +46,7 @@
         <view class='redv'>{{titem}}</view>
       </block>
     </view>
-    <view class="c-minheight wx-view_2wZcg2" wx:if="{{orderstatus!=0}}">
+    <view class="c-minheight wx-view_2wZcg2" wx:if="{{orderstatus!=1}}">
       <image class="wx-image_tFdnbt" mode="scaleToFill" src="/resources/xiaoxi.png" bindtap='gomessageopt' data-uid='{{order.member.uid}}'/>
       <view class='fengexian'></view>
       <image class="wx-image_vJe3HO" mode="scaleToFill" src="/resources/phone.png" bindtap='gophoneopt' data-phone='{{order.mobile}}' />

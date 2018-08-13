@@ -13,17 +13,12 @@
   <!--通知内容部分-->
   <block wx:for="{{newslsit}}" wx:key="item" wx:if="{{chkmenu==1}}">
 
-    <view class="c-minheight {{item.isnew?'wx-view_FSAqbP':'wx-view_FSAqbP1'}}">
-      <image class="wx-image_4j7TEO" mode="scaleToFill" src="{{item.headerimg}}" />
+    <view class="c-minheight {{item.is_read==0?'wx-view_FSAqbP':'wx-view_FSAqbP1'}}" bindtap='gomsgdetail' data-id='{{item.run_id}}'>
       <view class="c-minheight wx-view_tM4PI9">
-        <view class="c-minheight wx-view_sAVRB2">
-          <text class="c-block wx-text_m3PXXb">{{item.username}}</text>
-          <text class="c-block wx-text_XzBqYd">{{item.time}}</text>
-        </view>
         <view class="c-block wx-text_Z2yVpL">
-          <view class='newstxt'>{{item.info}}</view>
-          <view class='newsnum' wx:if="{{item.msgnum>0}}">{{item.msgnum}}</view>
-        </view>
+          <view class='newstxt'>{{item.content}}</view>
+        </view>        
+        <view class="c-block wx-text_XzBqYd">{{item.create_time}}</view>
       </view>
     </view>
 
@@ -37,6 +32,7 @@
       <view class="c-minheight wx-view_tM4PI9">      
         <view class="c-block wx-text_Z2yVpL">
           <view class='newstxt'>{{item.info}}</view>
+          <view class='newsnum' wx:if="{{item.msgnum>0}}">{{item.msgnum}}</view>
         </view>        
         <view class='newstime'>{{item.time}}</view>
       </view>

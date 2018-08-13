@@ -6,7 +6,7 @@
   <view class="c-minheight wx-view_9KOweV" style='margin-top:20rpx;'> 
     <view class="c-minheight wx-view_LSe4ga">
       <text class="c-block wx-text_MiAbaY">平台回复：</text>
-      <text class="c-block wx-text_YwWbjJ">骑士被封号7天，退款给雇主。骑士被封号7天，退款给雇主。骑士被封号7天，退款给雇主。</text>
+      <text class="c-block wx-text_YwWbjJ">{{orderobj.comments}}</text>
     </view>
     <view class="c-minheight wx-view_LSe4ga">
       <text class="c-block wx-text_MiAbaY">退款金额：</text>
@@ -61,32 +61,34 @@
   <view class="c-minheight wx-view_PPXd851">
     <view class="c-minheight wx-view_dfNyFR1">
       <text class="c-block wx-text_FFPqzR">始</text>
-      <text class="c-block wx-text_Vj9cHB">广东省中山市东区古镇镇骏贤居</text>
+      <text class="c-block wx-text_Vj9cHB">{{orderobj.addr}}</text>
     </view>
     <view class="c-minheight wx-view_dfNyFR1">
       <text class="c-block wx-text_FFPqzR1">终</text>
-      <text class="c-block wx-text_Vj9cHB">广东省中山市东区古镇镇骏贤居</text>
+      <text class="c-block wx-text_Vj9cHB">{{orderobj.o_addr}}</text>
     </view>
     <view class="c-minheight wx-view_xp9voB1">
       <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" />
-      <text class="c-block wx-text_u2uG4j">￥5.5</text>
+      <text class="c-block wx-text_u2uG4j">￥{{orderobj.cost}}</text>
+       <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" style='margin-left:60rpx;' wx:if="{{orderobj.tip!='0.00'}}" />
+        <text class="c-block wx-text_u2uG4j" wx:if="{{orderobj.tip!='0.00'}}">￥{{orderobj.tip}}</text>
     </view>
     <view class="c-minheight wx-view_XSYzuh1">
       <image class="wx-image_RYYYOg" mode="scaleToFill" src="/resources/miaoshu.png" />
-      <text class="c-block wx-text_QF0BYA">帮我买一罐可乐，要冰的帮我买一罐可乐，要冰的帮我买一罐可乐要冰的帮我买一罐可乐</text>
+      <text class="c-block wx-text_QF0BYA">{{orderobj.title}}</text>
     </view>
     <view class="c-minheight wx-view_Kv5Tev1">
       <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png"  />
-      <text class="c-block wx-text_1kGNpv">15:32  -  16:25</text>
+      <text class="c-block wx-text_1kGNpv">{{orderobj.start_time}}  -  {{orderobj.end_time}}</text>
     </view>
     <view class="c-minheight wx-view_JQPoPT11">
       <view class="c-minheight wx-view_o76ZdP">
         <text class="c-block wx-text_uhetRv">跑单编号</text>
-        <text class="c-block wx-text_uhetRv">1326545825441244</text>
+        <text class="c-block wx-text_uhetRv">{{orderobj.runn_no}}</text>
       </view>
       <view class="c-minheight wx-view_o76ZdP">
         <text class="c-block wx-text_uhetRv">跑单时间</text>
-        <text class="c-block wx-text_uhetRv">2018-03-01  13:12:36</text>
+        <text class="c-block wx-text_uhetRv">{{orderobj.create_time}}</text>
       </view>
     </view>
   </view>

@@ -46,38 +46,41 @@ Page({
   InitMessage: function() {
     var that = this;
     //参数部分
+    wx.request({
+      url: requesturl +'/staff/get_my_message_list',
+      data: {
+        openid:getApp().globalData.openid
+      },
+      header: {
+        "Content-Type":"application/x-www-form-urlencoded"
+      },
+      method: 'POST',
+      success: function(res) {
+        console.log("消息列表:");
+        console.log(res);
 
-    var newslsit = [{
-        id: 1,
-        headerimg: "/resources/touxiang.png",
-        username: '雇主昵称',
-        time: "3秒前",
-        info: "跑腿员XXX已接单，请尽快支付服务小费。赶紧付钱跑腿员XXX已接单，请尽快支付服务小费。赶紧付钱",
-        msgnum: 1,
-        isnew: true
-      },
-      {
-        id: 2,
-        headerimg: "/resources/touxiang.png",
-        username: '雇主昵称',
-        time: "3秒前",
-        info: "跑腿员XXX已接单，请尽快支付服务小费。赶紧付钱跑腿员XXX已接单，请尽快支付服务小费。赶紧付钱",
-        msgnum: 0,
-        isnew: false
-      },
-      {
-        id: 3,
-        headerimg: "/resources/touxiang.png",
-        username: '雇主昵称',
-        time: "3秒前",
-        info: "跑腿员XXX已接单，请尽快支付服务小费。赶紧付钱跑腿员XXX已接单，请尽快支付服务小费。赶紧付钱",
-        msgnum: 0,
-        isnew: false
-      },
-    ];
-    that.setData({
-      newslsit: newslsit
-    })
+        if(res.data.result){
+          that.setData({
+            newslsit: res.data.data
+          })
+          if(res.data.data.length>0){
+            //设置震动
+            wx.vibrateLong({
+              success: function(res) {},
+              fail: function(res) {},
+              complete: function(res) {},
+            })
+            //设置标识
+            wx.showTabBarRedDot({
+              index: 2
+            })
+          }
+        }else{
+          console.log("获取消息列表失败");
+        }
+      }
+    })   
+   
   },
   //获取聊天记录
   getchatlist: function() {
@@ -97,33 +100,24 @@ Page({
       success: function(res) {
         console.log("聊天记录结果:");
         console.log(res);
-        
-        var chatlist=[
-          {
-            id:1,
-            uid:"1",
-            headerimg:"/resources/touxiang.png",
-            info: "超出完成时间30分钟，雇主可退款或投诉，请联系雇主说明。",
-            isnew:true,
-            time:"12秒前"
-          },
-          {
-            id: 2,
-            uid: "2",
-            headerimg: "/resources/touxiang.png",
-            info: "超出完成时间30分钟，雇主可退款或投诉，请联系雇主说明。",
-            isnew: false,
-            time: "2018-06-01"
-          }
-        ]
-        that.setData({
-          //chatlist: res.data.data
-          chatlist: chatlist
-        })
+        if(res.data.result){
+          that.setData({
+            chatlist: res.data.data
+          })
+        }else{
+          console.log("获取聊天记录失败！");
+        }
       }
     })
   },
-  //跳转到聊天页
+  //跳转到消息详情
+  gomsgdetail:function(e){
+    var id=e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../paodan/detail?id='+id,
+    })
+  },
+  //跳转到聊天室
   gochat:function(e){
     var that=this;
     //参数部分

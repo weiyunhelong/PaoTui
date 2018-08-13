@@ -1,13 +1,14 @@
 // pages/sign/index.js
 var requesturl = getApp().globalData.requesturl;
 var validatorutil = require('../../utils/validator.js');
-
+var timer="";//计时器
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    sid: "", //sessionid
     name: "", //姓名
     identity: "", //身份证
     job: "", //工作
@@ -16,6 +17,10 @@ Page({
     genderlist: ["女", "男", "其他"], //性别选中
     address: "", //住址
     phone: "", //手机号码
+    mobile: "", //手机号码
+    msgcode: "", //手机验证码
+    codetip: "获取验证码", //发送验证码
+    timeclock:60,//倒计时
     guanxi: "", //关系
     isfront: false, //是否上传正面照
     fronttu: "", //正面照
@@ -30,8 +35,8 @@ Page({
     zhinaninfo: "", //指南
     messagestyle: "", //提示弹窗
     messagetxt: "", //提示内容
-    isxyshow:false,
-    xiyiinfo:"",//用户协议
+    isxyshow: false,
+    xiyiinfo: "", //用户协议
   },
 
   /**
@@ -43,39 +48,78 @@ Page({
     wx.setNavigationBarTitle({
       title: '申请成为跑腿员',
     })
+    //获取sessionid
+    that.InitSID();
     //初始化操作指南
     that.InitZN();
     //初始化用户协议
     that.InitXY();
   },
+  //获取sessionid
+  InitSID: function() {
+    var that = this;
+    //获取sid
+    wx.request({
+      url: requesturl + '/Index/getSessionId',
+      data: '',
+      success: function(res) {
+        console.log("sid获取结果:");
+        console.log(res);
+
+        if (res.data.result) {
+          that.setData({
+            sid: res.data.data
+          })
+        } else {
+          console.log("获取sid失败!");
+        }
+      }
+    })
+  },
   //初始化操作指南
   InitZN: function() {
     var that = this;
 
-    that.setData({
-      zhinaninfo: "今年唯一不同的是，行动最快的竟然是各个二线城市。年轻人还在脑内构思辞职信草稿，职场老手正向有意提供工作的大佬问好。新一年的未来还在迷惘中酝酿，二线城市的人才招揽广告已然杀到！     2月27日，杭州地铁1号线龙翔桥站C口，返城潮汹涌，两旁广告箱如往常般亮着瓦力十足的灯光。Sophie经过时，被上头的文字吸引了——“‘蓉漂’计划青年人才驿站”、“成都 · 许你一个美好的未来”。     成都抢人抢到了杭州家门口，还来不及为杭州倒吸一口冷气，其它二线城市也纷纷使出杀招。城市政策并非唯一推力，房产开发商为人才争夺战添了一把火。根据中国证券报的报道，2018年春节后，武汉、西安、南京等地多个楼盘均推出优惠政策，“送钱送房送户口”的口号不绝于耳。 人口集聚，则为城。  二线城市人才争夺战，本质是资源竞争和城市竞争。各城市在这场PK中孰胜孰败？   多城市政策齐发，并驱争先 “古时千里马常有，伯乐不常有；今日伯乐已翘首期盼，千里马却迟迟不归。”受国家双创政策的春风照拂，从世界范围看，2017全球十大创业生态系统中中国占据两席，北京上海分别排名第二、第七；从中国范围看，杭州紧随北上广深成为排名第五最适宜创业的城市，武汉、天津、苏州、成都、南京依次进入前十排行榜。 曾经的“上海后花园”杭州今非昔比一跃成为国际化大都市，先后举办了G20峰会、云栖大会、移动互联网大会等多个享誉国际的会议，拿下2022年亚运会的举办权，杭州的振兴为其他省市起了带头"
+    wx.request({
+      url: requesturl + '/Articlecenter/articleContent',
+      data: {
+        article_id: 2
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: 'POST',
+      success: function(res) {
+        console.log("操作指南:");
+        console.log(res);
+        if (res.data.result) {
+          that.setData({
+            zhinaninfo: res.data.data.content
+          })
+        }
+      }
     })
   },
   //初始化用户协议
-  InitXY:function(){
-    var that=this;
+  InitXY: function() {
+    var that = this;
 
     //请求接口获取用户协议
     wx.request({
-      url: requesturl +'/Helpcenter/index',
+      url: requesturl + '/Articlecenter/articleContent',
       data: {
-        openid:getApp().globalData.openid
+        article_id: 1
       },
       header: {
-        "Content-Type":"application/json"
+        "Content-Type": "application/x-www-form-urlencoded"
       },
-      method: 'GET',
+      method: 'POST',
       success: function(res) {
         console.log("用户协议内容:");
         console.log(res);
 
         that.setData({
-          xiyiinfo:res.data.data
+          xiyiinfo: res.data.data.content
         })
       }
     })
@@ -137,14 +181,91 @@ Page({
       address: txtval
     })
   },
-  //手机号码
+  //自己手机号码
+  getmobile: function(e) {
+    var that = this;
+    //参数值
+    var txtval = e.detail.value;
+
+    if (txtval == "") {
+      that.showAlert("请输入手机号码");
+    } else if (!validatorutil.validateMobile(txtval)) {
+      that.showAlert("手机号码错误");
+    } else {
+      that.setData({
+        mobile: txtval.trim()
+      })
+    }
+  },
+  //发送验证码
+  sendcode: function(e) {
+    var that = this;
+    //参数值
+    var mobile = that.data.mobile;
+    if (mobile == "") {
+      that.showAlert("请填写您的手机号码!");
+    } else if (!validatorutil.validateMobile(mobile)) {
+      that.showAlert("手机号码错误!");
+    } else {
+      //倒计时
+      var timer = setInterval(function () {
+
+        if (that.data.timeclock == 0) {
+          that.setData({
+            codetip: "获取验证码",
+            timeclock: 60
+          })
+          clearInterval(timer);
+        } else {
+          that.setData({
+            codetip: "剩余(" + (that.data.timeclock - 1) + ")s",
+            timeclock: that.data.timeclock - 1
+          })
+        }
+      }, 1000)
+
+      /**TODO获取验证码**/
+      wx.request({
+        url: requesturl + '/staff/sendSmsBindMobile',
+        data: {
+          mobile: that.data.mobile,
+          openid: getApp().globalData.openid
+        },
+        header: {
+          "Content-Type": "application/json",
+          "Cookie": "PHPSESSID=" + that.data.sid
+        },
+        method: 'GET',
+        success: function(res) {
+          console.log("获取验证码的值:");
+          console.log(res);
+
+          if (res.data.code==0){
+          }else{
+            console.log("获取短信验证码失败!");
+          }
+        }
+      })
+    }
+  },
+  //验证输入是否正确验证码
+  validatecode: function(e) {
+    var that = this;
+
+    //获取输入值
+    var txtval = e.detail.value;
+    that.setData({
+      msgcode: txtval
+    })
+  },
+  //联系人手机号码
   getphone: function(e) {
     var that = this;
     //参数值
     var txtval = e.detail.value;
 
     that.setData({
-      phone: txtval
+      phone: txtval.trim()
     })
   },
   //关系
@@ -283,14 +404,14 @@ Page({
     })
   },
   //显示协议
-  showxyopt: function () {
+  showxyopt: function() {
     var that = this;
     that.setData({
       isxyshow: "c-state1"
     })
   },
   //协议我知道了
-  xieyimodal: function () {
+  xieyimodal: function() {
     var that = this;
 
     that.setData({
@@ -323,6 +444,8 @@ Page({
       sexindex = that.data.sexindex, //性别下标
       genderlist = that.data.genderlist, //性别选中
       address = that.data.address, //住址
+      mobile = that.data.mobile, //手机号码
+      mobilecode = that.data.msgcode, //是否通过验证
       phone = that.data.phone, //手机号码
       guanxi = that.data.guanxi, //关系
       isfront = that.data.isfront, //是否上传正面照
@@ -348,13 +471,13 @@ Page({
       that.showAlert("请输入现职业");
     } else if (year == "") {
       that.showAlert("请输入年龄");
-    } else if (parseInt(year)<= 0) {
+    } else if (parseInt(year) <= 0) {
       that.showAlert("年龄大于0");
     } else if (sexindex == -1) {
       that.showAlert("请选择性别");
     } else if (address == "") {
       that.showAlert("请输入现住址");
-    } else if (phone == "") {
+    }else if (phone == "") {
       that.showAlert("请输入手机号码");
     } else if (!validatorutil.validateMobile(phone)) {
       that.showAlert("手机号码错误");
@@ -366,8 +489,6 @@ Page({
       that.showAlert("请上传身份证反面");
     } else if (!isshouchi) {
       that.showAlert("请上传手持身份证");
-    } else if (!iszheng) {
-      that.showAlert("请上传技能证书");
     } else if (!isagree) {
       that.showAlert("请同意协议");
     } else {
@@ -385,28 +506,29 @@ Page({
           age: year,
           sex: sexindex,
           addr: address,
+          mobile: mobile,
+          mobile_code: mobilecode,
           urgent_tel: phone,
           urgent_relationship: guanxi
         },
         header: {
-          "Content-Type":"application/x-www-form-urlencoded"
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Cookie": "PHPSESSID=" + that.data.sid
         },
         method: 'POST',
         success: function(res) {
           console.log("提交申请结果:");
           console.log(res);
-          if (res.data.data.result){
-            getApp().globalData.isnewuser = true;
-            wx.switchTab({
-              url: '../index/index',
+          if (res.data.result) {
+            wx.redirectTo({
+              url: '../sign/result?status=0&reason=',
             })
-          }else{
-            that.showAlert("入驻失败，请重新填写.");
-            that.onLoad();
+          } else {
+            that.showAlert(res.data.msg);
           }
         }
       })
-    } 
+    }
   },
   //弹窗显示提示
   showAlert: function(message) {

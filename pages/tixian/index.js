@@ -8,7 +8,7 @@ Page({
    */
   data: {
     money: 0, //账户余额
-    menkan: 0, //提款门槛
+    menkan: 50, //提款门槛
     tikuan: "", //提款的钱
     messagestyle: "", //提示的样式
     messageinfo: "", //提示的内容
@@ -20,7 +20,37 @@ Page({
   onLoad: function(options) {
     var that = this;
     that.setData({
-      money: parseFloat(options.qian)
+      money:options.qian
+    })
+    //获取提现门槛
+    that.InitMenkan();
+  },
+  //获取提现门槛
+  InitMenkan:function(){
+    var that=this;
+
+    //请求接口获取到门槛的值
+    wx.request({
+      url: requesturl +'/staff/get_staff_setting',
+      data: {
+        openid:getApp().globalData.openid
+      },
+      header: {
+        "Content-Type":"application/x-www-form-urlencoded"
+      },
+      method: 'POST',
+      success: function(res) {
+        console.log("门槛的值:");
+        console.log(res);
+
+        if(res.data.result){
+          that.setData({
+            menkan: res.data.data.withdrawal_limit
+          })
+        }else{
+          console.log("获取门槛失败");
+        }
+      }
     })
   },
   //获取提款的金额
@@ -37,8 +67,8 @@ Page({
   putmoney: function() {
     var that = this;
     //参数部分
-    var money = that.data.money, //账户余额
-      menkan = that.data.menkan, //提款门槛
+    var money = parseFloat(that.data.money), //账户余额
+      menkan = parseFloat(that.data.menkan), //提款门槛
       tikuan = that.data.tikuan, //提款的钱
       messagestyle = that.data.messagestyle, //提示的样式
       messageinfo = that.data.messageinfo; //提示的内容
@@ -80,7 +110,7 @@ Page({
         url: requesturl + '/staff/cash',
         data: {
           openid: getApp().globalData.openid,
-          money: parseFloat(money)
+          money: parseFloat(tikuan)
         },
         header: {
           "Content-Type":"application/json"

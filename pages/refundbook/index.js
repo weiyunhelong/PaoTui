@@ -23,38 +23,39 @@ Page({
     var that=this;
     //参数部分
     var chkmenu = that.data.chkmenu;
-    
+    var status="";
+    if (chkmenu==1){
+      status = "all";
+    } else if (chkmenu == 2) {
+      status = "refunding";
+    } else if (chkmenu == 3) {
+      status = "refunded";
+    } else {
+      status = "refuse_refund";
+    } 
     //获取列表数据
-    var datalist=[      
-      {
-        id: 1,
-        typeval: "代买",
-        orderno: "2326541515121",
-        info: "超时完成任务了。",
-        imglist: [],
-        status: 1,
+    wx.request({
+      url: requesturl +'/staff/refund_list',
+      data: {
+        openid:getApp().globalData.openid,
+        status: status
       },
-      {
-        id: 2,
-        typeval: "代买",
-        orderno: "2326541515122",
-        info: "51分8篮板8助攻，我不想说这一场比赛詹姆斯输了。不论是有个别的争议球没有吹，还是最后4.7秒那个希尔的罚球与JR的传球，各种状况都撞到一块，最后加时赛里詹姆斯甚至啊啊啊",
-        imglist: ["/resources/tu1.png", "/resources/tu1.png", "/resources/tu1.png"],
-        status: 2,
+      header: {
+        "Content-Type":"application/x-www-form-urlencoded"
       },
-      {
-        id: 3,
-        typeval: "代买",
-        orderno: "2326541515123",
-        info: "51分8篮板8助攻，我不想说这一场比赛詹姆斯输了。不论是有个别的争议球没有吹，还是最后4.7秒那个希尔的罚球与JR的传球，各种状况都撞到一块，最后加时赛里詹姆斯甚至啊啊啊",
-        imglist: ["/resources/tu1.png", "/resources/tu1.png", "/resources/tu1.png"],
-        status: 3,
-      },
-    ];
-    
-    //赋值部分
-    that.setData({
-      datalist: datalist
+      method: 'POST',
+      success: function(res) {
+        console.log("退款申请列表:");
+        console.log(res);
+
+        if(res.data.result){
+         that.setData({
+           datalist:res.data.data
+         })
+        }else{
+          console.log("获取退款申请列表失败!");
+        }
+      }
     })
   },
   //菜单的切换
