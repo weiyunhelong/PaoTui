@@ -50,6 +50,18 @@ Page({
       url: '/pages/account/index',
     })
   },
+  //分站客服
+  gofenchat:function(){
+    wx.navigateTo({
+      url: '../chat/index?uid=1&utx=/resources/fenzhankf.png&uname=分站客服&user_tel=',
+    })
+  },
+  //官方客服
+  gozhuchat: function () {
+    wx.navigateTo({
+      url: '../chat/index?uid=10&utx=/resources/guankf.png&uname=官方客服&user_tel=',
+    })
+  },
   //帮助中心
   acticle:function() {
     wx.navigateTo({

@@ -9,10 +9,10 @@ Page({
     orderid: "", //订单id
     order: {}, //订单详情    
     orderstatus: 1, //订单状态
-    isnewuser: false,//是否是新用户
+    isnewuser: false, //是否是新用户
     /*评价的内容*/
     xinglsit: [1, 2, 3, 4, 5], //星
-    comments:[], //评价列表
+    comments: [], //评价列表
     /*投诉雇主*/
     istsshow: "", //投诉弹窗显示
     tousuinfo: "", //投诉内容
@@ -30,7 +30,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this;
     //接受参数
     that.setData({
@@ -42,25 +42,25 @@ Page({
     that.InitOrderDetail();
   },
   //获取指南内容
-  InitZhiNan: function () {
+  InitZhiNan: function() {
     var that = this;
 
     /**TODO获取指南内容**/
     wx.request({
-      url: requesturl +'/receipt/run_type_detail',
+      url: requesturl + '/receipt/run_type_detail',
       data: {
-        openid:getApp().globalData.openid,
+        openid: getApp().globalData.openid,
         id: that.data.order.type
       },
       header: {
-        "Content-Type":"application/x-www-form-urlencoded"
+        "Content-Type": "application/x-www-form-urlencoded"
       },
       method: 'POST',
       success: function(res) {
         console.log("操作指南内容:");
         console.log(res);
-        
-        if(res.data.result){
+
+        if (res.data.result) {
           that.setData({
             zhinaninfo: res.data.data.run_guide,
             xieyiinfo: res.data.data.user_guide
@@ -68,9 +68,9 @@ Page({
         }
       }
     })
-  }, 
+  },
   //获取订单详情
-  InitOrderDetail: function () {
+  InitOrderDetail: function() {
     var that = this;
 
     //参数部分
@@ -86,13 +86,13 @@ Page({
         "Content-Type": "application/json"
       },
       method: 'GET',
-      success: function (res) {
+      success: function(res) {
         console.log("接单详情:");
         console.log(res);
         if (res.data.result) {
           that.setData({
             order: res.data.data,
-            comments: res.data.data.comments//评价部分
+            comments: res.data.data.comments //评价部分
           })
 
           //获取指南协议内容
@@ -108,8 +108,22 @@ Page({
       }
     })
   },
+  //地址打开
+  goaddress:function(e){
+    //参数部分
+    var lat=e.currentTarget.dataset.lat;
+    var lng=e.currentTarget.dataset.lng;
+    var name=e.currentTarget.dataset.name;
+    console.log("地图经纬度参数:" + lat + "," + lng + "," + name);
+    //打开地图
+    wx.openLocation({
+      latitude: parseFloat(lat) ,
+      longitude: parseFloat(lng) ,
+      name:name
+    })
+  },
   //抢单操作
-  getorderopt: function () {
+  getorderopt: function() {
     var that = this;
     //申请抢单
     wx.request({
@@ -122,12 +136,13 @@ Page({
         "Content-Type": "application/json"
       },
       method: 'GET',
-      success: function (res) {
+      success: function(res) {
         console.log("抢单结果:");
         console.log(res);
         /**TODO 抢单状态判断**/
         if (res.data.result) {
-          that.onLoad(that.data.orderid);
+          //获取订单详情
+          that.InitOrderDetail();
         } else {
           that.showAlert("抢单失败！");
         }
@@ -135,20 +150,25 @@ Page({
     })
   },
   //跳转到消息
-  gomessageopt: function () {
-    wx.switchTab({
-      url: '../message/index',
+  gomessageopt: function(e) {
+    var uid = e.currentTarget.dataset.uid;
+    var utx = e.currentTarget.dataset.utx;
+    var uname = e.currentTarget.dataset.uname;
+    var uname = e.currentTarget.dataset.uname;
+    var user_tel = e.currentTarget.dataset.utel;
+    wx.navigateTo({
+      url: '../chat/index?uid=' + uid + "&utx=" + utx + "&uname=" + uname + "&user_tel=" + user_tel,
     })
   },
   //打电话操作
-  gophoneopt: function (e) {
+  gophoneopt: function(e) {
     var phone = e.currentTarget.dataset.phone;
     wx.makePhoneCall({
       phoneNumber: phone
     })
   },
   //取消订单
-  cancelopt: function () {
+  cancelopt: function() {
     var that = this;
 
     that.setData({
@@ -156,7 +176,7 @@ Page({
     })
   },
   //关闭取消弹窗
-  closeqxmodal: function () {
+  closeqxmodal: function() {
     var that = this;
 
     that.setData({
@@ -164,7 +184,7 @@ Page({
     })
   },
   //获取取消原因
-  cancelinfo: function (e) {
+  cancelinfo: function(e) {
     var that = this;
 
     that.setData({
@@ -172,7 +192,7 @@ Page({
     })
   },
   //获取取消的图片
-  uploadqxopt: function () {
+  uploadqxopt: function() {
     var that = this;
 
     //已经上传的图片
@@ -183,7 +203,7 @@ Page({
       count: 9, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
+      success: function(res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
 
@@ -192,24 +212,24 @@ Page({
         })
 
         for (var i = 0; i < tempFilePaths.length; i++) {
-          var tupath = that.uploadtu(tempFilePaths[i],1);
+          var tupath = that.uploadtu(tempFilePaths[i], 1);
         }
         wx.hideLoading();
       }
     })
   },
   //上传图片
-  uploadtu: function (tupath, kind) {
+  uploadtu: function(tupath, kind) {
     var that = this;
     //参数部分
-    var canceltu = that.data.canceltu;  //已经上传取消的图片
-    var tousutu = that.data.tousutu;//已经上传投诉的图片
+    var canceltu = that.data.canceltu; //已经上传取消的图片
+    var tousutu = that.data.tousutu; //已经上传投诉的图片
     //上传文件
     wx.uploadFile({
       url: requesturl + '/upload/upload',
       filePath: tupath,
       name: 'file',
-      success: function (res) {
+      success: function(res) {
         if (kind == 1) {
           canceltu = canceltu.concat(res.data);
           that.setData({
@@ -225,7 +245,7 @@ Page({
     })
   },
   //提交申请取消跑单
-  postbook: function () {
+  postbook: function() {
     var that = this;
     //参数部分
     var openid = getApp().globalData.openid,
@@ -248,18 +268,20 @@ Page({
       method: 'GET',
       dataType: 'json',
       responseType: 'text',
-      success: function (res) {
+      success: function(res) {
         console.log("取消订单结果:");
         console.log(res);
 
         that.setData({
           isqxshow: ""
         })
+        //刷新页面，获取订单详情
+        that.InitOrderDetail();
       }
     })
   },
   //开始执行
-  runopt: function () {
+  runopt: function() {
     var that = this;
 
     //参数部分
@@ -274,17 +296,20 @@ Page({
         "Content-Type": "application/json"
       },
       method: 'GET',
-      success: function (res) {
+      success: function(res) {
         console.log("开始执行的结果:");
         console.log(res);
         if (!res.data.result) {
           that.showAlert(res.data.msg);
+        }else{
+          //获取订单详情
+          that.InitOrderDetail();
         }
       }
     })
   },
   //执行中
-  finishopt: function () {
+  finishopt: function() {
     var that = this;
 
     //参数部分
@@ -299,17 +324,20 @@ Page({
         "Content-Type": "application/json"
       },
       method: 'GET',
-      success: function (res) {
+      success: function(res) {
         console.log("开始执行的结果:");
         console.log(res);
         if (!res.data.result) {
           that.showAlert(res.data.msg);
+        }else{
+          //获取订单详情
+          that.InitOrderDetail();
         }
       }
     })
   },
   //投诉雇主
-  tousuopt: function () {
+  tousuopt: function() {
     var that = this;
 
     that.setData({
@@ -317,7 +345,7 @@ Page({
     })
   },
   //关闭弹窗
-  closemodal: function () {
+  closemodal: function() {
     var that = this;
 
     that.setData({
@@ -325,7 +353,7 @@ Page({
     })
   },
   //获取投诉内容
-  gettsopt: function (e) {
+  gettsopt: function(e) {
     var that = this;
 
     that.setData({
@@ -333,7 +361,7 @@ Page({
     })
   },
   //上传投诉图片
-  uploadtsopt: function () {
+  uploadtsopt: function() {
     var that = this;
 
     //参数部分
@@ -344,7 +372,7 @@ Page({
       count: 9, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
+      success: function(res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
 
@@ -352,14 +380,14 @@ Page({
           title: '正在上传中...',
         })
         for (var i = 0; i < tempFilePaths.length; i++) {
-          var tupath = that.uploadtu(tempFilePaths[i],2);
+          var tupath = that.uploadtu(tempFilePaths[i], 2);
         }
         wx.hideLoading();
       }
     })
   },
   //提交投诉
-  postmodal: function () {
+  postmodal: function() {
     var that = this;
     //参数部分
     var openid = getApp().globalData.openid,
@@ -384,7 +412,7 @@ Page({
           "Content-Type": "application/x-www-form-urlencoded"
         },
         method: 'POST',
-        success: function (res) {
+        success: function(res) {
           console.log("提交投诉的结果:");
           console.log(res);
 
@@ -393,6 +421,8 @@ Page({
             that.setData({
               istsshow: ""
             })
+            //获取订单详情
+            that.InitOrderDetail();
           } else {
             that.showAlert("提交投诉失败");
           }
@@ -401,7 +431,7 @@ Page({
     }
   },
   //操作协议
-  xieyiopt: function () {
+  xieyiopt: function() {
     var that = this;
 
     that.setData({
@@ -409,7 +439,7 @@ Page({
     })
   },
   //协议我知道了
-  xieyimodal: function () {
+  xieyimodal: function() {
     var that = this;
 
     that.setData({
@@ -417,7 +447,7 @@ Page({
     })
   },
   //操作指南
-  zhinanopt: function () {
+  zhinanopt: function() {
     var that = this;
 
     that.setData({
@@ -425,7 +455,7 @@ Page({
     })
   },
   //我知道了
-  knowmodal: function () {
+  knowmodal: function() {
     var that = this;
 
     that.setData({
@@ -433,7 +463,7 @@ Page({
     })
   },
   //将图片以逗号分隔的转换
-  listtustring: function (tulist) {
+  listtustring: function(tulist) {
     var result = "";
     if (tulist.length != 0) {
       for (var i = 0; i < tulist.length; i++) {
@@ -443,20 +473,20 @@ Page({
     return result;
   },
   //弹窗显示提示
-  showAlert: function (message) {
+  showAlert: function(message) {
     var that = this;
     that.setData({
       messagetxt: message,
       messagestyle: 'c-state1'
     });
-    setTimeout(function () {
+    setTimeout(function() {
       that.setData({
         messagestyle: ''
       })
     }, 2000)
   },
   //将图片以逗号分隔的转换
-  listtustring: function (tulist) {
+  listtustring: function(tulist) {
     var result = "";
     if (tulist.length != 0) {
       for (var i = 0; i < tulist.length; i++) {
@@ -465,52 +495,91 @@ Page({
     }
     return result;
   },
+  //用户取消跑单
+  userCancelOrder: function(e) {
+
+    var that = this;
+    //参数部分
+    var kind=e.currentTarget.dataset.type;
+    kind=parseInt(kind);
+    var condition="";
+    if(kind==1){
+      condition ="agree";
+    }else{
+      condition ="refuse";
+    }
+    //同意取消订单
+    wx.request({
+      url: requesturl + '/receipt/agree_refuse',
+      data: {
+        openid: getApp().globalData.openid,
+        id: that.data.orderid,
+        condition: condition, 
+      },
+      header: {
+        "Content-Type":"application/json"
+      },
+      method: 'GET',
+      success: function(res) {
+        console.log("用户取消跑单结果:");
+        console.log(res);
+
+        if(res.data.result){
+          //获取订单详情
+          that.InitOrderDetail();
+        }else{
+          console.log("取消失败");
+          that.showAlert(res.data.msg);
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

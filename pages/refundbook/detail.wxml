@@ -1,58 +1,52 @@
 <!--pages/refundbook/detail.wxml-->
 
 <view class="c-minheight wx-view_W1YqeQ">
-  
+
   <!--平台回复-->
-  <view class="c-minheight wx-view_9KOweV" style='margin-top:20rpx;'> 
+  <view class="c-minheight wx-view_9KOweV" style='margin-top:20rpx;' wx:if="{{orderobj.refund_reply!=''}}">
     <view class="c-minheight wx-view_LSe4ga">
       <text class="c-block wx-text_MiAbaY">平台回复：</text>
-      <text class="c-block wx-text_YwWbjJ">{{orderobj.comments}}</text>
+      <text class="c-block wx-text_YwWbjJ">{{orderobj.refund_reply}}</text>
     </view>
     <view class="c-minheight wx-view_LSe4ga">
       <text class="c-block wx-text_MiAbaY">退款金额：</text>
-      <text class="c-block wx-text_YwWbjJ">36.5</text>
+      <text class="c-block wx-text_YwWbjJ">{{orderobj.refund_money}}</text>
     </view>
     <view class="c-minheight wx-view_LSe4ga">
       <text class="c-block wx-text_MiAbaY">时间：</text>
-      <text class="c-block wx-text_YwWbjJ">2018-03-01  13:12:36</text>
+      <text class="c-block wx-text_YwWbjJ">{{orderobj.headle_refund_time}}</text>
     </view>
   </view>
 
-  <view class="c-minheight wx-view_nnJOwx">
-  
+  <view class="c-minheight wx-view_nnJOwx" wx:if="{{orderobj.refund_status!=''}}">
+
     <!--雇主信息-->
     <view class="c-minheight wx-view_6R3LFQ">
-      <image class="wx-image_UanGTG" mode="scaleToFill" src="/resources/touxiang.png" />
-      <text class="c-block wx-text_7KVuIb">雇主昵称</text>
+      <image class="wx-image_UanGTG" mode="scaleToFill" src="{{orderobj.member.user_headimg}}" />
+      <text class="c-block wx-text_7KVuIb">{{orderobj.member.nick_name}}</text>
     </view>
 
-    <!--投诉内容-->
-    <view class="c-minheight wx-view_CKL7oQ">
-      <view class="c-minheight wx-view_eJY7fz">
-        <text class="c-block wx-text_MiAbaY">投诉内容：</text>
-        <view class="c-minheight wx-view_3v6GL7">
-          <text class="c-block wx-text_YwWbjJ">雇主恶意差评，不配合验收订单。</text>
-          <view class="c-minheight wx-view_JtSjk2">
-            <image class="wx-image_7vnZHV" mode="scaleToFill" src="/resources/tu1.png" />
-             <image class="wx-image_7vnZHV" mode="scaleToFill" src="/resources/tu1.png" />
-             <image class="wx-image_7vnZHV" mode="scaleToFill" src="/resources/tu1.png" />
+    <!--退款理由：-->
+      <view class="c-minheight wx-view_CKL7oQ">
+        <view class="wx-view_eJY7fz">
+          <text class="c-block wx-text_MiAbaY">退款理由：</text>
+          <view class="wx-view_3v6GL7">
+            <text class="c-block wx-text_YwWbjJ">{{orderobj.refund_reason}}</text>
           </view>
         </view>
       </view>
-    </view>
 
-    <!--投诉时间-->
-    <view class="c-minheight wx-view_LSe4ga">
-      <text class="c-block wx-text_MiAbaY">时间：</text>
-      <text class="c-block wx-text_YwWbjJ">2018-03-01  13:12:36</text>
-    </view>
+      <!--退款时间-->
+      <view class="c-minheight wx-view_LSe4ga">
+        <text class="c-block wx-text_MiAbaY">时间：</text>
+        <text class="c-block wx-text_YwWbjJ">{{orderobj.refund_time}}</text>
+      </view>
 
-     <!--投诉状态-->
-    <view class="c-minheight wx-view_LSe4ga">
-      <text class="c-block wx-text_MiAbaY">状态：</text>
-      <text class="c-block wx-text_YwWbjJ">待处理</text>
-    </view>
-
+      <!--退款状态-->
+      <view class="c-minheight wx-view_LSe4ga">
+        <text class="c-block wx-text_MiAbaY">状态：</text>
+        <text class="c-block wx-text_YwWbjJ">{{orderobj.refund_status}}</text>
+      </view>
   </view>
 
 
@@ -70,15 +64,15 @@
     <view class="c-minheight wx-view_xp9voB1">
       <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" />
       <text class="c-block wx-text_u2uG4j">￥{{orderobj.cost}}</text>
-       <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" style='margin-left:60rpx;' wx:if="{{orderobj.tip!='0.00'}}" />
-        <text class="c-block wx-text_u2uG4j" wx:if="{{orderobj.tip!='0.00'}}">￥{{orderobj.tip}}</text>
+      <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" style='margin-left:60rpx;' wx:if="{{orderobj.tip!='0.00'}}" />
+      <text class="c-block wx-text_u2uG4j" wx:if="{{orderobj.tip!='0.00'}}">￥{{orderobj.tip}}</text>
     </view>
     <view class="c-minheight wx-view_XSYzuh1">
       <image class="wx-image_RYYYOg" mode="scaleToFill" src="/resources/miaoshu.png" />
       <text class="c-block wx-text_QF0BYA">{{orderobj.title}}</text>
     </view>
     <view class="c-minheight wx-view_Kv5Tev1">
-      <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png"  />
+      <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png" />
       <text class="c-block wx-text_1kGNpv">{{orderobj.start_time}}  -  {{orderobj.end_time}}</text>
     </view>
     <view class="c-minheight wx-view_JQPoPT11">

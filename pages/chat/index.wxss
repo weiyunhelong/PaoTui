@@ -26,6 +26,14 @@ page {
   font-size: 28rpx;
 }
 
+/*聊天列表部分*/
+
+.contentv {
+  width: 100%;
+  height: 1000rpx;
+  overflow-y: auto;
+}
+
 /*时间层*/
 
 .timev {
@@ -84,7 +92,8 @@ page {
   width: 80%;
   height: 300rpx;
   float: right;
-  margin-top: 30rpx;
+  margin-top: -100rpx;
+  margin-right: 150rpx;
 }
 
 .dizhitxt {
@@ -146,7 +155,8 @@ page {
   width: 80%;
   height: 300rpx;
   float: left;
-  margin-top: 30rpx;
+  margin-left: 107rpx;
+  margin-top: -100rpx;
 }
 
 .odizhitxt {

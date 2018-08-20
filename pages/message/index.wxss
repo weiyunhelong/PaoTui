@@ -21,5 +21,26 @@
   color: rgb(255, 255, 255);
   font-size: 24rpx;
   text-align: right;
-  width: 100%;
+}
+
+.wx-text_Z2yVpL {
+  font-size: 26rpx;
+  color: rgb(255, 255, 255);
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.newsnum {
+  width: 30rpx;
+  color: #fff;
+  background-color: #f00;
+  height: 30rpx;
+  font-size: 25rpx;
+  border-radius: 15rpx;
+  text-align: center;
+  line-height: 30rpx;
+  float: right;
+  margin-top: -30rpx;
 }

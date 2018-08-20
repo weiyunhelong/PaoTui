@@ -37,6 +37,8 @@ Page({
     messagetxt: "", //提示内容
     isxyshow: false,
     xiyiinfo: "", //用户协议
+    lat:0,//纬度
+    lng:0,//经度
   },
 
   /**
@@ -54,6 +56,8 @@ Page({
     that.InitZN();
     //初始化用户协议
     that.InitXY();
+    //获取定位
+    that.GetPostion();
   },
   //获取sessionid
   InitSID: function() {
@@ -121,6 +125,21 @@ Page({
         that.setData({
           xiyiinfo: res.data.data.content
         })
+      }
+    })
+  },
+  //获取定位
+  GetPostion:function(){
+    var that=this;
+
+    wx.getLocation({
+      success: function(res) {
+        that.setData({
+          lng:res.longitude,
+          lat:res.latitude
+        })
+      },fail:function(){
+        that.showAlert("请允许获取您的位置!");
       }
     })
   },
@@ -460,6 +479,13 @@ Page({
       isznshow = that.data.isznshow, //操作指南
       zhinaninfo = that.data.zhinaninfo; //指南
 
+    var lng=that.data.lng;//经度
+    var lat=that.data.lat;//纬度  
+    //技能照
+    var skill_imgs="";
+    for (var i = 0; i < zhengtu.length;i++){
+      skill_imgs += zhengtu[i]+",";
+    }
     //验证必填项
     if (name == "") {
       that.showAlert("请输入真实姓名");
@@ -491,6 +517,9 @@ Page({
       that.showAlert("请上传手持身份证");
     } else if (!isagree) {
       that.showAlert("请同意协议");
+    } else if (lat==0||lng==0) {
+      that.showAlert("请允许获取您得位置");
+      that.GetPostion();
     } else {
       //提交申请
       wx.request({
@@ -509,7 +538,10 @@ Page({
           mobile: mobile,
           mobile_code: mobilecode,
           urgent_tel: phone,
-          urgent_relationship: guanxi
+          urgent_relationship: guanxi,
+          skill_imgs: skill_imgs,
+          lat:lat,
+          lng:lng
         },
         header: {
           "Content-Type": "application/x-www-form-urlencoded",

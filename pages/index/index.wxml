@@ -54,7 +54,7 @@
         <view class="c-minheight wx-view_7tuQEA" style='justify-content:space-between;'>
           <view class='userinfov'>
             <image class="wx-image_jDkO78" mode="scaleToFill" src="{{item.member.user_headimg}}" />
-            <text class="c-block wx-text_ZaU8MQ">{{item.member.user_name}}</text>
+            <text class="c-block wx-text_ZaU8MQ">{{item.member.nick_name}}</text>
             <view class='shopv'>
               <block wx:for="{{item.tag_list}}" wx:key="titem" wx:for-item="titem">
                 <view class='redv'>{{titem}}</view>

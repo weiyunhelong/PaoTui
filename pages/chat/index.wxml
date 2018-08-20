@@ -2,58 +2,62 @@
 
 <!--聊天用户-->
 <view class='topv'>
-  <image src='/resources/touxiang.png' class='toptxcss'></image>
-  <view class='topwxname'>用户昵称A</view>
+  <image src='{{to_utx}}' class='toptxcss'></image>
+  <view class='topwxname'>{{to_uname}}</view>
 </view>
+<!--聊天内容部分-->
+<view class='contentv'>
+  <block wx:for="{{chatlist}}" wx:key="item">
+    <!--时间层-->
+    <view class='timev'>{{item.create_time}}</view>
 
-<!--时间层-->
-<view class='timev'>2018年02月24日  下午  08:47</view>
+    <!--我的聊天部分-->
+    <view class='mynewsv' wx:if="{{item.from_user_type=='2'}}">
+      <view class='mytxv'>
+        <image src='{{mytx}}' class='mytxcss'></image>
+      </view>
 
-<!--我的聊天部分-->
-<view class='mynewsv'>
-   <view class='mytxv'>
-    <image src='/resources/touxiang.png' class='mytxcss'></image>
-   </view>
-   
-   <view class='xiaoxitxt'  wx:if="{{typeval==1}}">消息</view>
-   <view class='xiaoxituv'  wx:if="{{typeval==2}}">
-     <image src='/resources/tu1.png' class='xiaoximg'></image>
-   </view>
-   <view class='xiaoximapv' wx:if="{{typeval==3}}">
-     <view class='dizhitxt'>沙岗墟(中山市沙岗墟水云四季南70米)</view>
-     <map id="map" longitude="113.324520" latitude="23.099994" scale="14" markers="{{markers}}" bindmarkertap="markertap"  style="width: 100%; height: 200rpx;"></map>
-   </view>
+      <view class='xiaoxitxt' wx:if="{{item.message_format==0}}">{{item.message}}</view>
+      <view class='xiaoxituv' wx:if="{{item.message_format==1}}">
+        <image src='{{item.message}}' class='xiaoximg'></image>
+      </view>
+      <view class='xiaoximapv' wx:if="{{item.message_format==2}}">
+        <view class='dizhitxt'>{{item.message.name}}</view>
+        <map id="map" longitude="{{item.message.longitude}}" latitude="{{item.message.latitude}}" scale="14" style="width: 100%; height: 200rpx;"></map>
+      </view>
+    </view>
+    <view class='clearv'></view>
+
+    <!--用户聊天部分-->
+    <view class='othernewsv' wx:if="{{item.from_user_type=='1'}}">
+      <view class='omytxv'>
+        <image src='{{to_utx}}' class='omytxcss'></image>
+      </view>
+      <view class='oxiaoxitxt' wx:if="{{item.message_format==0}}">{{item.message}}</view>
+      <view class='oxiaoxituv' wx:if="{{item.message_format==1}}">
+        <image src='{{item.message}}' class='oxiaoximg'></image>
+      </view>
+      <view class='oxiaoximapv' wx:if="{{item.message_format==2}}">
+        <view class='odizhitxt'>{{item.message.name}}</view>
+        <map id="map" longitude="{{item.message.longitude}}" latitude="{{item.message.latitude}}" scale="14" style="width: 100%; height: 200rpx;"></map>
+      </view>
+    </view>
+    <view class='clearv'></view>
+    
+  </block>
 </view>
-<view class='clearv'></view>
-
-<!--其他聊天部分-->
-<view class='othernewsv'>
-   <view class='omytxv'>
-    <image src='/resources/touxiang.png' class='omytxcss'></image>
-   </view>   
-
-   <view class='oxiaoxitxt'  wx:if="{{typeval==1}}">他发出的消息我发出的消息我发出的消息他发出的消息我发出的消息我发出的消息</view>
-   <view class='oxiaoxituv'  wx:if="{{typeval==2}}">
-     <image src='/resources/tu1.png' class='oxiaoximg'></image>
-   </view>
-   <view class='oxiaoximapv' wx:if="{{typeval==3}}">
-     <view class='odizhitxt'>沙岗墟(中山市沙岗墟水云四季南70米)</view>
-     <map id="map" longitude="113.324520" latitude="23.099994" scale="14" markers="{{markers}}" bindmarkertap="markertap"  style="width: 100%; height: 200rpx;"></map>
-   </view>
-
-</view>
-<view class='clearv'></view>
+<view class='clearv' style='height:200rpx;width:100%;'></view>
 
 
 <!--底部部分-->
 <view class='bottomv'>
- <view class='inputv'>
-   <input type='text' class='txtcss' value='{{info}}' bindinput='getinfo'></input>
-   <view class='sendbtn' bindtap='sendopt'>发送</view>
- </view>
- <view class='btnv'>
-   <image src='/resources/uploadtuico.png' class='btntu' bindtap='uploadtu'></image>
-   <image src='/resources/shouji.png'      class='btntu' bindtap='phoneopt'></image>
-   <image src='/resources/ditu.png'        class='btntu' bindtap='dituopt'></image>
- </view>
+  <view class='inputv'>
+    <input type='text' class='txtcss' value='{{info}}' bindinput='getinfo'></input>
+    <view class='sendbtn' bindtap='sendopt'>发送</view>
+  </view>
+  <view class='btnv'>
+    <image src='/resources/uploadtuico.png' class='btntu' bindtap='uploadtu'></image>
+    <image src='/resources/shouji.png' class='btntu' bindtap='phoneopt'></image>
+    <image src='/resources/ditu.png' class='btntu' bindtap='dituopt'></image>
+  </view>
 </view>

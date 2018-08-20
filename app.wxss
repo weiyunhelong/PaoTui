@@ -1038,6 +1038,7 @@ checkbox-group, radio-group {
 .wx-image_qTVseD {
   width: 32rpx;
   height: 32rpx;
+  margin-top:15rpx; 
 }
 
 .wx-image_9CTzhW {

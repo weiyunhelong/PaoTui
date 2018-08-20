@@ -62,11 +62,11 @@
 
   <!--客服帮助部分-->
   <view class="c-minheight wx-view_UpN6LQ">
-    <view class="c-minheight wx-view_RFJiE2">
+    <view class="c-minheight wx-view_RFJiE2" bindtap='gofenchat'>
       <image class="wx-image_LajZmH" mode="scaleToFill" src="/resources/fenzhankf.png" />
       <text class="c-block wx-text_BYKVBP">分站客服</text>
     </view>
-    <view class="c-minheight wx-view_RFJiE2">
+    <view class="c-minheight wx-view_RFJiE2" bindtap='gozhuchat'>
       <image class="wx-image_LajZmH" mode="scaleToFill" src="/resources/guankf.png" />
       <text class="c-block wx-text_BYKVBP">官方客服</text>
     </view>

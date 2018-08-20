@@ -39,12 +39,12 @@
 
   <!--订单的内容-->
   <view class="c-minheight wx-view_PPXd851">
-    <view class="c-minheight wx-view_dfNyFR1">
+    <view class="c-minheight wx-view_dfNyFR1" bindtap='goaddress' data-lat="{{order.lat}}" data-lng="{{order.lng}}" data-name="{{order.o_addr}}">
       <text class="c-block wx-text_FFPqzR">始</text>
       <text class="c-block wx-text_Vj9cHB">{{order.addr}}</text>
       <image class="wx-image_qTVseD" mode="scaleToFill" src="/resources/postion.png" />
     </view>
-    <view class="c-minheight wx-view_dfNyFR1">
+    <view class="c-minheight wx-view_dfNyFR1" bindtap='goaddress' data-lat="{{order.lat}}" data-lng="{{order.lng}}" data-name="{{order.o_addr}}">
       <text class="c-block wx-text_FFPqzR1">终</text>
       <text class="c-block wx-text_Vj9cHB">{{order.o_addr}}</text>
       <image class="wx-image_qTVseD" mode="scaleToFill" src="/resources/postion.png" />
@@ -74,8 +74,8 @@
         <view class='redv'>{{titem}}</view>
       </block>
     </view>
-    <view class="c-minheight wx-view_2wZcg2" wx:if="{{orderstatus!=0}}">
-      <image class="wx-image_tFdnbt" mode="scaleToFill" src="/resources/xiaoxi.png" bindtap='gomessageopt' data-uid='{{order.member.uid}}'/>
+    <view class="c-minheight wx-view_2wZcg2" wx:if="{{order.order_status==3}}">
+      <image class="wx-image_tFdnbt" mode="scaleToFill" src="/resources/xiaoxi.png" bindtap='gomessageopt' data-uid='{{order.member.uid}}' data-utx='{{order.member.user_headimg}}' data-uname='{{order.member.nick_name}}'/>
       <view class='fengexian'></view>
       <image class="wx-image_vJe3HO" mode="scaleToFill" src="/resources/phone.png" bindtap='gophoneopt' data-phone='{{order.mobile}}' />
     </view>
@@ -109,7 +109,11 @@
     </block>
     <block wx:if="{{order.order_status==4}}">
       <text class="c-block wx-text_OhLcTU" bindtap='cancelopt'>取消跑单</text>
-      <text class="c-block wx-text_ybBOBs" bindtap='finishopt'>执行中</text>
+      <text class="c-block wx-text_ybBOBs" bindtap='finishopt'>完成跑单</text>
+    </block>
+    <block wx:if="{{order.order_status==12}}">
+      <text class="c-block wx-text_OhLcTU" data-type='2' bindtap='userCancelOrder'>拒绝取消跑单</text>
+      <text class="c-block wx-text_ybBOBs" data-type='1' bindtap='userCancelOrder'>同意取消跑单</text>
     </block>
   </view>
   <view class="c-minheight wx-view_MhITsM" wx:if="{{order.order_status!=1}}">
