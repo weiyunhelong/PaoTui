@@ -1,5 +1,5 @@
 <!--pages/sign/index.wxml-->
-<view class="c-minheight wx-view_LUKtEB">
+<view class="c-minheight wx-view_LUKtEB" style='background-image: url({{runbg}})'>
 
   <!--姓名-->
   <view class='hangv'>

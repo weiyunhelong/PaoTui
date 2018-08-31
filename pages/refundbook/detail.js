@@ -21,6 +21,10 @@ Page({
      })
 
      that.InitOrderObj();
+    
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
   },
   //获取退款详情
   InitOrderObj:function(){

@@ -1,5 +1,5 @@
 <!--pages/business/index.wxml-->
-<view class="c-minheight wx-view_KqOJvU">
+<view class="c-minheight wx-view_KqOJvU" style='background-image: url({{runbg}})'>
   <!--顶部菜单部分-->
   <view class="c-minheight wx-view_lF3o2l">
     <view class="c-minheight wx-view_sDHbtd">

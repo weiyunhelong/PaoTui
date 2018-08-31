@@ -1,5 +1,5 @@
 <!--pages/tixian/index.wxml-->
-<view class="c-minheight wx-view_oQuCGO">
+<view class="c-minheight wx-view_oQuCGO" style='background-image: url({{runbg}})'>
   
   <!--账户余额-->
   <view class="c-minheight wx-view_ffp5Dq">

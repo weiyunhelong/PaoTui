@@ -1,5 +1,5 @@
 <!--pages/account/index.wxml-->
-<view class="c-minheight wx-view_e9tTYr">
+<view class="c-minheight wx-view_e9tTYr" style='background-image: url({{runbg}})'>
   <!--菜单部分-->
   <view class="c-minheight wx-view_V73TWA">
     <text class="c-block {{chkmenu==0?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkmenuopt' data-id='0'>全部</text>

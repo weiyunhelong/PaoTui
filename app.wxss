@@ -1,4 +1,5 @@
 /**app.wxss**/
+
 /*整个页面的背景*/
 
 page {
@@ -26,7 +27,7 @@ switch, action-sheet, action-sheet-item, action-sheet-cancel, modal, toast,
 loading, navigator, audio, image, video, map, canvas {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box;  
+  box-sizing: border-box;
 }
 
 page {
@@ -176,7 +177,7 @@ checkbox-group, radio-group {
   margin-right: 40rpx;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-top:20rpx;
+  padding-top: 20rpx;
 }
 
 .wx-text_FFPqzR1 {
@@ -1038,7 +1039,7 @@ checkbox-group, radio-group {
 .wx-image_qTVseD {
   width: 32rpx;
   height: 32rpx;
-  margin-top:15rpx; 
+  margin-top: 15rpx;
 }
 
 .wx-image_9CTzhW {
@@ -1251,6 +1252,7 @@ checkbox-group, radio-group {
   border-style: solid;
   border-color: rgb(204, 204, 204);
   text-indent: 20rpx;
+  text-align: left;
 }
 
 .wx-button_V2eIJ4 {
@@ -1975,12 +1977,13 @@ input {
   margin-left: -8rpx;
 }
 
-.newstxt{
+.newstxt {
   width: 95%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap
+  white-space: nowrap;
 }
+
 .newsnum {
   width: 30rpx;
   color: #fff;
@@ -1990,4 +1993,14 @@ input {
   border-radius: 15rpx;
   text-align: center;
   line-height: 30rpx;
+}
+
+/*删除图标*/
+
+.delicon {
+  position: relative;
+  width: 30rpx;
+  height: 30rpx;
+  top: 130rpx;
+  left: -60rpx;
 }

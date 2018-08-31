@@ -1,5 +1,5 @@
 <!--pages/refundbook/index.wxml-->
-<view class="c-minheight wx-view_XwihFK">
+<view class="c-minheight wx-view_XwihFK" style='background-image: url({{runbg}})'>
   <!--菜单部分-->
   <view class="c-minheight wx-view_UzkZaX">
     <text class="c-block {{chkmenu==1?'wx-text_ORXJYa1':'wx-text_F2IIzE'}}" bindtap='chkmenuopt' data-id='1'>全部</text>
@@ -22,15 +22,15 @@
           <text class="c-block wx-text_MVOodA">{{item.title}}</text>
           <view class="c-minheight wx-view_Xx9xdU">
             <block wx:for="{{item.images}}" wx:key="tuitem" wx:for-item="tuitem">
-              <image class="wx-image_z0fK8a" mode="scaleToFill" src="{{tuitem}}" wx:if="{{tuitem!=''}}"/>
+              <image class="wx-image_z0fK8a" mode="scaleToFill" src="{{tuitem}}" wx:if="{{tuitem!=''}}" />
             </block>
           </view>
         </view>
       </view>
       <view class="c-minheight wx-view_Wmg0Pk">
-        <text class="c-block wx-text_Qd5j7U" wx:if="{{item.type==1}}">退款中</text>
-        <text class="c-block wx-text_Qd5j7U" wx:if="{{item.type==2}}">已退款</text>
-        <text class="c-block wx-text_Qd5j7U" wx:if="{{item.type==3}}">拒绝退款</text>
+        <text class="c-block wx-text_Qd5j7U">
+        {{item.refund_status}}
+        </text>
         <text class="c-block wx-text_Gn0r6V1" bindtap='godetailopt' data-id='{{item.id}}'>退款详情</text>
       </view>
     </view>

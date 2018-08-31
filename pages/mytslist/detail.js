@@ -22,6 +22,10 @@ Page({
     })
     //初始化投诉
     that.InitTousu();
+   
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
   },
   //初始化投诉
   InitTousu:function(){

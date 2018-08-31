@@ -6,24 +6,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-    touxiang:"/resources/touxiang.png",//头像
-    wxname:"用户昵称",//用户昵称
-    fen: 0,//打分
-    qian:0,//钱
-    xinglsit:[1,2,3,4,5],//星分数显示使用
+    touxiang: "/resources/touxiang.png", //头像
+    wxname: "用户昵称", //用户昵称
+    fen: 0, //打分
+    qian: 0, //钱
+    xinglsit: [1, 2, 3, 4, 5], //星分数显示使用
+    gkefuuid:0,//官方客服uid
+    gkefuname:"",//官方客服名称
+    gkefutel:"",//官方客服电话
+    fkefuuid: 0,//分站客服uid
+    fkefuname: "",//分站客服名称
+    fkefutel:"",//分站客服电话
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-   
+  onLoad: function(options) {
+    var that = this;
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
   },
-  
+
   //提现
-  gotoput:function() {
+  gotoput: function() {
     wx.navigateTo({
-      url: '/pages/tixian/index?qian='+this.data.qian,
+      url: '/pages/tixian/index?qian=' + this.data.qian,
     })
   },
   //被投诉记录
@@ -51,19 +60,21 @@ Page({
     })
   },
   //分站客服
-  gofenchat:function(){
+  gofenchat: function() {
+    var that = this;
     wx.navigateTo({
-      url: '../chat/index?uid=1&utx=/resources/fenzhankf.png&uname=分站客服&user_tel=',
+      url: '../chat/index?uid=' + that.data.fkefuuid + '&utx=/resources/fenzhankf.png&uname=' + that.data.fkefuname + '&user_tel=' + that.data.fkefutel,
     })
   },
   //官方客服
-  gozhuchat: function () {
+  gozhuchat: function() {
+    var that=this;
     wx.navigateTo({
-      url: '../chat/index?uid=10&utx=/resources/guankf.png&uname=官方客服&user_tel=',
+      url: '../chat/index?uid=' + that.data.gkefuuid + '&utx=/resources/guankf.png&uname=' + that.data.gkefuname + '&user_tel=' + that.data.gkefutel,
     })
   },
   //帮助中心
-  acticle:function() {
+  acticle: function() {
     wx.navigateTo({
       url: '/pages/help/index',
     })
@@ -71,30 +82,34 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    var that=this;
+  onShow: function() {
+    var that = this;
 
     //初始化获取用户的信息
     that.InitWxUser();
+    //初始化获取官方客服的信息
+    that.InitGKeFu();
+    //初始化获取分站客服的信息
+    that.InitFKeFu();
   },
   //初始化获取用户的信息
-  InitWxUser:function(){
-    var that=this;
+  InitWxUser: function() {
+    var that = this;
     //获取用户信息
     wx.request({
-      url: requesturl +'/staff/detail',
+      url: requesturl + '/staff/detail',
       data: {
-        openid:getApp().globalData.openid
+        openid: getApp().globalData.openid
       },
       header: {
-        "Content-Type":"application/json"
+        "Content-Type": "application/json"
       },
       method: 'GET',
       success: function(res) {
@@ -105,43 +120,104 @@ Page({
           touxiang: res.data.avatarUrl,
           wxname: res.data.nickName,
           qian: res.data.money,
-          fen:res.data.star
+          fen: res.data.star
         })
+      }
+    })
+  },
+  //初始化获取官方客服的信息
+  InitGKeFu: function() {
+    var that = this;
+    //获取数据
+    wx.request({
+      url: requesturl + '/Chat/getAdminCustomService',
+      data: {
+        openid: getApp().globalData.openid
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      method: 'GET',
+      success: function(res) {
+        console.log("官方客服的信息:");
+        console.log(res);
+
+        if(res.data.result){
+          that.setData({
+            gkefuuid: res.data.data[0].uid,//官方客服uid
+            gkefuname: res.data.data[0].nick_name,//官方客服名称,
+            gkefutel: res.data.data[0].user_tel//官方客服电话
+          })
+        }else{
+          console.log("获取官方客服失败");
+        }
+      }
+    })
+  },
+  //初始化获取分站客服的信息
+  InitFKeFu: function() {
+    var that = this;
+    //获取数据
+    wx.request({
+      url: requesturl + '/Chat/getAgentCustomService',
+      data: {
+        openid: getApp().globalData.openid,
+        province_id: "",
+        city_id: "",
+        district_id: "",
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      method: 'GET',
+      success: function(res) {
+        console.log("分站客服的信息:");
+        console.log(res);
+
+        if (res.data.result) {
+          that.setData({
+            fkefuuid: res.data.data[0].uid,//分站客服uid
+            fkefuname: res.data.data[0].nick_name,//分站客服名称
+            fkefutel: res.data.data[0].user_tel,//分站客服电话
+          })
+        } else {
+          console.log("获取分站客服失败");
+        }
       }
     })
   },
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
+  onReachBottom: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function() {
+
   }
 })

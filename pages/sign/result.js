@@ -21,6 +21,10 @@ Page({
       reasopn:options.reason
     })
 
+   
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
   },
   //重新注册
   gosignopt:function(){

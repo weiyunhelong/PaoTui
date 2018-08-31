@@ -11,7 +11,24 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        that.globalData.code = res.code;        
+        that.globalData.code = res.code; 
+
+        //获取背景图
+        wx.request({
+          url: that.globalData.requesturl +'/Index/getBgSetting',
+          data: '',
+          header: {
+            "Content-Type":"application/x-www-form-urlencoded"
+          },
+          method: 'POST',
+          success: function(res) {
+            console.log("背景图获取:");
+            console.log(res);
+            if (res.data.result){
+              that.globalData.run_bg = res.data.data.run_bg;
+            }
+          }
+        })       
       }
     })
     // 获取用户信息
@@ -43,6 +60,7 @@ App({
     isnewuser: false, //是否是新用户
     cancel_count: 0, //取消的次数
     requesturl: "https://www.fsdragon.com/small", //请求的接口
+    run_bg:"",//背景图
     orderstatus: 0, //订单状态值:
     /*******
      * 1:待接单

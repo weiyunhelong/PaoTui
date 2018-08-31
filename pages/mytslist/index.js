@@ -20,6 +20,10 @@ Page({
 
     //被投诉列表
     that.Initbtslist();
+    
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
   },
   //被投诉列表
   Initbtslist: function () {

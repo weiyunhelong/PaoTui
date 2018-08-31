@@ -1,5 +1,5 @@
 <!--pages/help/detail.wxml-->
-<view class="c-minheight wx-view_DE2u7A">
+<view class="c-minheight wx-view_DE2u7A" style='background-image: url({{runbg}})'>
   <view class='title'>{{title}}</view>
 
   <view class='bodyinfo'>

@@ -17,7 +17,9 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
     //被投诉列表
     that.Initbtslist();
   },  

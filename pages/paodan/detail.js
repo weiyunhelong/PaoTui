@@ -40,6 +40,11 @@ Page({
     getApp().globalData.isnewuser = false;
     //获取订单详情
     that.InitOrderDetail();
+
+  
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
   },
   //获取指南内容
   InitZhiNan: function() {
@@ -211,38 +216,39 @@ Page({
           title: '正在上传中...',
         })
 
-        for (var i = 0; i < tempFilePaths.length; i++) {
-          var tupath = that.uploadtu(tempFilePaths[i], 1);
-        }
+        that.uploadtu(tempFilePaths, 1);
         wx.hideLoading();
       }
     })
   },
   //上传图片
-  uploadtu: function(tupath, kind) {
+  uploadtu: function(tupathlist, kind) {
     var that = this;
     //参数部分
     var canceltu = that.data.canceltu; //已经上传取消的图片
     var tousutu = that.data.tousutu; //已经上传投诉的图片
-    //上传文件
-    wx.uploadFile({
-      url: requesturl + '/upload/upload',
-      filePath: tupath,
-      name: 'file',
-      success: function(res) {
-        if (kind == 1) {
-          canceltu = canceltu.concat(res.data);
-          that.setData({
-            canceltu: canceltu
-          })
-        } else {
-          tousutu = tousutu.concat(res.data);
-          that.setData({
-            tousutu: tousutu
-          })
+    for (var i = 0; i < tupathlist.length;i++){
+      var tupath = tupathlist[i];
+      //上传文件
+      wx.uploadFile({
+        url: requesturl + '/upload/upload',
+        filePath: tupath,
+        name: 'file',
+        success: function (res) {
+          if (kind == 1) {
+            canceltu = canceltu.concat(res.data);
+            that.setData({
+              canceltu: canceltu
+            })
+          } else {
+            tousutu = tousutu.concat(res.data);
+            that.setData({
+              tousutu: tousutu
+            })
+          }
         }
-      }
-    })
+      })
+    }    
   },
   //提交申请取消跑单
   postbook: function() {
@@ -379,9 +385,58 @@ Page({
         wx.showLoading({
           title: '正在上传中...',
         })
-        for (var i = 0; i < tempFilePaths.length; i++) {
-          var tupath = that.uploadtu(tempFilePaths[i], 2);
-        }
+        that.uploadtu(tempFilePaths, 2);
+        wx.hideLoading();
+      }
+    })
+  },
+  //删除投诉的图片
+  deltsimg:function(e){
+    var that=this;
+    //删除投诉的图片
+    var tousutu=that.data.tousutu;
+    var index=e.currentTarget.dataset.index;
+    index=parseInt(index);
+    tousutu.splice(index, 1);
+    that.setData({
+      tousutu: tousutu
+    })
+  },
+  //替换投诉上传的图片
+  uploadtstu:function(e){
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    index = parseInt(index); 
+
+    //选取图片上传
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        var tempFilePaths = res.tempFilePaths;
+
+        wx.showLoading({
+          title: '正在上传中...',
+        })
+        var tupath = tempFilePaths[0];
+        //替换上传的图片
+        //上传文件
+        wx.uploadFile({
+          url: requesturl + '/upload/upload',
+          filePath: tupath,
+          name: 'file',
+          success: function (res) {
+            var result = res.data;
+            //参数部分
+            var tousutu = that.data.tousutu;
+            tousutu.splice(index, 1, result);
+            that.setData({
+              tousutu: tousutu
+            })
+          }
+        })       
         wx.hideLoading();
       }
     })
@@ -525,12 +580,67 @@ Page({
         console.log(res);
 
         if(res.data.result){
+          getApp().globalData.cancel_count = that.data.cacelnum+1;
+          that.setData({
+            cacelnum: getApp().globalData.cancel_count
+          })
           //获取订单详情
           that.InitOrderDetail();
         }else{
           console.log("取消失败");
           that.showAlert(res.data.msg);
         }
+      }
+    })
+  },
+  //删除取消订单的图片
+  delqximg: function (e) {
+    var that = this;
+    //删除取消订单的图片
+    var canceltu = that.data.canceltu;
+    var index = e.currentTarget.dataset.index;
+    index = parseInt(index);
+    canceltu.splice(index, 1);
+    that.setData({
+      canceltu: canceltu
+    })
+  },
+  //替换取消订单上传的图片
+  uploadqxtu: function (e) {
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    index = parseInt(index);
+
+    //选取图片上传
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        var tempFilePaths = res.tempFilePaths;
+
+        wx.showLoading({
+          title: '正在上传中...',
+        })
+        var tupath = tempFilePaths[0];
+        //替换上传的图片
+        //上传文件
+        wx.uploadFile({
+          url: requesturl + '/upload/upload',
+          filePath: tupath,
+          name: 'file',
+          success: function (res) {
+            var result = res.data;
+            //参数部分
+            var canceltu = that.data.canceltu;
+            canceltu.splice(index, 1, result);
+            that.setData({
+              canceltu: canceltu
+            })
+          }
+        })
+        wx.hideLoading();
       }
     })
   },

@@ -10,6 +10,7 @@ Page({
     feedescsort: false, //服务小费排序
     timedescsort: false, //完成时间排序
     orderlist: [], //订单列表   
+    runbg:"",//背景图
   },
   //事件处理函数
   bindViewTap: function() {
@@ -18,13 +19,16 @@ Page({
     })
   },
   //页面的初始化
-  onLoad: function() {
-    
+  onLoad: function() {    
     if (getApp().globalData.openid==""){
       wx.redirectTo({
         url: '../login/index',
       })
     }
+    var that = this;
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
   },
   //获取经纬度
   InitLocation: function() {

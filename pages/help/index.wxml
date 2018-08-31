@@ -1,5 +1,5 @@
 <!--pages/help/index.wxml-->
-<view class="c-minheight wx-view_DE2u7A">
+<view class="c-minheight wx-view_DE2u7A" style='background-image: url({{runbg}})'>
 
   <block wx:for="{{menulist}}" wx:key="item">
     <view class="c-minheight wx-view_xEnsb7" bindtap='gohelp' data-id='{{item.class_id}}'>

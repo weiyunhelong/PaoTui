@@ -1,5 +1,5 @@
 <!--pages/sign/result.wxml-->
-<view class="c-minheight wx-view_LUKtEB">
+<view class="c-minheight wx-view_LUKtEB" style='background-image: url({{runbg}})'>
  
   <view class='tipv' wx:if="{{status==0}}">入驻成功，后台正在审核.</view>
   

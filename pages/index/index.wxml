@@ -1,7 +1,7 @@
 <!--index.wxml-->
 
 <!--顶部的菜单部分-->
-<view class="c-minheight wx-view_LUKtEB">
+<view class="c-minheight wx-view_LUKtEB" style='background-image: url({{runbg}})'>
 
   <!--默认排序-->
   <view class="c-minheight wx-view_PPXd85" wx:if="{{chkmenu==0}}">
@@ -63,7 +63,11 @@
           </view>
           <view class='biaoqianv' wx:if="{{item.level!=null}}">
             <image src='/resources/biaoqian.png' class='biaoqianimg'></image>
-            <view class='biaoqiantxt'>{{item.level}}</view>
+            <view class='biaoqiantxt' wx:if="{{item.level==1}}">A</view>
+            <view class='biaoqiantxt' wx:if="{{item.level==2}}">B</view>
+            <view class='biaoqiantxt' wx:if="{{item.level==3}}">C</view>
+            <view class='biaoqiantxt' wx:if="{{item.level==4}}">D</view>
+            <view class='biaoqiantxt' wx:if="{{item.level==5}}">S</view>
           </view>
         </view>
         <!--第二行，起始地-->

@@ -19,7 +19,10 @@ Page({
      that.setData({
        id:options.id
      })
-
+     
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
      //初始化详情
      that.InitDetail();
   },

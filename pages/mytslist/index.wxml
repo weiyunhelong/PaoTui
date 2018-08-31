@@ -1,6 +1,6 @@
 <!--pages/mytslist/index.wxml-->
 
-<view class="c-minheight wx-view_RZ33PH">
+<view class="c-minheight wx-view_RZ33PH" style='background-image: url({{runbg}})'>
 
   <!--顶部的菜单-->
   <view class="c-minheight wx-view_V73TWA">

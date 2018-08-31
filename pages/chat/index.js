@@ -39,39 +39,9 @@ Page({
       to_uname: options.uname, //对话用户昵称
       phone: options.user_tel,//电话号码
     })
-    //获取用户的信息
-    that.InitWxUserInfo
     //获取我的的信息
     that.InitMyInfo();
-  }, 
-  //获取用户联系电话
-  InitWxUserInfo:function(){
-    var that=this;
-    //请求接口获取参数
-    wx.request({
-      url: requesturl +'/Forum/getUserInfo',
-      data: {
-        openid:getApp().globalData.openid,
-        uid: parseInt(that.data.to_uid) 
-      },
-      header: {
-        "Content-Type":"application/x-www-form-urlencoded"
-      },
-      method: 'POST',
-      success: function(res) {
-        console.log("获取用户的信息得数据");
-        console.log(res);
-        
-        if(res.data.result){
-          that.setData({
-            phone: res.data.data.user_tel
-          })
-        }else{
-          console.log("获取用户的信息数据失败");
-        }        
-      }
-    })
-  },
+  },  
   //获取我的信息
   InitMyInfo: function() {
     var that = this;

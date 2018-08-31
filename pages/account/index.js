@@ -16,6 +16,9 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
     //更新列表数据
     that.InitList();
   },

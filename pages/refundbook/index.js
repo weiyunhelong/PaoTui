@@ -17,6 +17,11 @@ Page({
     var that = this;
     //获取列表数据
     that.InitList();
+
+  
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
   },
   //获取列表数据
   InitList:function(){

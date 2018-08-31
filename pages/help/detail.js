@@ -20,7 +20,10 @@ Page({
     that.setData({
       id: options.id
     })
-
+    var that = this;
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
     //初始化文章内容
     that.InitWenzhang();
   },

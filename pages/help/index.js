@@ -17,6 +17,10 @@ Page({
     var that=this;
     //初始化列表
     that.IniMenuList();
+    
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
   },
   //初始化列表
   IniMenuList:function(){

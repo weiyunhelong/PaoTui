@@ -58,6 +58,11 @@ Page({
     that.InitXY();
     //获取定位
     that.GetPostion();
+
+
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
   },
   //获取sessionid
   InitSID: function() {

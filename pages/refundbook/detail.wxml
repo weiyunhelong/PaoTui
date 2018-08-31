@@ -1,6 +1,6 @@
 <!--pages/refundbook/detail.wxml-->
 
-<view class="c-minheight wx-view_W1YqeQ">
+<view class="c-minheight wx-view_W1YqeQ" style='background-image: url({{runbg}})'>
 
   <!--平台回复-->
   <view class="c-minheight wx-view_9KOweV" style='margin-top:20rpx;' wx:if="{{orderobj.refund_reply!=''}}">

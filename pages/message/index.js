@@ -22,7 +22,10 @@ Page({
     that.setData({
       uid: options.uid == undefined ? "" : options.uid
     })
-
+    
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
   },
   //菜单的切换
   chkmenuopt: function(e) {

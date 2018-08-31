@@ -1,5 +1,5 @@
 <!--pages/paodan/detail.wxml-->
-<view class="c-minheight wx-view_KqOJvU">
+<view class="c-minheight wx-view_KqOJvU" style='background-image: url({{runbg}})'>
   <!--顶部菜单部分-->
   <view class="c-minheight wx-view_lF3o2l">
     <view class="c-minheight wx-view_sDHbtd">
@@ -52,6 +52,8 @@
     <view class="c-minheight wx-view_xp9voB1">
       <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/qian.png" />
       <text class="c-block wx-text_u2uG4j">￥{{order.cost}}</text>
+      <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" style='margin-left:60rpx;' wx:if="{{item.tip!='0.00'}}" />
+        <text class="c-block wx-text_u2uG4j" wx:if="{{item.tip!='0.00'}}">￥{{item.tip}}</text>
     </view>
     <view class="c-minheight wx-view_XSYzuh1">
       <image class="wx-image_RYYYOg" mode="scaleToFill" src="/resources/miaoshu.png" />
@@ -75,7 +77,7 @@
       </block>
     </view>
     <view class="c-minheight wx-view_2wZcg2" wx:if="{{order.order_status==3}}">
-      <image class="wx-image_tFdnbt" mode="scaleToFill" src="/resources/xiaoxi.png" bindtap='gomessageopt' data-uid='{{order.member.uid}}' data-utx='{{order.member.user_headimg}}' data-uname='{{order.member.nick_name}}'/>
+      <image class="wx-image_tFdnbt" mode="scaleToFill" src="/resources/xiaoxi.png" bindtap='gomessageopt' data-uid='{{order.member.uid}}' data-utx='{{order.member.user_headimg}}' data-uname='{{order.member.nick_name}}' data-utel='{{order.mobile}}'/>
       <view class='fengexian'></view>
       <image class="wx-image_vJe3HO" mode="scaleToFill" src="/resources/phone.png" bindtap='gophoneopt' data-phone='{{order.mobile}}' />
     </view>
@@ -133,8 +135,9 @@
     <textarea class="c-block c-fullwidth wx-textarea_9pwDc5" name="textarea1" placeholder="请输入投诉内容" type="textarea" maxlength='200' value='{{tousuinfo}}' bindinput='gettsopt' />
     <view class="c-minheight wx-view_nxrraU">
       <image class="wx-image_IGjJPP" mode="scaleToFill" src="/resources/add.png" bindtap='uploadtsopt' />
-      <block wx:for="{{tousutu}}" wx:key="item">
-       <image class="wx-image_IGjJPP1" mode="scaleToFill" src="{{item}}" />
+      <block wx:for="{{tousutu}}" wx:key="item" wx:for-index="x">
+       <image class="wx-image_IGjJPP1" mode="scaleToFill" src="{{item}}" bindtap='uploadtstu' data-index='{{x}}' data-src='{{item}}'/>
+       <image src='/resources/delicon.png'  catchtap='deltsimg' data-index='{{x}}' data-src='{{item}}' class='delicon'></image>
       </block>
     </view>
     <button class="wx-button_17cUwW" size="default" bindtap="postmodal">
@@ -155,8 +158,9 @@
     <textarea class="c-block c-fullwidth wx-textarea_9pwDc5" name="textarea1" placeholder="请输入取消原因" type="textarea" maxlength='200' value='{{cancelinfo}}' bindinput='getqxopt' />
     <view class="c-minheight wx-view_nxrraU">
       <image class="wx-image_IGjJPP" mode="scaleToFill" src="/resources/add.png" bindtap='uploadqxopt' />
-      <block wx:for="{{canceltu}}" wx:key="item">
-       <image class="wx-image_IGjJPP1" mode="scaleToFill" src="{{item}}" />
+      <block wx:for="{{canceltu}}" wx:key="item" wx:for-index="x">
+        <image class="wx-image_IGjJPP1" mode="scaleToFill" src="{{item}}" bindtap='uploadqxtu' data-index='{{x}}' data-src='{{item}}'/>
+        <image src='/resources/delicon.png'  catchtap='delqximg' data-index='{{x}}' data-src='{{item}}' class='delicon'></image>
       </block>
     </view>
     <view class='cancelv'>

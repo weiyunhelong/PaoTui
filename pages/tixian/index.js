@@ -24,6 +24,11 @@ Page({
     })
     //获取提现门槛
     that.InitMenkan();
+
+ 
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
   },
   //获取提现门槛
   InitMenkan:function(){

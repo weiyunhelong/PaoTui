@@ -42,7 +42,10 @@ Page({
       cacelnum: getApp().globalData.cancel_count
     })
     getApp().globalData.isnewuser = false;
-
+    
+    that.setData({
+      runbg: getApp().globalData.run_bg
+    })
     //获取订单详情
     that.InitOrderDetail();
   },
