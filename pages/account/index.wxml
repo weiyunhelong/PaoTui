@@ -1,46 +1,48 @@
 <!--pages/account/index.wxml-->
-<view class="c-minheight wx-view_e9tTYr" style='background-image: url({{runbg}})'>
-  <!--菜单部分-->
-  <view class="c-minheight wx-view_V73TWA">
-    <text class="c-block {{chkmenu==0?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkmenuopt' data-id='0'>全部</text>
-    <text class="c-block {{chkmenu==1?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkmenuopt' data-id='1'>跑单</text>
-    <text class="c-block {{chkmenu==-1?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkmenuopt' data-id='-1'>提现</text>
-  </view>
-
-  <!--列表数据-->
-<block wx:for="{{datalist}}" wx:key="item" wx:for-item="item">
-    <view class="c-minheight wx-view_7QHnu2">
-      <text class="c-block wx-text_Hch3C9">{{item.datetime}}</text>
-      <block wx:for="{{item.childs}}" wx:key="citem" wx:for-item="citem">
-        <view class="c-minheight wx-view_ffp5Dq">
-          <!--提现部分-->
-          <view class="c-minheight wx-view_DlKnq3" wx:if="{{citem.type==-1}}">
-            <image class="wx-image_ZTxjkf" mode="scaleToFill" src="/resources/tixianico.png" />
-            <view class="c-minheight wx-view_1N72IJ">
-              <text class="c-block wx-text_GTr4On">提现</text>
-              <text class="c-block wx-text_zy1sxb"></text>
-            </view>
-          </view>
-          <!--退款部分-->
-          <view class="c-minheight wx-view_DlKnq3" wx:else>
-            <image class="wx-image_ZTxjkf" mode="scaleToFill" src="/resources/tuikuanico.png" />
-            <view class="c-minheight wx-view_1N72IJ">
-              <text class="c-block wx-text_GTr4On" wx:if="{{citem.type==4}}">退款</text>
-              <text class="c-block wx-text_GTr4On">{{citem.type_explain}}</text>
-              <text class="c-block wx-text_zy1sxb">{{citem.order_no}}</text>
-            </view>
-          </view>
-          <!--金额部分-->
-          <text class="c-block wx-text_5McyvR1"  wx:if="{{citem.status==0}}">-{{citem.money}}</text>
-          <text class="c-block wx-text_5McyvR" wx:else>+{{citem.money}}</text>
-        </view>
-      </block>
+<view class="wx-view_e9tTYr" style='background-image: url({{runbg}})'>
+  <view class="c-minheight wx-view_e9tTYr">
+    <!--菜单部分-->
+    <view class="c-minheight wx-view_V73TWA">
+      <text class="c-block {{chkmenu==0?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkmenuopt' data-id='0'>全部</text>
+      <text class="c-block {{chkmenu==1?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkmenuopt' data-id='1'>跑单</text>
+      <text class="c-block {{chkmenu==-1?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkmenuopt' data-id='-1'>提现</text>
     </view>
-  </block>
 
-  <!--没有数据的提示-->
-  <view class="c-minheight wx-view_3Ut5XA" wx:if="{{showtip}}">
-    <text class="c-block wx-text_BvZJc5">暂无记录,要加油了哦</text>
+    <!--列表数据-->
+    <block wx:for="{{datalist}}" wx:key="item" wx:for-item="item">
+      <view class="c-minheight wx-view_7QHnu2">
+        <text class="c-block wx-text_Hch3C9">{{item.datetime}}</text>
+        <block wx:for="{{item.childs}}" wx:key="citem" wx:for-item="citem">
+          <view class="c-minheight wx-view_ffp5Dq">
+            <!--提现部分-->
+            <view class="c-minheight wx-view_DlKnq3" wx:if="{{citem.type==-1}}">
+              <image class="wx-image_ZTxjkf" mode="scaleToFill" src="/resources/tixianico.png" />
+              <view class="c-minheight wx-view_1N72IJ">
+                <text class="c-block wx-text_GTr4On">提现</text>
+                <text class="c-block wx-text_zy1sxb"></text>
+              </view>
+            </view>
+            <!--退款部分-->
+            <view class="c-minheight wx-view_DlKnq3" wx:else>
+              <image class="wx-image_ZTxjkf" mode="scaleToFill" src="/resources/tuikuanico.png" />
+              <view class="c-minheight wx-view_1N72IJ">
+                <text class="c-block wx-text_GTr4On" wx:if="{{citem.type==4}}">退款</text>
+                <text class="c-block wx-text_GTr4On">{{citem.type_explain}}</text>
+                <text class="c-block wx-text_zy1sxb">{{citem.order_no}}</text>
+              </view>
+            </view>
+            <!--金额部分-->
+            <text class="c-block wx-text_5McyvR1" wx:if="{{citem.status==0}}">-{{citem.money}}</text>
+            <text class="c-block wx-text_5McyvR" wx:else>+{{citem.money}}</text>
+          </view>
+        </block>
+      </view>
+    </block>
+
+    <!--没有数据的提示-->
+    <view class="c-minheight wx-view_3Ut5XA" wx:if="{{showtip}}">
+      <text class="c-block wx-text_BvZJc5">暂无记录,要加油了哦</text>
+    </view>
+    <!--结束标识符-->
   </view>
-  <!--结束标识符-->
 </view>

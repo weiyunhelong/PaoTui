@@ -1,48 +1,50 @@
 <!--pages/btslist/index.wxml-->
-<view class="c-minheight wx-view_RZ33PH" style='background-image: url({{runbg}})'>
+<view class="wx-view_RZ33PH" style='background-image: url({{runbg}})'>
+  <view class="c-minheight wx-view_RZ33PH">
 
-  <!--顶部的菜单-->
-  <view class="c-minheight wx-view_V73TWA">
-    <text class="c-block {{chkmenu==1?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkemnuopt' data-id='1'>全部</text>
-    <text class="c-block {{chkmenu==2?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkemnuopt' data-id='2'>已处理</text>
-    <text class="c-block {{chkmenu==3?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkemnuopt' data-id='3'>待处理</text>
-  </view>
-
-  <!--列表数据部分-->
-  <block wx:for="{{btslist}}" wx:key="item">
-  
-    <view class="c-minheight wx-view_m7kMgb">
-      <view class="wx-view_nspPcM">
-        <!--订单号类型值-->
-        <view class="c-minheight wx-view_DlKnq3">
-          <image class="wx-image_ZTxjkf" mode="scaleToFill" src="/resources/tsico.png" />
-          <view class="c-minheight wx-view_1N72IJ">
-            <text class="c-block wx-text_GTr4On">[{{item.run_type}}]</text>
-            <text class="c-block wx-text_zy1sxb">{{item.run_no}}</text>
-          </view>
-        </view>
-        <!--表述和图片-->
-        <view class="c-minheight wx-view_OH3iiM">
-          <image class="wx-image_QL5YpT" mode="scaleToFill" src="/resources/miaoshu.png" />
-          <view class="wx-view_3NZ4vV">
-            <text class="c-block wx-text_of9VYP">{{item.content}}</text>
-            <block wx:for="{{item.imgs}}" wx:key="imgitem" wx:for-item="imgitem">
-              <image class="wx-image_AVmash" mode="scaleToFill" src="{{imgitem}}" wx:if="{{imgitem!=''}}"/>
-            </block>
-          </view>
-        </view>
-      </view>
-      <!--状态值-->
-      <view class="c-minheight wx-view_Wmg0Pk">
-        <text class="c-block wx-text_Qd5j7U">{{item.status_explain}}</text>
-        <text class="c-block wx-text_Gn0r6V" bindtap='gochkbtsopt' data-id='{{item.id}}'>查看</text>
-      </view>
+    <!--顶部的菜单-->
+    <view class="c-minheight wx-view_V73TWA">
+      <text class="c-block {{chkmenu==1?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkemnuopt' data-id='1'>全部</text>
+      <text class="c-block {{chkmenu==2?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkemnuopt' data-id='2'>已处理</text>
+      <text class="c-block {{chkmenu==3?'wx-text_ylTSLq':'wx-text_8ASClb'}}" bindtap='chkemnuopt' data-id='3'>待处理</text>
     </view>
-  </block>
 
-  <!--无数据的提示-->
-  <view class="c-minheight wx-view_3Ut5XA" wx:if="{{showtip}}">
-    <text class="c-block wx-text_BvZJc5">暂无投诉记录</text>
+    <!--列表数据部分-->
+    <block wx:for="{{btslist}}" wx:key="item">
+
+      <view class="c-minheight wx-view_m7kMgb">
+        <view class="wx-view_nspPcM">
+          <!--订单号类型值-->
+          <view class="c-minheight wx-view_DlKnq3">
+            <image class="wx-image_ZTxjkf" mode="scaleToFill" src="/resources/tsico.png" />
+            <view class="c-minheight wx-view_1N72IJ">
+              <text class="c-block wx-text_GTr4On">[{{item.run_type}}]</text>
+              <text class="c-block wx-text_zy1sxb">{{item.run_no}}</text>
+            </view>
+          </view>
+          <!--表述和图片-->
+          <view class="c-minheight wx-view_OH3iiM">
+            <image class="wx-image_QL5YpT" mode="scaleToFill" src="/resources/miaoshu.png" />
+            <view class="wx-view_3NZ4vV">
+              <text class="c-block wx-text_of9VYP">{{item.content}}</text>
+              <block wx:for="{{item.imgs}}" wx:key="imgitem" wx:for-item="imgitem">
+                <image class="wx-image_AVmash" mode="scaleToFill" src="{{imgitem}}" wx:if="{{imgitem!=''}}" />
+              </block>
+            </view>
+          </view>
+        </view>
+        <!--状态值-->
+        <view class="c-minheight wx-view_Wmg0Pk">
+          <text class="c-block wx-text_Qd5j7U">{{item.status_explain}}</text>
+          <text class="c-block wx-text_Gn0r6V" bindtap='gochkbtsopt' data-id='{{item.id}}'>查看</text>
+        </view>
+      </view>
+    </block>
+
+    <!--无数据的提示-->
+    <view class="c-minheight wx-view_3Ut5XA" wx:if="{{showtip}}">
+      <text class="c-block wx-text_BvZJc5">暂无投诉记录</text>
+    </view>
+
   </view>
-
 </view>

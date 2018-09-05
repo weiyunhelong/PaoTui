@@ -1,144 +1,147 @@
 <!--pages/sign/index.wxml-->
-<view class="c-minheight wx-view_LUKtEB" style='background-image: url({{runbg}})'>
+<view class="wx-view_LUKtEB" style='background-image: url({{runbg}})'>
+  <view class="c-minheight wx-view_LUKtEB">
 
-  <!--姓名-->
-  <view class='hangv'>
-    <view class='hangtitle'>姓名:</view>
-    <view class='hanginputv'>
-      <input type='text' placeholder='请输入真实姓名' value='{{name}}' class='txtcss' placeholder-class='tipcss' bindblur='getname' bindconfirm='getname' bindinput='getname'></input>
-    </view>
-  </view>
-
-  <!--身份证号-->
-  <view class='hangv'>
-    <view class='hangtitle'>身份证号:</view>
-    <view class='hanginputv'>
-      <input type='text' placeholder='请输入身份证号' value='{{identity}}' class='txtcss' placeholder-class='tipcss' bindblur='getidentity' bindconfirm='getidentity' bindinput='getidentity'></input>
-    </view>
-  </view>
-
-  <!--现职业-->
-  <view class='hangv'>
-    <view class='hangtitle'>现职业:</view>
-    <view class='hanginputv'>
-      <input type='text' placeholder='如无工作填写待业' value='{{job}}' class='txtcss' placeholder-class='tipcss' bindblur='getjob' bindconfirm='getjob' bindinput='getjob'></input>
-    </view>
-  </view>
-
-  <!--年龄和性别-->
-  <view class='hangv'>
-    <view class='hangtitle'>年龄:</view>
-    <view class='hangyearv'>
-      <input type='number' placeholder='' value='{{year}}' class='txtcss' placeholder-class='tipcss' bindblur='getyear' bindconfirm='getyear' bindinput='getyear'></input>
+    <!--姓名-->
+    <view class='hangv'>
+      <view class='hangtitle'>姓名:</view>
+      <view class='hanginputv'>
+        <input type='text' placeholder='请输入真实姓名' value='{{name}}' class='txtcss' placeholder-class='tipcss' bindblur='getname' bindconfirm='getname' bindinput='getname'></input>
+      </view>
     </view>
 
-    <view class='hangtitle'>性别:</view>
-    <view class='hanggenderv'>
-      <picker bindchange="bindPickerChange" value="{{sexindex}}" range="{{genderlist}}">
-        <view class="picker" wx:if="{{sexindex!=-1}}">
-          {{genderlist[sexindex]}}
-        </view>
-        <view class="nopicker" wx:if="{{sexindex==-1}}">
-          请选择
-        </view>
-      </picker>
-    </view>
-  </view>
-
-  <!--手机号码-->
-  <view class='hangv'>
-    <view class='hangtitle'>手机号码:</view>
-    <view class='hanginputv'>
-      <input type='text' placeholder='请填写您的手机号码' value='{{mobile}}' class='txtcss' placeholder-class='tipcss' bindblur='getmobile' bindconfirm='getmobile'></input>
-    </view>
-  </view>
-
-  <!--短信验证码-->
-  <view class='hangv'>
-    <view class='hangtitle'>短信验证码:</view>
-    <view class='hangyearv'>
-      <input type='number' placeholder='' value='{{mgscode}}' class='txtcss' placeholder-class='tipcss' bindblur='validatecode' bindconfirm='validatecode' bindinput='validatecode'></input>
+    <!--身份证号-->
+    <view class='hangv'>
+      <view class='hangtitle'>身份证号:</view>
+      <view class='hanginputv'>
+        <input type='text' placeholder='请输入身份证号' value='{{identity}}' class='txtcss' placeholder-class='tipcss' bindblur='getidentity' bindconfirm='getidentity' bindinput='getidentity'></input>
+      </view>
     </view>
 
-    <view class='sendcodebtn' bindtap="{{codetip=='获取验证码'?'sendcode':''}}">{{codetip}}</view>
-
-  </view>
-
-
-
-  <!--现住址-->
-  <view class='hangv'>
-    <view class='hangtitle'>现住址:</view>
-    <view class='hanginputv'>
-      <input type='text' placeholder='' value='{{address}}' class='txtcss' placeholder-class='tipcss' bindblur='getaddress' bindconfirm='getaddress' bindinput='getaddress'></input>
+    <!--现职业-->
+    <view class='hangv'>
+      <view class='hangtitle'>现职业:</view>
+      <view class='hanginputv'>
+        <input type='text' placeholder='如无工作填写待业' value='{{job}}' class='txtcss' placeholder-class='tipcss' bindblur='getjob' bindconfirm='getjob' bindinput='getjob'></input>
+      </view>
     </view>
-  </view>
 
-  <!--紧急联系人手机号-->
-  <view class='hangv'>
-    <view class='hangmdtitle'>紧急联系人手机号:</view>
-    <view class='hangmdinputv'>
-      <input type='number' placeholder='' value='{{phone}}' class='txtcss' placeholder-class='tipcss' bindblur='getphone' bindconfirm='getphone' bindinput='getphone'></input>
+    <!--年龄和性别-->
+    <view class='hangv'>
+      <view class='hangtitle'>年龄:</view>
+      <view class='hangyearv'>
+        <input type='number' placeholder='' value='{{year}}' class='txtcss' placeholder-class='tipcss' bindblur='getyear' bindconfirm='getyear' bindinput='getyear'></input>
+      </view>
+
+      <view class='hangtitle'>性别:</view>
+      <view class='hanggenderv'>
+        <picker bindchange="bindPickerChange" value="{{sexindex}}" range="{{genderlist}}">
+          <view class="picker" wx:if="{{sexindex!=-1}}">
+            {{genderlist[sexindex]}}
+          </view>
+          <view class="nopicker" wx:if="{{sexindex==-1}}">
+            请选择
+          </view>
+        </picker>
+      </view>
     </view>
-  </view>
 
-  <!--与紧急联系人关系-->
-  <view class='hangv'>
-    <view class='hangmdtitle'>与紧急联系人关系:</view>
-    <view class='hangmdinputv'>
-      <input type='text' placeholder='例:父子，母子，兄弟' value='{{guanxi}}' class='txtcss' placeholder-class='tipcss' bindblur='getguanxi' bindconfirm='getguanxi' bindinput='getguanxi'></input>
+    <!--手机号码-->
+    <view class='hangv'>
+      <view class='hangtitle'>手机号码:</view>
+      <view class='hanginputv'>
+        <input type='text' placeholder='请填写您的手机号码' value='{{mobile}}' class='txtcss' placeholder-class='tipcss' bindblur='getmobile' bindconfirm='getmobile'></input>
+      </view>
     </view>
-  </view>
 
-  <!--上传图片-->
-  <view class='tuhangv'>
-    <view class='tutitle'>身份证正面:</view>
-    <view class='tuv'>
-      <image src='/resources/addico.png' class='addico' bindtap='uploadfile' data-id='1' wx:if="{{!isfront}}"></image>
-      <image src='{{fronttu}}' class='addtuico' bindtap='uploadfile' data-id='1' wx:if="{{isfront}}"></image>
+    <!--短信验证码-->
+    <view class='hangv'>
+      <view class='hangtitle'>短信验证码:</view>
+      <view class='hangyearv'>
+        <input type='number' placeholder='' value='{{mgscode}}' class='txtcss' placeholder-class='tipcss' bindblur='validatecode' bindconfirm='validatecode' bindinput='validatecode'></input>
+      </view>
+
+      <view class='sendcodebtn' bindtap="{{codetip=='获取验证码'?'sendcode':''}}">{{codetip}}</view>
+
     </view>
-  </view>
 
-  <view class='tuhangv'>
-    <view class='tutitle'>身份证反面:</view>
-    <view class='tuv'>
-      <image src='/resources/addico.png' class='addico' bindtap='uploadfile' data-id='2' wx:if="{{!isback}}"></image>
-      <image src='{{backtu}}' class='addtuico' bindtap='uploadfile' data-id='2' wx:if="{{isback}}"></image>
+
+
+    <!--现住址-->
+    <view class='hangv'>
+      <view class='hangtitle'>现住址:</view>
+      <view class='hanginputv'>
+        <input type='text' placeholder='' value='{{address}}' class='txtcss' placeholder-class='tipcss' bindblur='getaddress' bindconfirm='getaddress' bindinput='getaddress'></input>
+      </view>
     </view>
-  </view>
 
-  <view class='tuhangv'>
-    <view class='tutitle'>手持身份证:</view>
-    <view class='tuv'>
-      <image src='/resources/addico.png' class='addico' bindtap='uploadfile' data-id='3' wx:if="{{!isshouchi}}"></image>
-      <image src='{{shouchitu}}' class='addtuico' bindtap='uploadfile' data-id='3' wx:if="{{isshouchi}}"></image>
+    <!--紧急联系人手机号-->
+    <view class='hangv'>
+      <view class='hangmdtitle'>紧急联系人手机号:</view>
+      <view class='hangmdinputv'>
+        <input type='number' placeholder='' value='{{phone}}' class='txtcss' placeholder-class='tipcss' bindblur='getphone' bindconfirm='getphone' bindinput='getphone'></input>
+      </view>
     </view>
-  </view>
 
-  <view class='zhenghangv'>
-    <view class='tutitle'>其他技能证书:</view>
-    <view class='zhengtuv'>
-      <block wx:for="{{zhengtu}}" wx:key="item">
-        <image src='{{item}}' class='zhengtuico'></image>
-      </block>
-      <image src='/resources/addico.png' class='addico' bindtap='uploadzheng' wx:if="{{!iszheng}}"></image>
+    <!--与紧急联系人关系-->
+    <view class='hangv'>
+      <view class='hangmdtitle'>与紧急联系人关系:</view>
+      <view class='hangmdinputv'>
+        <input type='text' placeholder='例:父子，母子，兄弟' value='{{guanxi}}' class='txtcss' placeholder-class='tipcss' bindblur='getguanxi' bindconfirm='getguanxi' bindinput='getguanxi'></input>
+      </view>
     </view>
+
+    <!--上传图片-->
+    <view class='tuhangv'>
+      <view class='tutitle'>身份证正面:</view>
+      <view class='tuv'>
+        <image src='/resources/addico.png' class='addico' bindtap='uploadfile' data-id='1' wx:if="{{!isfront}}"></image>
+        <image src='{{fronttu}}' class='addtuico' bindtap='uploadfile' data-id='1' wx:if="{{isfront}}"></image>
+      </view>
+    </view>
+
+    <view class='tuhangv'>
+      <view class='tutitle'>身份证反面:</view>
+      <view class='tuv'>
+        <image src='/resources/addico.png' class='addico' bindtap='uploadfile' data-id='2' wx:if="{{!isback}}"></image>
+        <image src='{{backtu}}' class='addtuico' bindtap='uploadfile' data-id='2' wx:if="{{isback}}"></image>
+      </view>
+    </view>
+
+    <view class='tuhangv'>
+      <view class='tutitle'>手持身份证:</view>
+      <view class='tuv'>
+        <image src='/resources/addico.png' class='addico' bindtap='uploadfile' data-id='3' wx:if="{{!isshouchi}}"></image>
+        <image src='{{shouchitu}}' class='addtuico' bindtap='uploadfile' data-id='3' wx:if="{{isshouchi}}"></image>
+      </view>
+    </view>
+
+    <view class='zhenghangv'>
+      <view class='tutitle'>其他技能证书:</view>
+      <view class='zhengtuv'>
+        <block wx:for="{{zhengtu}}" wx:key="item">
+          <image src='{{item}}' class='zhengtuico'></image>
+        </block>
+        <image src='/resources/addico.png' class='addico' bindtap='uploadzheng' wx:if="{{!iszheng}}"></image>
+      </view>
+    </view>
+
+    <!--同意协议-->
+    <view class='xieyiv' bindtap='agreetopt'>
+      <icon type="success" size="20" color='#ccc' class='xieyiico' wx:if="{{!isagree}}"></icon>
+      <icon type="success" size="20" color='#0ff' class='xieyiico' wx:if="{{isagree}}"></icon>
+      <view class='agreetip'>我同意</view>
+      <view class='agreetxt' catchtap='showxyopt'>《小龙快跑跑腿员服务协议》</view>
+    </view>
+
+    <!--操作示例和指南-->
+    <view class='lasttip' bindtap='showmodal'>操作示例和指南</view>
+
+    <!--提交申请-->
+    <view class='postbtn' bindtap='postbookopt'>提交申请</view>
   </view>
-
-  <!--同意协议-->
-  <view class='xieyiv' bindtap='agreetopt'>
-    <icon type="success" size="20" color='#ccc' class='xieyiico' wx:if="{{!isagree}}"></icon>
-    <icon type="success" size="20" color='#0ff' class='xieyiico' wx:if="{{isagree}}"></icon>
-    <view class='agreetip'>我同意</view>
-    <view class='agreetxt' catchtap='showxyopt'>《小龙快跑跑腿员服务协议》</view>
-  </view>
-
-  <!--操作示例和指南-->
-  <view class='lasttip' bindtap='showmodal'>操作示例和指南</view>
-
-  <!--提交申请-->
-  <view class='postbtn' bindtap='postbookopt'>提交申请</view>
 </view>
+
 
 <!--操作指南部分-->
 <view class="modalview {{isznshow}}">

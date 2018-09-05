@@ -1,88 +1,88 @@
 <!--pages/paodan/index.wxml-->
-
-<view class="c-minheight wx-view_3oyzpl" style='background-image: url({{runbg}})'>
-  <!--顶部的状态-->
-  <view class="c-minheight wx-view_2llUqR">
-    <scroll-view class="c-minheight wx-scroll-view_M0guNR" lower-threshold="50" scroll-x="True" style="overflow-x:  auto; overflow-y: hidden; " upper-threshold="50">
-      <view class="c-minheight wx-view_2iKOhp">
-        <text class="c-block wx-text_YmSCZi {{chkmenu==1?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="1">全部</text>
-        <text class="c-block wx-text_YmSCZi {{chkmenu==2?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="2">待支付</text>
-        <text class="c-block wx-text_YmSCZi {{chkmenu==3?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="3">待执行</text>
-        <text class="c-block wx-text_YmSCZi {{chkmenu==4?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="4">进行中</text>
-        <text class="c-block wx-text_YmSCZi {{chkmenu==14?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="14">待验收</text>
-        <text class="c-block wx-text_YmSCZi {{chkmenu==5?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="5">待评价</text>
-        <text class="c-block wx-text_YmSCZi {{chkmenu==6?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="6">已结束</text>
-        <text class="c-block wx-text_YmSCZi {{chkmenu==7?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="7">已取消</text>
-        <text class="c-block wx-text_YmSCZi {{chkmenu==8?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="8">退款</text>
-      </view>
-    </scroll-view>
-  </view>
-
-  <!--列表数据-->
-  <block wx:for="{{orderlist}}" wx:key="item" wx:for-index="x">
-    <view class="c-minheight wx-view_PPXd851" data-id='{{item.id}}' bindtap='godetail'>
-
-      <view class="c-minheight wx-view_7tuQEA" style='justify-content:space-between;'>
-        <view class='userinfov'>
-          <image class="wx-image_jDkO78" mode="scaleToFill" src="{{item.member.user_headimg}}" />
-          <text class="c-block wx-text_ZaU8MQ">{{item.member.nick_name}}</text>
-          <view class='shopv' catchtap='gonews' data-uid='{{item.member.uid}}' data-uname='{{item.member.nick_name}}' data-utx='{{item.member.user_headimg}}' data-utel='{{item.mobile}}'>
-            <view class='xiaoxiv' wx:if="{{item.news}}">
-              <image src='/resources/xiaoxih.png' class='xiaoxitu'></image>
-              <view class='hongdian'></view>
-            </view>
-            <image src='/resources/xiaoxi.png' class='xiaoxitu' wx:if="{{!item.news}}"></image>
-          </view>
+<view style='background-image: url({{runbg}})' class='wx-view_3oyzpl'>
+  <view class="c-minheight wx-view_3oyzpl">
+    <!--顶部的状态-->
+    <view class="c-minheight wx-view_2llUqR">
+      <scroll-view class="c-minheight wx-scroll-view_M0guNR" lower-threshold="50" scroll-x="True" style="overflow-x:  auto; overflow-y: hidden; " upper-threshold="50">
+        <view class="c-minheight wx-view_2iKOhp">
+          <text class="c-block wx-text_YmSCZi {{chkmenu==1?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="1">全部</text>
+          <text class="c-block wx-text_YmSCZi {{chkmenu==2?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="2">待支付</text>
+          <text class="c-block wx-text_YmSCZi {{chkmenu==3?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="3">待执行</text>
+          <text class="c-block wx-text_YmSCZi {{chkmenu==4?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="4">进行中</text>
+          <text class="c-block wx-text_YmSCZi {{chkmenu==14?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="14">待验收</text>
+          <text class="c-block wx-text_YmSCZi {{chkmenu==5?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="5">待评价</text>
+          <text class="c-block wx-text_YmSCZi {{chkmenu==6?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="6">已结束</text>
+          <text class="c-block wx-text_YmSCZi {{chkmenu==7?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="7">已取消</text>
+          <text class="c-block wx-text_YmSCZi {{chkmenu==8?'wx-text_PBukUn':''}}" bindtap='chkmenu' data-status="8">退款</text>
         </view>
-        <view class='biaoqianv' wx:if="{{item.level!=null}}">
-          <image src='/resources/biaoqian.png' class='biaoqianimg'></image>          
+      </scroll-view>
+    </view>
+
+    <!--列表数据-->
+    <block wx:for="{{orderlist}}" wx:key="item" wx:for-index="x">
+      <view class="c-minheight wx-view_PPXd851" data-id='{{item.id}}' bindtap='godetail'>
+
+        <view class="c-minheight wx-view_7tuQEA" style='justify-content:space-between;'>
+          <view class='userinfov'>
+            <image class="wx-image_jDkO78" mode="scaleToFill" src="{{item.member.user_headimg}}" />
+            <text class="c-block wx-text_ZaU8MQ">{{item.member.nick_name}}</text>
+            <view class='shopv' catchtap='gonews' data-uid='{{item.member.uid}}' data-uname='{{item.member.nick_name}}' data-utx='{{item.member.user_headimg}}' data-utel='{{item.mobile}}'>
+              <view class='xiaoxiv' wx:if="{{item.news}}">
+                <image src='/resources/xiaoxih.png' class='xiaoxitu'></image>
+                <view class='hongdian'></view>
+              </view>
+              <image src='/resources/xiaoxi.png' class='xiaoxitu' wx:if="{{!item.news}}"></image>
+            </view>
+          </view>
+          <view class='biaoqianv' wx:if="{{item.level!=null}}">
+            <image src='/resources/biaoqian.png' class='biaoqianimg'></image>
             <view class='biaoqiantxt' wx:if="{{item.level==1}}">A</view>
             <view class='biaoqiantxt' wx:if="{{item.level==2}}">B</view>
             <view class='biaoqiantxt' wx:if="{{item.level==3}}">C</view>
             <view class='biaoqiantxt' wx:if="{{item.level==4}}">D</view>
             <view class='biaoqiantxt' wx:if="{{item.level==5}}">S</view>
+          </view>
+        </view>
+
+        <view class="c-minheight wx-view_dfNyFR">
+          <text class="c-block wx-text_FFPqzR">始</text>
+          <text class="c-block wx-text_Vj9cHB">{{item.addr}}</text>
+        </view>
+        <view class="c-minheight wx-view_dfNyFR">
+          <text class="c-block wx-text_FFPqzR1">终</text>
+          <text class="c-block wx-text_Vj9cHB">{{item.o_addr}}</text>
+        </view>
+        <view class="c-minheight wx-view_xp9voB">
+          <image class="wx-image_PYrvOU" mode="scaleToFill" src="/resources/daimai.png" />
+          <text class="c-block wx-text_tBG9kh">代买</text>
+          <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/qian.png" />
+          <text class="c-block wx-text_u2uG4j">￥{{item.cost}}</text>
+          <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" style='margin-left:60rpx;' wx:if="{{item.tip!='0.00'}}" />
+          <text class="c-block wx-text_u2uG4j" wx:if="{{item.tip!='0.00'}}">￥{{item.tip}}</text>
+        </view>
+        <view class="c-minheight wx-view_XSYzuh">
+          <image class="wx-image_RYYYOg" mode="scaleToFill" src="/resources/miaoshu.png" />
+          <text class="c-block wx-text_QF0BYA">{{item.title}}</text>
+        </view>
+        <view class="c-minheight wx-view_Kv5Tev">
+          <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png" />
+          <text class="c-block wx-text_1kGNpv">{{item.start_time}}  -  {{item.end_time}}</text>
+        </view>
+        <view class="c-minheight wx-view_co23rd" />
+        <view class="c-minheight wx-view_V8DLtP">
+          <text class="c-block wx-text_UQYh9c">{{item.order_explain}}</text>
+          <view class="c-minheight wx-view_oVtGKg">
+            <text class="c-block wx-text_9JmF1M" wx:if="{{item.order_status<=4}}" catchtap="cancelorder" data-id="{{item.id}}">取消跑单</text>
+            <text class="c-block wx-text_HoPYvU" wx:if="{{item.order_status==3}}" catchtap='runopt' data-id="{{item.id}}">开始执行</text>
+            <text class="c-block wx-text_HoPYvU" wx:if="{{item.order_status==4}}" catchtap='finishopt' data-id="{{item.id}}">完成跑单</text>
+            <text class="c-block wx-text_CR9emH" wx:if="{{item.order_status>4}}" catchtap='tousuopt' data-id="{{item.id}}">投诉雇主</text>
+          </view>
         </view>
       </view>
+    </block>
 
-      <view class="c-minheight wx-view_dfNyFR">
-        <text class="c-block wx-text_FFPqzR">始</text>
-        <text class="c-block wx-text_Vj9cHB">{{item.addr}}</text>
-      </view>
-      <view class="c-minheight wx-view_dfNyFR">
-        <text class="c-block wx-text_FFPqzR1">终</text>
-        <text class="c-block wx-text_Vj9cHB">{{item.o_addr}}</text>
-      </view>
-      <view class="c-minheight wx-view_xp9voB">
-        <image class="wx-image_PYrvOU" mode="scaleToFill" src="/resources/daimai.png" />
-        <text class="c-block wx-text_tBG9kh">代买</text>
-        <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/qian.png" />
-        <text class="c-block wx-text_u2uG4j">￥{{item.cost}}</text>
-        <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" style='margin-left:60rpx;' wx:if="{{item.tip!='0.00'}}" />
-        <text class="c-block wx-text_u2uG4j" wx:if="{{item.tip!='0.00'}}">￥{{item.tip}}</text>
-      </view>
-      <view class="c-minheight wx-view_XSYzuh">
-        <image class="wx-image_RYYYOg" mode="scaleToFill" src="/resources/miaoshu.png" />
-        <text class="c-block wx-text_QF0BYA">{{item.title}}</text>
-      </view>
-      <view class="c-minheight wx-view_Kv5Tev">
-        <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png" />
-        <text class="c-block wx-text_1kGNpv">{{item.start_time}}  -  {{item.end_time}}</text>
-      </view>
-      <view class="c-minheight wx-view_co23rd" />
-      <view class="c-minheight wx-view_V8DLtP">
-        <text class="c-block wx-text_UQYh9c">{{item.order_explain}}</text>
-        <view class="c-minheight wx-view_oVtGKg">
-          <text class="c-block wx-text_9JmF1M" wx:if="{{item.order_status<=4}}" catchtap="cancelorder" data-id="{{item.id}}">取消跑单</text>
-          <text class="c-block wx-text_HoPYvU" wx:if="{{item.order_status==3}}" catchtap='runopt' data-id="{{item.id}}">开始执行</text>
-          <text class="c-block wx-text_HoPYvU" wx:if="{{item.order_status==4}}" catchtap='finishopt' data-id="{{item.id}}">进行中</text>
-          <text class="c-block wx-text_CR9emH" wx:if="{{item.order_status>4}}" catchtap='tousuopt' data-id="{{item.id}}">投诉雇主</text>
-        </view>
-      </view>
-    </view>
-  </block>
-
+  </view>
 </view>
-
 
 
 <!--弹窗投诉部分-->

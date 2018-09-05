@@ -1,9 +1,11 @@
 <!--pages/sign/result.wxml-->
-<view class="c-minheight wx-view_LUKtEB" style='background-image: url({{runbg}})'>
- 
-  <view class='tipv' wx:if="{{status==0}}">入驻成功，后台正在审核.</view>
-  
-  <view class='tipv' wx:if="{{status==-1}}">审核未通过</view>
-  <view class='tipsv' wx:if="{{status==-1}}">未通过原因:{{reasopn}}</view>
-  <view class='signv' wx:if="{{status==-1}}" bindtap='gosignopt'>重新注册</view>
+<view class="wx-view_LUKtEB" style='background-image: url({{runbg}})'>
+  <view class="c-minheight wx-view_LUKtEB">
+
+    <view class='tipv' wx:if="{{status==0}}">入驻成功，后台正在审核.</view>
+
+    <view class='tipv' wx:if="{{status==-1}}">审核未通过</view>
+    <view class='tipsv' wx:if="{{status==-1}}">未通过原因:{{reasopn}}</view>
+    <view class='signv' wx:if="{{status==-1}}" bindtap='gosignopt'>重新注册</view>
+  </view>
 </view>

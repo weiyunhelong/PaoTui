@@ -1,127 +1,159 @@
 <!--pages/paodan/detail.wxml-->
-<view class="c-minheight wx-view_KqOJvU" style='background-image: url({{runbg}})'>
-  <!--顶部菜单部分-->
-  <view class="c-minheight wx-view_lF3o2l">
-    <view class="c-minheight wx-view_sDHbtd">
-      <image class="wx-image_o81ARp" mode="scaleToFill" src="/resources/mddaimai.png" />
-      <text class="c-block wx-text_BuCDli">{{order.type_desc}}</text>
+<view class='wx-view_KqOJvU' style='background-image: url({{runbg}})'>
+  <view class="c-minheight wx-view_KqOJvU">
+    <!--顶部菜单部分-->
+    <view class="c-minheight wx-view_lF3o2l">
+      <view class="c-minheight wx-view_sDHbtd">
+        <image class="wx-image_o81ARp" mode="scaleToFill" src="/resources/mddaimai.png" />
+        <text class="c-block wx-text_BuCDli">{{order.type_desc}}</text>
+      </view>
+      <text class="c-block wx-text_vuovO2">{{order.status_explain}}</text>
     </view>
-    <text class="c-block wx-text_vuovO2">{{order.status_explain}}</text>
-  </view>
-  
-  <!--评价内容-->
-  <view class="c-minheight wx-view_5u27ZS" wx:if="{{order.order_status==11}}">
-   <block wx:for="{{comments}}" wx:key="item">
-    <view class="c-minheight wx-view_fUEelB">
-      <text class="c-block wx-text_eAKhuH">评分：</text>
-      <block wx:for="{{xinglsit}}" wx:key="xitem" wx:for-item="xitem">
-        <image class="wx-image_LfAJyx" mode="scaleToFill" src="/resources/xing.png" wx:if="{{xitem<=item.star}}" />
+
+    <!--评价内容-->
+    <view class="c-minheight wx-view_5u27ZS" wx:if="{{order.order_status==11}}">
+      <block wx:for="{{comments}}" wx:key="item">
+        <view class="c-minheight wx-view_fUEelB">
+          <text class="c-block wx-text_eAKhuH">评分：</text>
+          <block wx:for="{{xinglsit}}" wx:key="xitem" wx:for-item="xitem">
+            <image class="wx-image_LfAJyx" mode="scaleToFill" src="/resources/xing.png" wx:if="{{xitem<=item.star}}" />
+          </block>
+          <image class="wx-image_jRpsXD" mode="scaleToFill" wx:if="{{item.star%1!=0}}" src="/resources/banxing.png" />
+        </view>
+        <view class="c-minheight wx-view_nOn7MR">
+          <text class="c-block wx-text_eAKhuH">内容：</text>
+          <view class="c-minheight wx-view_5pA13j">
+            <text class="c-block wx-text_eAKhuH">{{item.desc}}</text>
+            <view class="c-minheight wx-view_ghWvFg">
+              <block wx:for="{{item.imgs}}" wx:key="tuitem" wx:for-item="tuitem">
+                <image class="wx-image_BVT0xx" mode="scaleToFill" src="{{tuitem}}" wx:if="{{tuitem!=''}}" />
+              </block>
+            </view>
+          </view>
+        </view>
+        <view class="c-minheight wx-view_aKGF5k">
+          <text class="c-block wx-text_eAKhuH">时间：</text>
+          <text class="c-block wx-text_eAKhuH">{{item.comment_time}}</text>
+        </view>
       </block>
-      <image class="wx-image_jRpsXD" mode="scaleToFill" wx:if="{{item.star%1!=0}}" src="/resources/banxing.png" />
     </view>
-    <view class="c-minheight wx-view_nOn7MR">
-      <text class="c-block wx-text_eAKhuH">内容：</text>
-      <view class="c-minheight wx-view_5pA13j">
-        <text class="c-block wx-text_eAKhuH">{{item.desc}}</text>
-        <view class="c-minheight wx-view_ghWvFg">
-          <block wx:for="{{item.imgs}}" wx:key="tuitem" wx:for-item="tuitem">
-            <image class="wx-image_BVT0xx" mode="scaleToFill" src="{{tuitem}}"  wx:if="{{tuitem!=''}}"/>
+
+    <!--订单的内容-->
+    <view class="c-minheight wx-view_PPXd851">
+      <view class="c-minheight wx-view_dfNyFR1" bindtap='goaddress' data-lat="{{order.lat}}" data-lng="{{order.lng}}" data-name="{{order.o_addr}}">
+        <text class="c-block wx-text_FFPqzR">始</text>
+        <text class="c-block wx-text_Vj9cHB">{{order.addr}}</text>
+        <image class="wx-image_qTVseD" mode="scaleToFill" src="/resources/postion.png" />
+      </view>
+      <view class="c-minheight wx-view_dfNyFR1" bindtap='goaddress' data-lat="{{order.lat}}" data-lng="{{order.lng}}" data-name="{{order.o_addr}}">
+        <text class="c-block wx-text_FFPqzR1">终</text>
+        <text class="c-block wx-text_Vj9cHB">{{order.o_addr}}</text>
+        <image class="wx-image_qTVseD" mode="scaleToFill" src="/resources/postion.png" />
+      </view>
+      <view class="c-minheight wx-view_xp9voB1">
+        <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/qian.png" />
+        <text class="c-block wx-text_u2uG4j">￥{{order.cost}}</text>
+        <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" style='margin-left:60rpx;' wx:if="{{order.tip!='0.00'}}" />
+        <text class="c-block wx-text_u2uG4j" wx:if="{{order.tip!='0.00'}}">￥{{order.tip}}</text>
+      </view>
+      <view class="c-minheight wx-view_XSYzuh1">
+        <image class="wx-image_RYYYOg" mode="scaleToFill" src="/resources/miaoshu.png" />
+        <text class="c-block wx-text_QF0BYA">{{order.title}}</text>
+      </view>
+      <view class="c-minheight wx-view_Kv5Tev1">
+        <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png" />
+        <text class="c-block wx-text_1kGNpv">{{order.start_time}}-{{order.end_time}}</text>
+      </view>
+      <!--骑手星级要求-->
+      <view class="c-minheight wx-view_Kv5Tev1" wx:if="{{order.star!=0}}">
+        <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/qishoulevel.png" />
+        <view class='addinfov'>
+          <block wx:for="{{xinglist}}" wx:key="item">
+            <image src='/resources/xing.png' wx:if="{{order.star>=item}}" class="xingicon"></image>
           </block>
         </view>
       </view>
-    </view>
-    <view class="c-minheight wx-view_aKGF5k">
-      <text class="c-block wx-text_eAKhuH">时间：</text>
-      <text class="c-block wx-text_eAKhuH">{{item.comment_time}}</text>
-    </view>
-    </block>
-  </view>
+      <!--附图列表-->
+      <view class="c-minheight wx-view_Kv5Tev1" wx:if="{{order.images.length>0}}">
+        <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/futu.png" />
+        <view class='addinfov'>
+          <block wx:for="{{order.images}}" wx:key="item" wx:for-item="item">
+            <image src='{{item}}' class="futucss" class='futuimg'></image>
+          </block>
+        </view>
+      </view>
 
-  <!--订单的内容-->
-  <view class="c-minheight wx-view_PPXd851">
-    <view class="c-minheight wx-view_dfNyFR1" bindtap='goaddress' data-lat="{{order.lat}}" data-lng="{{order.lng}}" data-name="{{order.o_addr}}">
-      <text class="c-block wx-text_FFPqzR">始</text>
-      <text class="c-block wx-text_Vj9cHB">{{order.addr}}</text>
-      <image class="wx-image_qTVseD" mode="scaleToFill" src="/resources/postion.png" />
+      <!--备注要求-->
+      <view class="c-minheight wx-view_Kv5Tev1" wx:if="{{order.explain!=''}}">
+        <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/tip.png" style='margin-top:35rpx;' />
+        <text class="c-block wx-text_1kGNpv">
+      {{order.explain}}
+      </text>
+      </view>
+
+
+      <view class="c-minheight wx-view_XuuAYf">
+        <text catchtap="zhinanopt" class="c-block wx-text_dZAta1">操作指南</text>
+      </view>
     </view>
-    <view class="c-minheight wx-view_dfNyFR1" bindtap='goaddress' data-lat="{{order.lat}}" data-lng="{{order.lng}}" data-name="{{order.o_addr}}">
-      <text class="c-block wx-text_FFPqzR1">终</text>
-      <text class="c-block wx-text_Vj9cHB">{{order.o_addr}}</text>
-      <image class="wx-image_qTVseD" mode="scaleToFill" src="/resources/postion.png" />
+    <!--客户信息-->
+    <view class="c-minheight wx-view_JQPoPT">
+      <view class="c-minheight wx-view_7tuQEA">
+        <image class="wx-image_jDkO78" mode="scaleToFill" src="{{order.member.user_headimg}}" />
+        <text class="c-block wx-text_ZaU8MQ">{{order.member.nick_name}}</text>
+        <block wx:for="{{order.tag_list}}" wx:key="titem" wx:for-item="titem">
+          <view class='redv'>{{titem}}</view>
+        </block>
+      </view>
+      <view class="c-minheight wx-view_2wZcg2" wx:if="{{order.order_status==3}}">
+        <image class="wx-image_tFdnbt" mode="scaleToFill" src="/resources/xiaoxi.png" bindtap='gomessageopt' data-uid='{{order.member.uid}}' data-utx='{{order.member.user_headimg}}' data-uname='{{order.member.nick_name}}' data-utel='{{order.mobile}}' />
+        <view class='fengexian'></view>
+        <image class="wx-image_vJe3HO" mode="scaleToFill" src="/resources/phone.png" bindtap='gophoneopt' data-phone='{{order.mobile}}' />
+      </view>
     </view>
-    <view class="c-minheight wx-view_xp9voB1">
-      <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/qian.png" />
-      <text class="c-block wx-text_u2uG4j">￥{{order.cost}}</text>
-      <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" style='margin-left:60rpx;' wx:if="{{item.tip!='0.00'}}" />
-        <text class="c-block wx-text_u2uG4j" wx:if="{{item.tip!='0.00'}}">￥{{item.tip}}</text>
+    <!--订单信息-->
+    <view class="c-minheight wx-view_JQPoPT1">
+      <view class="c-minheight wx-view_o76ZdP">
+        <text class="c-block wx-text_uhetRv">跑单编号</text>
+        <text class="c-block wx-text_uhetRv">{{order.runn_no}}</text>
+      </view>
+      <view class="c-minheight wx-view_o76ZdP">
+        <text class="c-block wx-text_uhetRv">跑单时间</text>
+        <text class="c-block wx-text_uhetRv">{{order.create_time}}</text>
+      </view>
     </view>
-    <view class="c-minheight wx-view_XSYzuh1">
-      <image class="wx-image_RYYYOg" mode="scaleToFill" src="/resources/miaoshu.png" />
-      <text class="c-block wx-text_QF0BYA">{{order.title}}</text>
+
+    <!--同意协议-->
+    <view class='xieyiv' wx:if="{{isnewuser}}">
+      <icon type="success" size="20" color='#0ff' class='xieyiico'></icon>
+      <view class='agreetip'>我同意</view>
+      <view class='agreetxt' catchtap='xieyiopt'>《小龙快跑跑腿员服务协议》</view>
     </view>
-    <view class="c-minheight wx-view_Kv5Tev1">
-      <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png" />
-      <text class="c-block wx-text_1kGNpv">{{order.start_time}}-{{order.end_time}}</text>
-    </view>
-    <view class="c-minheight wx-view_XuuAYf">
-      <text catchtap="zhinanopt" class="c-block wx-text_dZAta1">操作指南</text>
-    </view>
-  </view>
-  <!--客户信息-->
-  <view class="c-minheight wx-view_JQPoPT">
-    <view class="c-minheight wx-view_7tuQEA">
-      <image class="wx-image_jDkO78" mode="scaleToFill" src="{{order.member.user_headimg}}" />
-      <text class="c-block wx-text_ZaU8MQ">{{order.member.nick_name}}</text>
-      <block wx:for="{{order.tag_list}}" wx:key="titem" wx:for-item="titem">
-        <view class='redv'>{{titem}}</view>
+
+    <!--操作按钮-->
+    <view class="c-minheight wx-view_dHiiPT">
+      <text class="c-block wx-text_yebBOBs" bindtap='getorderopt' wx:if="{{order.order_status==1}}">抢单</text>
+      <text class="c-block wx-text_ybbBOBs" bindtap='cancelopt' wx:if="{{order.order_status==2}}">取消跑单</text>
+      <block wx:if="{{order.order_status==3}}">
+        <text class="c-block wx-text_OhLcTU" bindtap='cancelopt'>取消跑单</text>
+        <text class="c-block wx-text_ybBOBs" bindtap='runopt'>开始执行</text>
+      </block>
+      <block wx:if="{{order.order_status==4}}">
+        <text class="c-block wx-text_OhLcTU" bindtap='cancelopt'>取消跑单</text>
+        <text class="c-block wx-text_ybBOBs" bindtap='finishopt'>完成跑单</text>
+      </block>
+      <block wx:if="{{order.order_status==12}}">
+        <text class="c-block wx-text_OhLcTU" data-type='2' bindtap='userCancelOrder'>拒绝取消跑单</text>
+        <text class="c-block wx-text_ybBOBs" data-type='1' bindtap='userCancelOrder'>同意取消跑单</text>
       </block>
     </view>
-    <view class="c-minheight wx-view_2wZcg2" wx:if="{{order.order_status==3}}">
-      <image class="wx-image_tFdnbt" mode="scaleToFill" src="/resources/xiaoxi.png" bindtap='gomessageopt' data-uid='{{order.member.uid}}' data-utx='{{order.member.user_headimg}}' data-uname='{{order.member.nick_name}}' data-utel='{{order.mobile}}'/>
-      <view class='fengexian'></view>
-      <image class="wx-image_vJe3HO" mode="scaleToFill" src="/resources/phone.png" bindtap='gophoneopt' data-phone='{{order.mobile}}' />
+    <view class="c-minheight wx-view_MhITsM" wx:if="{{order.order_status!=1}}">
+      <text catchtap="tousuopt" class="c-block wx-text_BWm6IN">投诉雇主</text>
     </view>
-  </view>
-  <!--订单信息-->
-  <view class="c-minheight wx-view_JQPoPT1">
-    <view class="c-minheight wx-view_o76ZdP">
-      <text class="c-block wx-text_uhetRv">跑单编号</text>
-      <text class="c-block wx-text_uhetRv">{{order.runn_no}}</text>
-    </view>
-    <view class="c-minheight wx-view_o76ZdP">
-      <text class="c-block wx-text_uhetRv">跑单时间</text>
-      <text class="c-block wx-text_uhetRv">{{order.create_time}}</text>
-    </view>
-  </view>
-
-  <!--同意协议-->
-  <view class='xieyiv' wx:if="{{isnewuser}}">
-    <icon type="success" size="20" color='#0ff' class='xieyiico'></icon>
-    <view class='agreetip'>我同意</view>
-    <view class='agreetxt' catchtap='xieyiopt'>《小龙快跑跑腿员服务协议》</view>
-  </view>
-
-  <!--操作按钮-->
-  <view class="c-minheight wx-view_dHiiPT">
-    <text class="c-block wx-text_yebBOBs" bindtap='getorderopt' wx:if="{{order.order_status==1}}">抢单</text>
-    <text class="c-block wx-text_ybbBOBs" bindtap='cancelopt' wx:if="{{order.order_status==2}}">取消跑单</text>
-    <block wx:if="{{order.order_status==3}}">
-      <text class="c-block wx-text_OhLcTU" bindtap='cancelopt'>取消跑单</text>
-      <text class="c-block wx-text_ybBOBs" bindtap='runopt'>开始执行</text>
-    </block>
-    <block wx:if="{{order.order_status==4}}">
-      <text class="c-block wx-text_OhLcTU" bindtap='cancelopt'>取消跑单</text>
-      <text class="c-block wx-text_ybBOBs" bindtap='finishopt'>完成跑单</text>
-    </block>
-    <block wx:if="{{order.order_status==12}}">
-      <text class="c-block wx-text_OhLcTU" data-type='2' bindtap='userCancelOrder'>拒绝取消跑单</text>
-      <text class="c-block wx-text_ybBOBs" data-type='1' bindtap='userCancelOrder'>同意取消跑单</text>
-    </block>
-  </view>
-  <view class="c-minheight wx-view_MhITsM" wx:if="{{order.order_status!=1}}">
-    <text catchtap="tousuopt" class="c-block wx-text_BWm6IN">投诉雇主</text>
   </view>
 </view>
+
+
 
 <!--弹窗投诉部分-->
 <view class="modalview {{istsshow}}">
@@ -136,8 +168,8 @@
     <view class="c-minheight wx-view_nxrraU">
       <image class="wx-image_IGjJPP" mode="scaleToFill" src="/resources/add.png" bindtap='uploadtsopt' />
       <block wx:for="{{tousutu}}" wx:key="item" wx:for-index="x">
-       <image class="wx-image_IGjJPP1" mode="scaleToFill" src="{{item}}" bindtap='uploadtstu' data-index='{{x}}' data-src='{{item}}'/>
-       <image src='/resources/delicon.png'  catchtap='deltsimg' data-index='{{x}}' data-src='{{item}}' class='delicon'></image>
+        <image class="wx-image_IGjJPP1" mode="scaleToFill" src="{{item}}" bindtap='uploadtstu' data-index='{{x}}' data-src='{{item}}' />
+        <image src='/resources/delicon.png' catchtap='deltsimg' data-index='{{x}}' data-src='{{item}}' class='delicon'></image>
       </block>
     </view>
     <button class="wx-button_17cUwW" size="default" bindtap="postmodal">
@@ -159,8 +191,8 @@
     <view class="c-minheight wx-view_nxrraU">
       <image class="wx-image_IGjJPP" mode="scaleToFill" src="/resources/add.png" bindtap='uploadqxopt' />
       <block wx:for="{{canceltu}}" wx:key="item" wx:for-index="x">
-        <image class="wx-image_IGjJPP1" mode="scaleToFill" src="{{item}}" bindtap='uploadqxtu' data-index='{{x}}' data-src='{{item}}'/>
-        <image src='/resources/delicon.png'  catchtap='delqximg' data-index='{{x}}' data-src='{{item}}' class='delicon'></image>
+        <image class="wx-image_IGjJPP1" mode="scaleToFill" src="{{item}}" bindtap='uploadqxtu' data-index='{{x}}' data-src='{{item}}' />
+        <image src='/resources/delicon.png' catchtap='delqximg' data-index='{{x}}' data-src='{{item}}' class='delicon'></image>
       </block>
     </view>
     <view class='cancelv'>
@@ -183,7 +215,7 @@
       <text class="c-block wx-text_AgStyc">操作指南</text>
     </view>
     <view class='wx_text_info'>
-      <rich-text nodes="{{zhinaninfo}}"></rich-text> 
+      <rich-text nodes="{{zhinaninfo}}"></rich-text>
     </view>
     <button class="wx-button_18cUwW" size="default" bindtap="knowmodal">
       我知道了
@@ -198,7 +230,7 @@
       <text class="c-block wx-text_AgStyc">操作协议</text>
     </view>
     <view class='wx_text_info'>
-       <rich-text nodes="{{xieyiinfo}}"></rich-text> 
+      <rich-text nodes="{{xieyiinfo}}"></rich-text>
     </view>
     <button class="wx-button_18cUwW" size="default" bindtap="xieyimodal">
       我知道了

@@ -26,6 +26,35 @@ Page({
     that.setData({
       runbg: getApp().globalData.run_bg
     })
+    that.GetNewChatMsg();
+  },
+  //判断是否有新消息
+  GetNewChatMsg:function(){
+    var that=this;
+    //请求接口获取未读取的消息
+    wx.request({
+      url: requesturl +'/Chat/checkHasNewMsg',
+      data: {
+        openid:getApp().globalData.openid,
+      from_uid: getApp().globalData.uid,
+        from_user_type: 2
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function(res) {
+        console.log("是否有新消息列表：");
+        console.log(res);
+
+        if(res.data.result){
+          that.setData({
+            hasnews: res.data.new_msg_count>0?true:false
+          })
+        }else{
+          console.log("暂无获取未读的消息");
+        }
+      }      
+    })
   },
   //菜单的切换
   chkmenuopt: function(e) {
@@ -41,7 +70,8 @@ Page({
     if (id == 1) {
       that.InitMessage();
     } else { //消息列表
-      that.getchatlist();
+      that.GetNewChatMsg();
+      that.getchatlist();//聊天列表
     }
   },
   //初始化数据
@@ -103,8 +133,7 @@ Page({
         console.log(res);
         if (res.data.result) {
           that.setData({
-            chatlist: res.data.data.data,
-            hasnews: res.data.data.total_count > 0 ? true : false
+            chatlist: res.data.data.data
           })
         } else {
           console.log("获取聊天记录失败！");
@@ -115,9 +144,30 @@ Page({
   //跳转到消息详情
   gomsgdetail: function(e) {
     var id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: '../paodan/detail?id=' + id,
+    var msgid = e.currentTarget.dataset.msgid;
+
+    //请求接口
+    wx.request({
+      url: requesturl +'/staff/get_message_detail',
+      data: {
+        openid: getApp().globalData.openid,
+        msg_id:msgid
+      },
+      header: {
+        "Content-Type":"application/x-www-form-urlencoded"
+      },
+      method: 'POST',
+      success: function(res) {
+        console.log("通知消息修改为已读:");
+        console.log(res);
+
+        wx.navigateTo({
+          url: '../paodan/detail?id=' + id,
+        })
+      }
     })
+
+   
   },
   //跳转到聊天室
   gochat: function(e) {
@@ -127,9 +177,30 @@ Page({
     var utx = e.currentTarget.dataset.utx;
     var uname = e.currentTarget.dataset.uname;
     var utel = e.currentTarget.dataset.utel;
-    wx.navigateTo({
-      url: '../chat/index?uid=' + uid + "&utx=" + utx + "&uname=" + uname + "&user_tel=" + utel,
+    
+    //消息设置为已读
+    wx.request({
+      url: requesturl +'/Chat/checkHasNewMsg',
+      data: {
+        openid:getApp().globalData.openid,
+        from_uid:getApp().globalData.uid,
+        from_user_type:2
+      },
+      header: {
+        "Content-Type":"application/x-www-form-urlencoded"
+      },
+      method: 'POST',
+      success: function(res) {
+        console.log("聊天消息设置为已读:");
+        console.log(res);
+
+        //调整到聊天页面
+        wx.navigateTo({
+          url: '../chat/index?uid=' + uid + "&utx=" + utx + "&uname=" + uname + "&user_tel=" + utel,
+        })
+      }
     })
+   
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -145,8 +216,9 @@ Page({
     var that = this;
     //初始化通知数据
     that.InitMessage();
-    //初始化聊天数据
-    that.getchatlist();
+    //消息列表
+    that.GetNewChatMsg();
+    that.getchatlist();//聊天列表
   },
 
   /**

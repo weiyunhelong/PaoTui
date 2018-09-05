@@ -9,7 +9,7 @@ page {
 .wx-view_XwihFK {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.3);
   overflow: scroll;
   min-height: initial;
   margin-bottom: 0px;

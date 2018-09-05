@@ -1,1 +1,6 @@
 /* pages/my/index.wxss */
+
+.wx-text_acNa0t {
+  width: 90%;
+  color: #fc6;
+}

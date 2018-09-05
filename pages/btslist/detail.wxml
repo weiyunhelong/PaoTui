@@ -1,89 +1,90 @@
 <!--pages/btslist/detail.wxml-->
+<view class="wx-view_W1YqeQ" style='background-image: url({{runbg}})'>
+  <view class="c-minheight wx-view_W1YqeQ">
+    <view class="c-minheight wx-view_nnJOwx">
 
-<view class="c-minheight wx-view_W1YqeQ" style='background-image: url({{runbg}})'>
-  <view class="c-minheight wx-view_nnJOwx">
+      <!--雇主信息-->
+      <view class="c-minheight wx-view_6R3LFQ">
+        <image class="wx-image_UanGTG" mode="scaleToFill" src="{{dataorder.user_info.user_headimg}}" />
+        <text class="c-block wx-text_7KVuIb">{{dataorder.user_info.nick_name}}</text>
+      </view>
 
-    <!--雇主信息-->
-    <view class="c-minheight wx-view_6R3LFQ">
-      <image class="wx-image_UanGTG" mode="scaleToFill" src="{{dataorder.user_info.user_headimg}}" />
-      <text class="c-block wx-text_7KVuIb">{{dataorder.user_info.nick_name}}</text>
+      <!--投诉内容-->
+      <view class="wx-view_CKL7oQ">
+        <view class="wx-view_eJY7fz">
+          <text class="c-block wx-text_MiAbaY">投诉内容：</text>
+          <view class="wx-view_3v6GL7">
+            <text class="c-block wx-text_YwWbjJ">{{dataorder.content}}</text>
+            <view class="wx-view_JtSjk2">
+              <block wx:for="{{dataorder.imgs}}" wx:key="tuitem">
+                <image class="wx-image_7vnZHV" mode="scaleToFill" src="{{item}}" wx:if="{{item!=''}}" />
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!--投诉时间-->
+      <view class="c-minheight wx-view_LSe4ga">
+        <text class="c-block wx-text_MiAbaY">时间：</text>
+        <text class="c-block wx-text_YwWbjJ">{{dataorder.create_time}}</text>
+      </view>
+
+      <!--投诉状态-->
+      <view class="c-minheight wx-view_LSe4ga">
+        <text class="c-block wx-text_MiAbaY">状态：</text>
+        <text class="c-block wx-text_YwWbjJ">{{dataorder.status_explain}}</text>
+      </view>
+
     </view>
 
-    <!--投诉内容-->
-    <view class="wx-view_CKL7oQ">
-      <view class="wx-view_eJY7fz">
-        <text class="c-block wx-text_MiAbaY">投诉内容：</text>
-        <view class="wx-view_3v6GL7">
-          <text class="c-block wx-text_YwWbjJ">{{dataorder.content}}</text>
-          <view class="wx-view_JtSjk2">
-            <block wx:for="{{dataorder.imgs}}" wx:key="tuitem">
-              <image class="wx-image_7vnZHV" mode="scaleToFill" src="{{item}}" wx:if="{{item!=''}}"/>
-            </block>
-          </view>
+    <!--平台回复-->
+    <view class="c-minheight wx-view_9KOweV" wx:if="{{dataorder.handle_content!=''}}">
+      <view class="c-minheight wx-view_LSe4ga">
+        <text class="c-block wx-text_MiAbaY">平台回复：</text>
+        <text class="c-block wx-text_YwWbjJ">{{dataorder.handle_content}}</text>
+      </view>
+      <view class="c-minheight wx-view_LSe4ga">
+        <text class="c-block wx-text_MiAbaY">时间：</text>
+        <text class="c-block wx-text_YwWbjJ">{{dataorder.handle_time}}</text>
+      </view>
+    </view>
+
+    <!--订单信息-->
+    <view class="c-minheight wx-view_PPXd851">
+      <view class="c-minheight wx-view_dfNyFR1">
+        <text class="c-block wx-text_FFPqzR">始</text>
+        <text class="c-block wx-text_Vj9cHB">{{dataorder.run_info.addr}}</text>
+      </view>
+      <view class="c-minheight wx-view_dfNyFR1">
+        <text class="c-block wx-text_FFPqzR1">终</text>
+        <text class="c-block wx-text_Vj9cHB">{{dataorder.run_info.o_addr}}</text>
+      </view>
+      <view class="c-minheight wx-view_xp9voB1">
+        <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/qian.png" />
+        <text class="c-block wx-text_u2uG4j">￥{{dataorder.run_info.cost}}</text>
+        <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" style='margin-left:60rpx;' wx:if="{{dataorder.run_info.tip!='0.00'}}" />
+        <text class="c-block wx-text_u2uG4j" wx:if="{{dataorder.run_info.tip!='0.00'}}">￥{{dataorder.run_info.tip}}</text>
+      </view>
+      <view class="c-minheight wx-view_XSYzuh1">
+        <image class="wx-image_RYYYOg" mode="scaleToFill" src="/resources/miaoshu.png" />
+        <text class="c-block wx-text_QF0BYA">{{dataorder.run_info.title}}</text>
+      </view>
+      <view class="c-minheight wx-view_Kv5Tev1">
+        <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png" />
+        <text class="c-block wx-text_1kGNpv">{{dataorder.run_info.start_time}}  -  {{dataorder.run_info.end_time}}</text>
+      </view>
+      <view class="c-minheight wx-view_JQPoPT11">
+        <view class="c-minheight wx-view_o76ZdP">
+          <text class="c-block wx-text_uhetRv">跑单编号</text>
+          <text class="c-block wx-text_uhetRv">{{dataorder.run_info.runn_no}}</text>
+        </view>
+        <view class="c-minheight wx-view_o76ZdP">
+          <text class="c-block wx-text_uhetRv">跑单时间</text>
+          <text class="c-block wx-text_uhetRv">{{dataorder.run_info.create_time}}</text>
         </view>
       </view>
     </view>
 
-    <!--投诉时间-->
-    <view class="c-minheight wx-view_LSe4ga">
-      <text class="c-block wx-text_MiAbaY">时间：</text>
-      <text class="c-block wx-text_YwWbjJ">{{dataorder.create_time}}</text>
-    </view>
-
-    <!--投诉状态-->
-    <view class="c-minheight wx-view_LSe4ga">
-      <text class="c-block wx-text_MiAbaY">状态：</text>
-      <text class="c-block wx-text_YwWbjJ">{{dataorder.status_explain}}</text>
-    </view>
-
   </view>
-
-  <!--平台回复-->
-  <view class="c-minheight wx-view_9KOweV" wx:if="{{dataorder.handle_content!=''}}">
-    <view class="c-minheight wx-view_LSe4ga">
-      <text class="c-block wx-text_MiAbaY">平台回复：</text>
-      <text class="c-block wx-text_YwWbjJ">{{dataorder.handle_content}}</text>
-    </view>
-    <view class="c-minheight wx-view_LSe4ga">
-      <text class="c-block wx-text_MiAbaY">时间：</text>
-      <text class="c-block wx-text_YwWbjJ">{{dataorder.handle_time}}</text>
-    </view>
-  </view>
-
-  <!--订单信息-->
-  <view class="c-minheight wx-view_PPXd851">
-    <view class="c-minheight wx-view_dfNyFR1">
-      <text class="c-block wx-text_FFPqzR">始</text>
-      <text class="c-block wx-text_Vj9cHB">{{dataorder.run_info.addr}}</text>
-    </view>
-    <view class="c-minheight wx-view_dfNyFR1">
-      <text class="c-block wx-text_FFPqzR1">终</text>
-      <text class="c-block wx-text_Vj9cHB">{{dataorder.run_info.o_addr}}</text>
-    </view>
-    <view class="c-minheight wx-view_xp9voB1">
-      <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/qian.png" />
-      <text class="c-block wx-text_u2uG4j">￥{{dataorder.run_info.cost}}</text>
-      <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/shang.png" style='margin-left:60rpx;' wx:if="{{dataorder.run_info.tip!='0.00'}}" />
-      <text class="c-block wx-text_u2uG4j" wx:if="{{dataorder.run_info.tip!='0.00'}}">￥{{dataorder.run_info.tip}}</text>
-    </view>
-    <view class="c-minheight wx-view_XSYzuh1">
-      <image class="wx-image_RYYYOg" mode="scaleToFill" src="/resources/miaoshu.png" />
-      <text class="c-block wx-text_QF0BYA">{{dataorder.run_info.title}}</text>
-    </view>
-    <view class="c-minheight wx-view_Kv5Tev1">
-      <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png" />
-      <text class="c-block wx-text_1kGNpv">{{dataorder.run_info.start_time}}  -  {{dataorder.run_info.end_time}}</text>
-    </view>
-    <view class="c-minheight wx-view_JQPoPT11">
-      <view class="c-minheight wx-view_o76ZdP">
-        <text class="c-block wx-text_uhetRv">跑单编号</text>
-        <text class="c-block wx-text_uhetRv">{{dataorder.run_info.runn_no}}</text>
-      </view>
-      <view class="c-minheight wx-view_o76ZdP">
-        <text class="c-block wx-text_uhetRv">跑单时间</text>
-        <text class="c-block wx-text_uhetRv">{{dataorder.run_info.create_time}}</text>
-      </view>
-    </view>
-  </view>
-
 </view>

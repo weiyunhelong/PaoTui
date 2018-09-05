@@ -39,37 +39,9 @@ Page({
       to_uname: options.uname, //对话用户昵称
       phone: options.user_tel,//电话号码
     })
-    //获取我的的信息
-    that.InitMyInfo();
-  },  
-  //获取我的信息
-  InitMyInfo: function() {
-    var that = this;
-    //获取我的信息
-    wx.request({
-      url: requesturl + '/staff/detail',
-      data: {
-        openid: getApp().globalData.openid
-      },
-      header: {
-        "Content-Type": "application/json"
-      },
-      method: 'GET',
-      success: function(res) {
-        console.log("获取我的信息得数据");
-        console.log(res);
-        
-        //赋值部分
-        that.setData({
-          mytx: res.data.avatarUrl,
-          from_uid: res.data.staff_id,
-          myname: res.data.name
-        })
-        //获取聊天历史
-        that.getHistory();        
-      }
-    })
-  },
+    //获取聊天历史
+    that.getHistory();  
+  },   
   //获取发送的内容
   getinfo: function(e) {
     var that = this;
