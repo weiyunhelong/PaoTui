@@ -62,8 +62,23 @@
       </view>
       <view class="c-minheight wx-view_Kv5Tev1">
         <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png" />
-        <text class="c-block wx-text_1kGNpv">{{order.start_time}}-{{order.end_time}}</text>
+        <text class="c-block wx-text_1kGNpv">{{order.start_time}}~{{order.end_time}}</text>
       </view>
+      
+      <!--商品状态-->
+       <view class="c-minheight wx-view_xp9voB1" wx:if="{{order.is_reserve==1||order.is_pay==1}}">
+        <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/chkbox.png"  wx:if="{{order.is_reserve==1}}"/>
+        <text class="c-block wx-text_u2uG4j" wx:if="{{order.is_reserve==1}}">{{order.is_reserve_explain}}</text>
+        <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/chkbox.png" style='margin-left:60rpx;' wx:if="{{order.tip!='0.00'}}" wx:if="{{order.is_pay==1}}"/>
+        <text class="c-block wx-text_u2uG4j" wx:if="{{order.is_pay==1}}">{{order.is_pay_explain}}</text>
+      </view>
+      
+      <!--取货时间-->
+      <view class="c-minheight wx-view_Kv5Tev1" wx:if="{{type_desc=='代送'}}">
+        <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/filter.png" />
+        <text class="c-block wx-text_1kGNpv">{{order.pick_start_time}}~{{order.pick_end_time}}</text>
+      </view>
+
       <!--骑手星级要求-->
       <view class="c-minheight wx-view_Kv5Tev1" wx:if="{{order.star!=0}}">
         <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/qishoulevel.png" />

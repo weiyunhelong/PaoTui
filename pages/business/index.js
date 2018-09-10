@@ -11,7 +11,7 @@ Page({
     orderstatus: 1, //订单状态
     isnewuser: false, //是否是新用户
     /*评价的内容*/
-    xinglsit: [1, 2, 3, 4, 5], //星
+    xinglist: [0,1, 2, 3, 4, 5], //星
   
     /*投诉雇主*/
     istsshow: "", //投诉弹窗显示

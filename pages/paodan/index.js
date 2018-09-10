@@ -30,6 +30,55 @@ Page({
     that.setData({
       runbg: getApp().globalData.run_bg
     })
+    //判断是否有新消息
+    that.InitMessage();
+  },
+  //初始化数据
+  InitMessage: function () {
+    var that = this;
+    //参数部分
+    wx.request({
+      url: requesturl + '/staff/get_my_message_list',
+      data: {
+        openid: getApp().globalData.openid
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log("消息列表:");
+        console.log(res);
+
+        if (res.data.result) {
+          that.setData({
+            newslsit: res.data.data
+          })
+          //遍历判断是否有未读的消息
+          var datalist = res.data.data;
+          var hasnum = 0;
+          for (var i = 0; i < datalist.length; i++) {
+            if (datalist[i].is_read == 0) {
+              hasnum++;
+            }
+          }
+          if (hasnum > 0) {
+            //设置震动
+            wx.vibrateLong({
+              success: function (res) { },
+              fail: function (res) { },
+              complete: function (res) { },
+            })
+            //设置标识
+            wx.showTabBarRedDot({
+              index: 2
+            })
+          }
+        } else {
+          console.log("获取消息列表失败");
+        }
+      }
+    })
   },
   //菜单的选择
   chkmenu: function(e) {

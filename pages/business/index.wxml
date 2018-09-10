@@ -34,6 +34,58 @@
         <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/time.png" />
         <text class="c-block wx-text_1kGNpv">{{order.start_time}}-{{order.end_time}}</text>
       </view>
+
+      <!--商品状态-->
+      <view class="c-minheight wx-view_xp9voB1" wx:if="{{order.is_reserve==1||order.is_pay==1||order.is_fragile==1||order.is_rece_money==1}}">
+        <!--商品预订-->
+        <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/chkbox.png" wx:if="{{order.is_reserve==1}}" />
+        <text class="c-block wx-text_u2uG4j" wx:if="{{order.is_reserve==1}}">{{order.is_reserve_explain}}</text>
+        <!--商品付款--> 
+        <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/chkbox.png" style='margin-left:60rpx;' wx:if="{{order.is_pay==1}}" />
+        <text class="c-block wx-text_u2uG4j" wx:if="{{order.is_pay==1}}">{{order.is_pay_explain}}</text>
+        
+         <!--易碎变形-->
+         <image class="wx-image_uM6VvD" mode="scaleToFill" src="/resources/chkbox.png" wx:if="{{order.is_fragile==1}}" />
+        <text class="c-block wx-text_u2uG4j" wx:if="{{order.is_fragile==1}}">{{order.is_fragile_explain}}</text>
+         <!--需代收款-->
+         <image class="wx-image_uM6VvD" mode="scaleToFill" style='margin-left:60rpx;' src="/resources/chkbox.png" wx:if="{{order.is_rece_money==1}}" />
+        <text class="c-block wx-text_u2uG4j" wx:if="{{order.is_rece_money==1}}">{{order.is_rece_money_explain}}</text>
+      </view>
+
+      <!--取货时间-->
+      <view class="c-minheight wx-view_Kv5Tev1" wx:if="{{order.type==2}}">
+        <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/filter.png" />
+        <text class="c-block wx-text_1kGNpv">{{order.pick_start_time}}~{{order.pick_end_time}}</text>
+      </view>
+
+      <!--骑手星级要求-->
+      <view class="c-minheight wx-view_Kv5Tev1" wx:if="{{order.star!=0}}">
+        <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/qishoulevel.png" />
+        <view class='addinfov'>
+          <block wx:for="{{xinglist}}" wx:key="item">
+            <image src='/resources/xing.png' wx:if="{{order.star>=item}}" class="xingicon"></image>
+          </block>
+        </view>
+      </view>
+
+      <!--附图列表-->
+      <view class="c-minheight wx-view_Kv5Tev1" wx:if="{{order.images.length>0}}">
+        <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/futu.png" />
+        <view class='addinfov'>
+          <block wx:for="{{order.images}}" wx:key="item" wx:for-item="item">
+            <image src='{{item}}' class="futucss" class='futuimg'></image>
+          </block>
+        </view>
+      </view>
+
+      <!--备注要求-->
+      <view class="c-minheight wx-view_Kv5Tev1" wx:if="{{order.explain!=''}}">
+        <image class="wx-image_MTlz53" mode="scaleToFill" src="/resources/tip.png" style='margin-top:35rpx;' />
+        <text class="c-block wx-text_1kGNpv">
+      {{order.explain}}
+      </text>
+      </view>
+
       <view class="c-minheight wx-view_XuuAYf">
         <text catchtap="zhinanopt" class="c-block wx-text_dZAta1">操作指南</text>
       </view>

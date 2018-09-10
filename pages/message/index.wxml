@@ -29,11 +29,11 @@
     <!--聊天内容部分-->
     <block wx:for="{{chatlist}}" wx:key="item" wx:if="{{chkmenu==2}}">
 
-      <view class="c-minheight {{item.unread_message_count>0?'wx-view_FSAqbP':'wx-view_FSAqbP1'}}" bindtap='gochat' data-uid='{{item.uid}}' data-utx='{{item.user_avatar}}' data-uname='{{item.user_name}}' data-utel='{{item.user_tel}}'>
+      <view class="c-minheight {{item.unread_message_count>0?'wx-view_FSAqbP':'wx-view_FSAqbP1'}}" bindtap='gochat' data-msgid="{{item.last_message.id}}" data-uid='{{item.uid}}' data-utx='{{item.user_avatar}}' data-uname='{{item.nick_name}}' data-utel='{{item.user_tel}}'>
         <image class="wx-image_4j7TEO" mode="scaleToFill" src="{{item.user_avatar}}" />
         <view class="c-minheight wx-view_tM4PI9" data-c_e_id="wx_view2b8c99c5">
           <view class="c-minheight wx-view_sAVRB2" data-c_e_id="wx_viewe75d732b">
-            <text class="c-block wx-text_m3PXXb" data-c_e_id="wx_texte3ba4a62">{{item.user_name}}</text>
+            <text class="c-block wx-text_m3PXXb" data-c_e_id="wx_texte3ba4a62">{{item.nick_name}}</text>
             <text class="c-block wx-text_XzBqYd" data-c_e_id="wx_textc9231edc">{{item.last_message.create_time}}</text>
           </view>
           <view style='diplay:flex;width:100%;'>

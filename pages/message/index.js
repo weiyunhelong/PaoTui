@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    hasnews: false, //是否有消息
+    hasnews: false, //是否有通知消息
     chkmenu: 1, //菜单的选中
     newslsit: [], //通知列表
     chatlist: [], //聊天列表
@@ -22,21 +22,21 @@ Page({
     that.setData({
       uid: options.uid == undefined ? "" : options.uid
     })
-    
+
     that.setData({
       runbg: getApp().globalData.run_bg
     })
     that.GetNewChatMsg();
   },
   //判断是否有新消息
-  GetNewChatMsg:function(){
-    var that=this;
+  GetNewChatMsg: function() {
+    var that = this;
     //请求接口获取未读取的消息
     wx.request({
-      url: requesturl +'/Chat/checkHasNewMsg',
+      url: requesturl + '/Chat/checkHasNewMsg',
       data: {
-        openid:getApp().globalData.openid,
-      from_uid: getApp().globalData.uid,
+        openid: getApp().globalData.openid,
+        from_uid: getApp().globalData.uid,
         from_user_type: 2
       },
       header: {
@@ -46,14 +46,14 @@ Page({
         console.log("是否有新消息列表：");
         console.log(res);
 
-        if(res.data.result){
+        if (res.data.result) {
           that.setData({
-            hasnews: res.data.new_msg_count>0?true:false
+            hasnews: res.data.new_msg_count > 0 ? true : false
           })
-        }else{
+        } else {
           console.log("暂无获取未读的消息");
         }
-      }      
+      }
     })
   },
   //菜单的切换
@@ -71,7 +71,7 @@ Page({
       that.InitMessage();
     } else { //消息列表
       that.GetNewChatMsg();
-      that.getchatlist();//聊天列表
+      that.getchatlist(); //聊天列表
     }
   },
   //初始化数据
@@ -95,18 +95,26 @@ Page({
           that.setData({
             newslsit: res.data.data
           })
-          if (res.data.data.length > 0) {
+            //遍历判断是否有未读的消息
+          var datalist = res.data.data;
+          var hasnum = 0;
+          for (var i = 0; i < datalist.length; i++) {
+            if (datalist[i].is_read == 0) {
+              hasnum++;
+            }
+          }
+          if (hasnum > 0) {
             //设置震动
             wx.vibrateLong({
-              success: function(res) {},
-              fail: function(res) {},
-              complete: function(res) {},
+              success: function (res) { },
+              fail: function (res) { },
+              complete: function (res) { },
             })
             //设置标识
             wx.showTabBarRedDot({
               index: 2
             })
-          }
+          }          
         } else {
           console.log("获取消息列表失败");
         }
@@ -148,13 +156,13 @@ Page({
 
     //请求接口
     wx.request({
-      url: requesturl +'/staff/get_message_detail',
+      url: requesturl + '/staff/get_message_detail',
       data: {
         openid: getApp().globalData.openid,
-        msg_id:msgid
+        msg_id: msgid
       },
       header: {
-        "Content-Type":"application/x-www-form-urlencoded"
+        "Content-Type": "application/x-www-form-urlencoded"
       },
       method: 'POST',
       success: function(res) {
@@ -167,7 +175,7 @@ Page({
       }
     })
 
-   
+
   },
   //跳转到聊天室
   gochat: function(e) {
@@ -177,17 +185,17 @@ Page({
     var utx = e.currentTarget.dataset.utx;
     var uname = e.currentTarget.dataset.uname;
     var utel = e.currentTarget.dataset.utel;
-    
+    var msgid = e.currentTarget.dataset.msgid;
+
     //消息设置为已读
     wx.request({
-      url: requesturl +'/Chat/checkHasNewMsg',
+      url: requesturl + '/Chat/setMessageRead',
       data: {
-        openid:getApp().globalData.openid,
-        from_uid:getApp().globalData.uid,
-        from_user_type:2
+        openid: getApp().globalData.openid,
+        message_id: msgid,
       },
       header: {
-        "Content-Type":"application/x-www-form-urlencoded"
+        "Content-Type": "application/x-www-form-urlencoded"
       },
       method: 'POST',
       success: function(res) {
@@ -200,7 +208,7 @@ Page({
         })
       }
     })
-   
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -218,7 +226,7 @@ Page({
     that.InitMessage();
     //消息列表
     that.GetNewChatMsg();
-    that.getchatlist();//聊天列表
+    that.getchatlist(); //聊天列表
   },
 
   /**
