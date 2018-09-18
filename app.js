@@ -59,7 +59,7 @@ App({
     uid: "", //用户id
     isnewuser: false, //是否是新用户
     cancel_count: 0, //取消的次数
-    requesturl: "https://www.fsdragon.com/small", //请求的接口
+    requesturl: "https://xlkp.fsdragon.com/small", //请求的接口
     run_bg:"",//背景图
     orderstatus: 0, //订单状态值:
     /*******

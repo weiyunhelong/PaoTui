@@ -71,9 +71,16 @@ Page({
             wx.showTabBarRedDot({
               index: 2
             })
+          } else {
+            wx.hideTabBarRedDot({
+              index: 2
+            })
           }
         } else {
           console.log("获取消息列表失败");
+          wx.hideTabBarRedDot({
+            index: 2
+          })
         }
       }
     })
